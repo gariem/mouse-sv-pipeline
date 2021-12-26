@@ -1,0 +1,1086 @@
+##gff-version 3
+##genome-build GRCm39
+NC_000067.7	GRC	region	22495218	22533351	.	+	.	Name=MG-10;type=Gap;chr=1;status=Resolved;affectVersion=na;fixVersion=na
+NC_000067.7	GRC	region	155985948	156161546	.	+	.	Name=MG-101;type=Gap;chr=1;status=Resolved;affectVersion=na;fixVersion=na
+NC_000067.7	GRC	region	182810773	183255267	.	+	.	Name=MG-11;type=Gap;chr=1;status=Resolved;affectVersion=na;fixVersion=na
+NC_000067.7	GRC	region	182810773	183255267	.	+	.	Name=MG-123;type=Gap;chr=1;status=Resolved;affectVersion=na;fixVersion=na
+NC_000067.7	GRC	region	134977264	135148632	.	+	.	Name=MG-135;type=Clone Problem;chr=1;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000067.7	GRC	region	182635848	183401521	.	+	.	Name=MG-137;type=Gap;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000067.7	GRC	region	24550796	24718880	.	+	.	Name=MG-150;type=Unknown;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000067.7	GRC	region	75145184	75342561	.	+	.	Name=MG-187;type=Clone Problem;chr=1;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000067.7	GRC	region	155996314	156161546	.	+	.	Name=MG-200;type=Clone Problem;chr=1;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000067.7	GRC	region	78538858	78635455	.	+	.	Name=MG-3216;type=Path Problem;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NT_166338.1	GRC	region	1	40056	.	+	.	Name=MG-3239;type=Localization Problem;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000067.7	GRC	region	191719525	191738391	.	+	.	Name=MG-33;type=Gap;chr=1;status=Resolved;affectVersion=na;fixVersion=na
+NC_000067.7	GRC	region	22422346	22708955	.	+	.	Name=MG-3496;type=Gap;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p5
+NC_000067.7	GRC	region	24550796	24932716	.	+	.	Name=MG-3497;type=Gap;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000067.7	GRC	region	78538858	78635455	.	+	.	Name=MG-3498;type=Gap;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000067.7	GRC	region	78584059	78588717	.	+	.	Name=MG-3499;type=Gap;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000067.7	GRC	region	85109181	85604024	.	+	.	Name=MG-3504;type=Gap;chr=1;status=Stalled;affectVersion=MGSCv37;fixVersion=na
+NC_000067.7	GRC	region	22444290	22503513	.	+	.	Name=MG-3513;type=Gap;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000067.7	GRC	region	78587667	78591893	.	+	.	Name=MG-3514;type=Gap;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000067.7	GRC	region	78588800	78608279	.	+	.	Name=MG-3516;type=Gap;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000067.7	GRC	region	143218000	143331440	.	+	.	Name=MG-3517;type=Gap;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000067.7	GRC	region	182635848	183401521	.	+	.	Name=MG-3519;type=Gap;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000067.7	GRC	region	182803857	182810705	.	+	.	Name=MG-3521;type=Gap;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000067.7	GRC	region	182806294	182819341	.	+	.	Name=MG-3525;type=Gap;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000067.7	GRC	region	191525325	191791225	.	+	.	Name=MG-3527;type=Gap;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000067.7	GRC	region	191689388	191710000	.	+	.	Name=MG-3528;type=Gap;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000067.7	GRC	region	191736129	191743966	.	+	.	Name=MG-3532;type=Gap;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000067.7	GRC	region	191742083	191746379	.	+	.	Name=MG-3534;type=Gap;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000067.7	GRC	region	191814000	191840896	.	+	.	Name=MG-3535;type=Gap;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000067.7	GRC	region	191837198	191866669	.	+	.	Name=MG-3537;type=Gap;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000067.7	GRC	region	191791226	192056864	.	+	.	Name=MG-3538;type=Gap;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000067.7	GRC	region	3080143	3303606	.	+	.	Name=MG-3542;type=Gap;chr=1;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000067.7	GRC	region	195051547	195054279	.	+	.	Name=MG-3543;type=Gap;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=MGSCv37
+NC_000067.7	GRC	region	155969882	156161546	.	+	.	Name=MG-3669;type=Gap;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000067.7	GRC	region	75054928	75145183	.	+	.	Name=MG-3670;type=Gap;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NT_166280.1	GRC	region	1	169725	.	+	.	Name=MG-3755;type=Localization Problem;chr=1;status=Under Review;affectVersion=na;fixVersion=na
+NT_166281.1	GRC	region	1	241735	.	+	.	Name=MG-3756;type=Localization Problem;chr=1;status=Under Review;affectVersion=na;fixVersion=na
+NT_166282.1	GRC	region	1	153618	.	+	.	Name=MG-3757;type=Localization Problem;chr=1;status=Under Review;affectVersion=na;fixVersion=na
+NC_000085.7	GRC	region	56480168	56519505	.	+	.	Name=MG-3758;type=Localization Problem;chr=19;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NT_162750.1	GRC	region	1	206961	.	+	.	Name=MG-3761;type=Localization Problem;chr=1;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000067.7	GRC	region	88108169	88306761	.	+	.	Name=MG-3828;type=Clone Problem;chr=1;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000067.7	GRC	region	90526942	90704077	.	+	.	Name=MG-3852;type=Clone Problem;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000067.7	GRC	region	75448819	75560973	.	+	.	Name=MG-3927;type=Variation;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000067.7	GRC	region	88108169	88306761	.	+	.	Name=MG-3928;type=Clone Problem;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000067.7	GRC	region	88108169	88306761	.	+	.	Name=MG-3929;type=Clone Problem;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000067.7	GRC	region	88108169	88306761	.	+	.	Name=MG-3930;type=Clone Problem;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000067.7	GRC	region	88108169	88306761	.	+	.	Name=MG-3931;type=Clone Problem;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000067.7	GRC	region	88108169	88306761	.	+	.	Name=MG-3932;type=Clone Problem;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000067.7	GRC	region	133646780	133826364	.	+	.	Name=MG-3933;type=Clone Problem;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000067.7	GRC	region	191525325	191733452	.	+	.	Name=MG-3998;type=Gap;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000067.7	GRC	region	191695093	191791225	.	+	.	Name=MG-3999;type=Gap;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p5
+NC_000067.7	GRC	region	84936874	85324824	.	+	.	Name=MG-4006;type=Missing sequence;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000067.7	GRC	region	24550796	24718880	.	+	.	Name=MG-4007;type=Path Problem;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000067.7	GRC	region	90526942	90704077	.	+	.	Name=MG-4012;type=Clone Problem;chr=1;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000067.7	GRC	region	182891582	183401521	.	+	.	Name=MG-4028;type=Gap;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000067.7	GRC	region	173528696	173803579	.	+	.	Name=MG-4046;type=Clone Problem;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000067.7	GRC	region	47237185	47402739	.	+	.	Name=MG-4047;type=Clone Problem;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000067.7	GRC	region	61468677	61650328	.	+	.	Name=MG-4048;type=Clone Problem;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000067.7	GRC	region	74847861	75054927	.	+	.	Name=MG-4049;type=Clone Problem;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000067.7	GRC	region	192183639	192367914	.	+	.	Name=MG-4050;type=Clone Problem;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000067.7	GRC	region	195003104	195051546	.	+	.	Name=MG-4051;type=Path Problem;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000067.7	GRC	region	85109181	85604024	.	+	.	Name=MG-4089;type=Gap;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000067.7	GRC	region	182635848	183401521	.	+	.	Name=MG-4122;type=Localization Problem;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000067.7	GRC	region	17242067	17615927	.	+	.	Name=MG-4197;type=GRC Housekeeping;chr=1;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000067.7	GRC	region	76460554	76599431	.	+	.	Name=MG-4205;type=Clone Problem;chr=1;status=Under Review;affectVersion=na;fixVersion=na
+NC_000067.7	GRC	region	5343462	5475432	.	+	.	Name=MG-4206;type=Clone Problem;chr=1;status=Resolved;affectVersion=na;fixVersion=na
+NC_000067.7	GRC	region	47237185	47402739	.	+	.	Name=MG-4208;type=Clone Problem;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=MGSCv37
+NC_000067.7	GRC	region	60733864	61156197	.	+	.	Name=MG-4236;type=Variation;chr=1;status=Resolved;affectVersion=GRCm38.p2;fixVersion=GRCm38.p3
+NC_000067.7	GRC	region	47238794	47239279	.	+	.	Name=MG-4252;type=GRC Housekeeping;chr=1;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000067.7	GRC	region	173544540	173878749	.	+	.	Name=MG-4258;type=Variation;chr=1;status=Open;affectVersion=na;fixVersion=na
+NC_000067.7	GRC	region	177972317	178172324	.	+	.	Name=MG-4281;type=Clone Problem;chr=1;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39,GRCm38.p5
+NC_000067.7	GRC	region	191695093	191791225	.	+	.	Name=MG-4309;type=Gap;chr=1;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000067.7	GRC	region	75054928	75134466	.	+	.	Name=MG-4325;type=Gap;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000067.7	GRC	region	143327709	143464425	.	+	.	Name=MG-4329;type=GRC Housekeeping;chr=1;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000067.7	GRC	region	167302851	167450146	.	+	.	Name=MG-4331;type=Clone Problem;chr=1;status=Under Review;affectVersion=GRCm38;fixVersion=na
+NC_000067.7	GRC	region	167450147	167648141	.	+	.	Name=MG-4332;type=Clone Problem;chr=1;status=Under Review;affectVersion=GRCm38;fixVersion=na
+NC_000067.7	GRC	region	120172584	120334542	.	+	.	Name=MG-4345;type=Clone Problem;chr=1;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000067.7	GRC	region	171641009	171781736	.	+	.	Name=MG-4347;type=Clone Problem;chr=1;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000067.7	GRC	region	93899118	94013476	.	+	.	Name=MG-4354;type=Clone Problem;chr=1;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NT_166338.1	GRC	region	1	40056	.	+	.	Name=MG-4374;type=Localization Problem;chr=1;status=Under Review;affectVersion=na;fixVersion=na
+NC_000067.7	GRC	region	148174414	148351900	.	+	.	Name=MG-4380;type=GRC Housekeeping;chr=1;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000067.7	GRC	region	182810773	183255267	.	+	.	Name=MG-47;type=Gap;chr=1;status=Resolved;affectVersion=MGSCv36;fixVersion=na
+NC_000067.7	GRC	region	182810773	183255267	.	+	.	Name=MG-69;type=Gap;chr=1;status=Resolved;affectVersion=na;fixVersion=na
+NC_000067.7	GRC	region	75054928	75134466	.	+	.	Name=MG-75;type=Gap;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000067.7	GRC	region	88108169	88306761	.	+	.	Name=MG-81;type=Missing sequence;chr=1;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000068.8	GRC	region	58940052	58953144	.	+	.	Name=MG-102;type=Gap;chr=2;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000068.8	GRC	region	86090686	86227874	.	+	.	Name=MG-133;type=Variation;chr=2;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000068.8	GRC	region	86437884	86445707	.	+	.	Name=MG-166;type=Variation;chr=2;status=Resolved;affectVersion=MGSCv36;fixVersion=GRCm38
+NC_000068.8	GRC	region	85392140	85597239	.	+	.	Name=MG-167;type=Variation;chr=2;status=Resolved;affectVersion=MGSCv36;fixVersion=GRCm38
+NC_000068.8	GRC	region	87829422	88038112	.	+	.	Name=MG-168;type=Variation;chr=2;status=Resolved;affectVersion=MGSCv36;fixVersion=GRCm38
+NC_000068.8	GRC	region	85940763	86090685	.	+	.	Name=MG-170;type=Variation;chr=2;status=Resolved;affectVersion=MGSCv36;fixVersion=GRCm38
+NC_000068.8	GRC	region	124937277	125059286	.	+	.	Name=MG-185;type=Variation;chr=2;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000068.8	GRC	region	90684292	90880026	.	+	.	Name=MG-191;type=Clone Problem;chr=2;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39,GRCm38.p5
+NC_000068.8	GRC	region	77765022	78030803	.	+	.	Name=MG-3183;type=GRC Housekeeping;chr=2;status=Resolved;affectVersion=na;fixVersion=na
+NC_000068.8	GRC	region	102785232	103193153	.	+	.	Name=MG-3184;type=GRC Housekeeping;chr=2;status=Resolved;affectVersion=na;fixVersion=na
+NC_000068.8	GRC	region	104398448	104873066	.	+	.	Name=MG-3185;type=GRC Housekeeping;chr=2;status=Resolved;affectVersion=na;fixVersion=na
+NC_000068.8	GRC	region	106569233	106958973	.	+	.	Name=MG-3186;type=GRC Housekeeping;chr=2;status=Resolved;affectVersion=na;fixVersion=na
+NC_000068.8	GRC	region	172200893	172464688	.	+	.	Name=MG-3187;type=GRC Housekeeping;chr=2;status=Resolved;affectVersion=na;fixVersion=na
+NC_000068.8	GRC	region	113683763	114036766	.	+	.	Name=MG-3188;type=GRC Housekeeping;chr=2;status=Resolved;affectVersion=na;fixVersion=na
+NC_000068.8	GRC	region	175596550	176061729	.	+	.	Name=MG-3189;type=GRC Housekeeping;chr=2;status=Resolved;affectVersion=na;fixVersion=na
+NC_000068.8	GRC	region	175218193	177607608	.	+	.	Name=MG-3190;type=GRC Housekeeping;chr=2;status=Resolved;affectVersion=na;fixVersion=na
+NC_000068.8	GRC	region	177355881	177680050	.	+	.	Name=MG-3191;type=GRC Housekeeping;chr=2;status=Resolved;affectVersion=na;fixVersion=na
+NC_000068.8	GRC	region	176435776	176528236	.	+	.	Name=MG-3205;type=GRC Housekeeping;chr=2;status=Resolved;affectVersion=na;fixVersion=na
+NC_000068.8	GRC	region	175280542	175596549	.	+	.	Name=MG-3215;type=Gap;chr=2;status=Awaiting Exptl Data;affectVersion=GRCm38;fixVersion=na
+NC_000068.8	GRC	region	175596550	176061729	.	+	.	Name=MG-3506;type=Gap;chr=2;status=Awaiting Exptl Data;affectVersion=MGSCv37;fixVersion=na
+NC_000068.8	GRC	region	175280542	175596549	.	+	.	Name=MG-3507;type=Gap;chr=2;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000068.8	GRC	region	175835188	176240665	.	+	.	Name=MG-3508;type=Gap;chr=2;status=Awaiting Exptl Data;affectVersion=MGSCv37;fixVersion=na
+NC_000068.8	GRC	region	177169547	177407183	.	+	.	Name=MG-3509;type=Gap;chr=2;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000068.8	GRC	region	3051040	3056506	.	+	.	Name=MG-3563;type=Gap;chr=2;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000068.8	GRC	region	7180174	7203945	.	+	.	Name=MG-3564;type=Gap;chr=2;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000068.8	GRC	region	7197227	7205315	.	+	.	Name=MG-3565;type=Gap;chr=2;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000068.8	GRC	region	7203964	7208428	.	+	.	Name=MG-3567;type=Gap;chr=2;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000068.8	GRC	region	7205780	7210714	.	+	.	Name=MG-3568;type=Gap;chr=2;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000068.8	GRC	region	7208637	7214131	.	+	.	Name=MG-3570;type=Gap;chr=2;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000068.8	GRC	region	7210989	7252206	.	+	.	Name=MG-3571;type=Gap;chr=2;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000068.8	GRC	region	22328031	22648204	.	+	.	Name=MG-3572;type=Gap;chr=2;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000068.8	GRC	region	22436796	22648204	.	+	.	Name=MG-3574;type=Gap;chr=2;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000068.8	GRC	region	58902210	59033975	.	+	.	Name=MG-3575;type=Gap;chr=2;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000068.8	GRC	region	58951085	58986795	.	+	.	Name=MG-3576;type=Gap;chr=2;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000068.8	GRC	region	113694812	113891761	.	+	.	Name=MG-3577;type=Gap;chr=2;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000068.8	GRC	region	172455606	172536086	.	+	.	Name=MG-3578;type=Gap;chr=2;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000068.8	GRC	region	172468199	172497341	.	+	.	Name=MG-3579;type=Gap;chr=2;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000068.8	GRC	region	172470813	172501160	.	+	.	Name=MG-3580;type=Gap;chr=2;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000068.8	GRC	region	172497624	172505969	.	+	.	Name=MG-3581;type=Gap;chr=2;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000068.8	GRC	region	172501329	172514093	.	+	.	Name=MG-3582;type=Gap;chr=2;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000076.7	GRC	region	130409721	130430862	.	+	.	Name=MG-3583;type=Gap;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000068.8	GRC	region	113683763	113819501	.	+	.	Name=MG-3680;type=Gap;chr=2;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000068.8	GRC	region	122396786	122562881	.	+	.	Name=MG-3836;type=Clone Problem;chr=2;status=Resolved;affectVersion=na;fixVersion=GRCm39,GRCm38.p5
+NC_000068.8	GRC	region	22648205	22908623	.	+	.	Name=MG-3909;type=Path Problem;chr=2;status=Resolved;affectVersion=na;fixVersion=MGSCv37
+NC_000068.8	GRC	region	91290301	91485164	.	+	.	Name=MG-3920;type=Clone Problem;chr=2;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000068.8	GRC	region	98486444	98596614	.	+	.	Name=MG-3921;type=Clone Problem;chr=2;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000068.8	GRC	region	96494466	96522585	.	+	.	Name=MG-3923;type=Clone Problem;chr=2;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000068.8	GRC	region	130910299	131036656	.	+	.	Name=MG-3924;type=Clone Problem;chr=2;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000068.8	GRC	region	70268310	70477966	.	+	.	Name=MG-3939;type=GRC Housekeeping;chr=2;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000068.8	GRC	region	175835188	176061729	.	+	.	Name=MG-4000;type=GRC Housekeeping;chr=2;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000068.8	GRC	region	180949560	181039809	.	+	.	Name=MG-4008;type=Clone Problem;chr=2;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000068.8	GRC	region	176290666	176528236	.	+	.	Name=MG-4043;type=Gap;chr=2;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000068.8	GRC	region	3085766	3292235	.	+	.	Name=MG-4044;type=Gap;chr=2;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000068.8	GRC	region	176111730	176435775	.	+	.	Name=MG-4045;type=Gap;chr=2;status=Under Review;affectVersion=MGSCv37;fixVersion=na
+NC_000068.8	GRC	region	3917638	4072718	.	+	.	Name=MG-4052;type=Path Problem;chr=2;status=Reopened;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000068.8	GRC	region	8208950	8420977	.	+	.	Name=MG-4053;type=Clone Problem;chr=2;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000068.8	GRC	region	52444256	52637988	.	+	.	Name=MG-4054;type=Path Problem;chr=2;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000068.8	GRC	region	53575496	53782479	.	+	.	Name=MG-4058;type=Clone Problem;chr=2;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000068.8	GRC	region	111933398	112112049	.	+	.	Name=MG-4059;type=Clone Problem;chr=2;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000068.8	GRC	region	113681763	113704674	.	+	.	Name=MG-4060;type=Clone Problem;chr=2;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000068.8	GRC	region	164099945	164290849	.	+	.	Name=MG-4061;type=Clone Problem;chr=2;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000068.8	GRC	region	181630040	181655017	.	+	.	Name=MG-4062;type=Path Problem;chr=2;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000068.8	GRC	region	90684292	90909500	.	+	.	Name=MG-4193;type=GRC Housekeeping;chr=2;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000068.8	GRC	region	39362161	39657494	.	+	.	Name=MG-4194;type=GRC Housekeeping;chr=2;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000068.8	GRC	region	172471942	172510288	.	+	.	Name=MG-4358;type=GRC Housekeeping;chr=2;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000068.8	GRC	region	22406537	22436804	.	+	.	Name=MG-71;type=Gap;chr=2;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000069.7	GRC	region	86803637	86953309	.	+	.	Name=MG-178;type=Clone Problem;chr=3;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000069.7	GRC	region	95523093	95564778	.	+	.	Name=MG-182;type=Clone Problem;chr=3;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000069.7	GRC	region	3077415	3118277	.	+	.	Name=MG-3217;type=Gap;chr=3;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000069.7	GRC	region	98402762	98558546	.	+	.	Name=MG-3219;type=Variation;chr=3;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000069.7	GRC	region	93153380	93291507	.	+	.	Name=MG-3494;type=Clone Problem;chr=3;status=Stalled;affectVersion=na;fixVersion=na
+NC_000069.7	GRC	region	15583935	15857001	.	+	.	Name=MG-3510;type=Gap;chr=3;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000069.7	GRC	region	113134148	113498571	.	+	.	Name=MG-3511;type=Gap;chr=3;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000069.7	GRC	region	113134148	113498571	.	+	.	Name=MG-3671;type=Gap;chr=3;status=Continuing Investigation;affectVersion=na;fixVersion=na
+NC_000069.7	GRC	region	3077415	3118277	.	+	.	Name=MG-3709;type=Gap;chr=3;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000069.7	GRC	region	15583935	15857001	.	+	.	Name=MG-3710;type=Gap;chr=3;status=Resolved;affectVersion=MGSCv37;fixVersion=MGSCv37
+NC_000069.7	GRC	region	40559840	40670216	.	+	.	Name=MG-3711;type=Gap;chr=3;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000069.7	GRC	region	50640684	50812336	.	+	.	Name=MG-3712;type=Gap;chr=3;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p6
+NC_000069.7	GRC	region	113134148	113498571	.	+	.	Name=MG-3713;type=Gap;chr=3;status=Resolved;affectVersion=MGSCv37;fixVersion=MGSCv37
+NC_000069.7	GRC	region	131093505	131211273	.	+	.	Name=MG-3714;type=Gap;chr=3;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p6
+NC_000069.7	GRC	region	159604384	159642455	.	+	.	Name=MG-3715;type=Gap;chr=3;status=Resolved;affectVersion=MGSCv37;fixVersion=MGSCv37
+NC_000071.7	GRC	region	100314837	100356733	.	+	.	Name=MG-3759;type=Localization Problem;chr=5;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000069.7	GRC	region	95564779	95778775	.	+	.	Name=MG-3904;type=Variation;chr=3;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000069.7	GRC	region	95564779	95778775	.	+	.	Name=MG-3905;type=Clone Problem;chr=3;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000069.7	GRC	region	96687908	96858395	.	+	.	Name=MG-3906;type=Variation;chr=3;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000069.7	GRC	region	104567760	104802744	.	+	.	Name=MG-4042;type=Variation;chr=3;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000069.7	GRC	region	20143601	20343879	.	+	.	Name=MG-4123;type=Variation;chr=3;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000069.7	GRC	region	27683481	27978741	.	+	.	Name=MG-4184;type=GRC Housekeeping;chr=3;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000069.7	GRC	region	35702815	47634399	.	+	.	Name=MG-4235;type=Path Problem;chr=3;status=Resolved;affectVersion=GRCm38;fixVersion=na
+NC_000069.7	GRC	region	15583935	15857001	.	+	.	Name=MG-4248;type=Gap;chr=3;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p4
+NC_000069.7	GRC	region	35702815	47634399	.	+	.	Name=MG-4322;type=Variation;chr=3;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000069.7	GRC	region	95564779	95778775	.	+	.	Name=MG-4328;type=Clone Problem;chr=3;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000069.7	GRC	region	95523093	95564778	.	+	.	Name=MG-4372;type=Clone Problem;chr=3;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000069.7	GRC	region	94509016	94699391	.	+	.	Name=MG-4387;type=GRC Housekeeping;chr=3;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000069.7	GRC	region	159604384	159642455	.	+	.	Name=MG-4388;type=GRC Housekeeping;chr=3;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000069.7	GRC	region	93078034	93153379	.	+	.	Name=MG-56;type=Clone Problem;chr=3;status=Stalled;affectVersion=na;fixVersion=na
+NC_000069.7	GRC	region	40559840	40670216	.	+	.	Name=MG-89;type=Gap;chr=3;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p6
+NC_000069.7	GRC	region	151437715	151514620	.	+	.	Name=MG-92;type=Variation;chr=3;status=Resolved;affectVersion=MGSCv36;fixVersion=GRCm38
+NC_000070.7	GRC	region	118171911	118377272	.	+	.	Name=MG-111;type=Variation;chr=4;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000071.7	GRC	region	122755074	122785058	.	+	.	Name=MG-112;type=Path Problem;chr=5;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000070.7	GRC	region	156374261	156440896	.	+	.	Name=MG-122;type=Missing sequence;chr=4;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000070.7	GRC	region	156389269	156411583	.	+	.	Name=MG-149;type=Localization Problem;chr=4;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000070.7	GRC	region	42238203	42865792	.	+	.	Name=MG-177;type=Unknown;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000070.7	GRC	region	156550794	156565554	.	+	.	Name=MG-18;type=Missing sequence;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	124445629	124653892	.	+	.	Name=MG-183;type=Clone Problem;chr=4;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000071.7	GRC	region	122755074	122785058	.	+	.	Name=MG-198;type=Clone Problem;chr=5;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000070.7	GRC	region	156151265	156270358	.	+	.	Name=MG-199;type=Clone Problem;chr=4;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000070.7	GRC	region	156550794	156565554	.	+	.	Name=MG-2;type=Missing sequence;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	141569061	141715273	.	+	.	Name=MG-203;type=Variation;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000070.7	GRC	region	41809842	42113108	.	+	.	Name=MG-3197;type=GRC Housekeeping;chr=4;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000070.7	GRC	region	60436214	61583135	.	+	.	Name=MG-3198;type=GRC Housekeeping;chr=4;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000070.7	GRC	region	121283458	121598670	.	+	.	Name=MG-3200;type=GRC Housekeeping;chr=4;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000070.7	GRC	region	146019399	146836790	.	+	.	Name=MG-3201;type=GRC Housekeeping;chr=4;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000070.7	GRC	region	11113719	11488744	.	+	.	Name=MG-3202;type=GRC Housekeeping;chr=4;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000070.7	GRC	region	14803600	15073984	.	+	.	Name=MG-3203;type=GRC Housekeeping;chr=4;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000070.7	GRC	region	146524213	146742869	.	+	.	Name=MG-3204;type=GRC Housekeeping;chr=4;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000070.7	GRC	region	156257432	156341072	.	+	.	Name=MG-3220;type=Gap;chr=4;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000070.7	GRC	region	130221011	130480029	.	+	.	Name=MG-3221;type=Gap;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000070.7	GRC	region	130671393	130844668	.	+	.	Name=MG-3245;type=GRC Housekeeping;chr=4;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000070.7	GRC	region	42113109	42844102	.	+	.	Name=MG-3252;type=Unknown;chr=4;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000070.7	GRC	region	31370253	31571278	.	+	.	Name=MG-3500;type=Gap;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=MGSCv37
+NC_000070.7	GRC	region	42113109	42844102	.	+	.	Name=MG-3501;type=Gap;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=MGSCv37
+NC_000070.7	GRC	region	146886791	147023224	.	+	.	Name=MG-3505;type=Gap;chr=4;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000070.7	GRC	region	31370253	31571278	.	+	.	Name=MG-3558;type=Gap;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	41809842	42386163	.	+	.	Name=MG-3559;type=Path Problem;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	60643125	61300175	.	+	.	Name=MG-3560;type=Path Problem;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	60250666	60436213	.	+	.	Name=MG-3561;type=Gap;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p4
+NC_000070.7	GRC	region	61105611	61504875	.	+	.	Name=MG-3562;type=Gap;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p4
+NC_000070.7	GRC	region	60721771	61300175	.	+	.	Name=MG-3566;type=Gap;chr=4;status=Awaiting Exptl Data;affectVersion=MGSCv37;fixVersion=na
+NC_000070.7	GRC	region	42113109	42386163	.	+	.	Name=MG-3569;type=Gap;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	41893829	42240202	.	+	.	Name=MG-3573;type=Gap;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	41893829	42844102	.	+	.	Name=MG-3588;type=Path Problem;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	41967678	42644645	.	+	.	Name=MG-3589;type=Gap;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	60721771	61504875	.	+	.	Name=MG-3590;type=Path Problem;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	61314414	61583135	.	+	.	Name=MG-3591;type=Gap;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	89031403	89295972	.	+	.	Name=MG-3592;type=Gap;chr=4;status=Under Review;affectVersion=MGSCv37;fixVersion=na
+NC_000070.7	GRC	region	121453067	122054392	.	+	.	Name=MG-3608;type=Path Problem;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	122048769	122367610	.	+	.	Name=MG-3609;type=Path Problem;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p4
+NC_000070.7	GRC	region	99698518	99767477	.	+	.	Name=MG-3618;type=Gap;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p6
+NC_000070.7	GRC	region	130243040	130480029	.	+	.	Name=MG-3619;type=Gap;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	146019399	146551970	.	+	.	Name=MG-3620;type=Gap;chr=4;status=Awaiting Exptl Data;affectVersion=MGSCv37;fixVersion=na
+NC_000070.7	GRC	region	146792870	147223084	.	+	.	Name=MG-3621;type=Path Problem;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	130300535	130353300	.	+	.	Name=MG-3622;type=Gap;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	130342306	130355709	.	+	.	Name=MG-3623;type=Gap;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	130353498	130360324	.	+	.	Name=MG-3624;type=Gap;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	146792870	146926152	.	+	.	Name=MG-3637;type=Gap;chr=4;status=Awaiting Elec Data;affectVersion=MGSCv37;fixVersion=na
+NC_000070.7	GRC	region	145431509	146742869	.	+	.	Name=MG-3638;type=Path Problem;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	145986546	147223084	.	+	.	Name=MG-3639;type=Path Problem;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	27987291	28260633	.	+	.	Name=MG-3643;type=Gap;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000070.7	GRC	region	34186281	34352966	.	+	.	Name=MG-3644;type=Gap;chr=4;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000070.7	GRC	region	3050001	3074853	.	+	.	Name=MG-3672;type=Gap;chr=4;status=Reopened;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000070.7	GRC	region	3050001	3074853	.	+	.	Name=MG-3721;type=Gap;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000070.7	GRC	region	156270359	156302313	.	+	.	Name=MG-3722;type=Gap;chr=4;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000070.7	GRC	region	147478792	147662999	.	+	.	Name=MG-3744;type=Missing sequence;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000070.7	GRC	region	41888085	42115916	.	+	.	Name=MG-3768;type=Localization Problem;chr=4;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000070.7	GRC	region	89031403	89295972	.	+	.	Name=MG-3817;type=Gap;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	122048769	122367610	.	+	.	Name=MG-3818;type=Gap;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	130243040	130480029	.	+	.	Name=MG-3819;type=Gap;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000070.7	GRC	region	60250666	60436213	.	+	.	Name=MG-3820;type=Gap;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	121453067	122054392	.	+	.	Name=MG-3821;type=Gap;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	24505204	24726143	.	+	.	Name=MG-3911;type=Clone Problem;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	40689941	40882780	.	+	.	Name=MG-3913;type=Clone Problem;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000070.7	GRC	region	148888820	149034715	.	+	.	Name=MG-3914;type=Clone Problem;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000070.7	GRC	region	42238203	42386163	.	+	.	Name=MG-4001;type=GRC Housekeeping;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	35796357	36002161	.	+	.	Name=MG-4063;type=Clone Problem;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	56205891	56460390	.	+	.	Name=MG-4064;type=Unknown;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	73536867	73734077	.	+	.	Name=MG-4065;type=Clone Problem;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	78437637	78617335	.	+	.	Name=MG-4066;type=Clone Problem;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	121865435	122201282	.	+	.	Name=MG-4107;type=Path Problem;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	121865435	122050768	.	+	.	Name=MG-4108;type=Clone Problem;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	3074854	3259710	.	+	.	Name=MG-4109;type=Path Problem;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	93514143	93671273	.	+	.	Name=MG-4115;type=Clone Problem;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	41809842	41901915	.	+	.	Name=MG-4125;type=Path Problem;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	41473992	41645417	.	+	.	Name=MG-4126;type=GRC Housekeeping;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	41643416	41811841	.	+	.	Name=MG-4127;type=GRC Housekeeping;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	41809842	41901915	.	+	.	Name=MG-4128;type=GRC Housekeeping;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	42714292	42865792	.	+	.	Name=MG-4129;type=GRC Housekeeping;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	42642646	42716291	.	+	.	Name=MG-4130;type=GRC Housekeeping;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	60721771	60805610	.	+	.	Name=MG-4131;type=Path Problem;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000070.7	GRC	region	145431509	146019398	.	+	.	Name=MG-4132;type=Gap;chr=4;status=Continuing Investigation;affectVersion=GRCm38;fixVersion=na
+NC_000070.7	GRC	region	146742618	146836790	.	+	.	Name=MG-4133;type=Gap;chr=4;status=Continuing Investigation;affectVersion=GRCm38;fixVersion=na
+NC_000070.7	GRC	region	42240203	42644645	.	+	.	Name=MG-4134;type=Gap;chr=4;status=Continuing Investigation;affectVersion=GRCm38;fixVersion=na
+NC_000070.7	GRC	region	118377273	118426821	.	+	.	Name=MG-4135;type=Clone Problem;chr=4;status=Awaiting Exptl Data;affectVersion=GRCm38;fixVersion=na
+NC_000070.7	GRC	region	143108786	143303035	.	+	.	Name=MG-4136;type=Clone Problem;chr=4;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm38.p1,GRCm39
+NC_000070.7	GRC	region	121453067	121867434	.	+	.	Name=MG-4243;type=Gap;chr=4;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39,GRCm38.p6
+NC_000070.7	GRC	region	42240203	42386163	.	+	.	Name=MG-4253;type=GRC Housekeeping;chr=4;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000070.7	GRC	region	149719771	149995843	.	+	.	Name=MG-4257;type=Path Problem;chr=4;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000070.7	GRC	region	130243040	130480029	.	+	.	Name=MG-4265;type=Gap;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p4
+NC_000070.7	GRC	region	130243040	130480029	.	+	.	Name=MG-4266;type=Gap;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p4
+NC_000070.7	GRC	region	156658307	156710686	.	+	.	Name=MG-4283;type=Path Problem;chr=4;status=Under Review;affectVersion=GRCm38;fixVersion=na
+NC_000070.7	GRC	region	156374261	156440896	.	+	.	Name=MG-4304;type=Localization Problem;chr=4;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000070.7	GRC	region	146019399	146551970	.	+	.	Name=MG-4310;type=Gap;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p6
+NC_000070.7	GRC	region	146019399	146551970	.	+	.	Name=MG-4311;type=Gap;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p6
+NC_000070.7	GRC	region	41888085	42115916	.	+	.	Name=MG-4379;type=Clone Problem;chr=4;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000070.7	GRC	region	156339360	156660564	.	+	.	Name=MG-4381;type=Gap;chr=4;status=Open;affectVersion=GRCm38;fixVersion=na
+NC_000070.7	GRC	region	41967678	42175681	.	+	.	Name=MG-4412;type=Localization Problem;chr=4;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000070.7	GRC	region	42652192	42844102	.	+	.	Name=MG-4413;type=Localization Problem;chr=4;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000070.7	GRC	region	141991984	142424372	.	+	.	Name=MG-51;type=Gap;chr=4;status=Resolved;affectVersion=MGSCv36;fixVersion=GRCm39,GRCm38.p6
+NC_000070.7	GRC	region	99698518	99749307	.	+	.	Name=MG-58;type=Gap;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000071.7	GRC	region	124769658	124812139	.	+	.	Name=MG-103;type=Gap;chr=5;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000071.7	GRC	region	36779309	36819726	.	+	.	Name=MG-143;type=Gap;chr=5;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000071.7	GRC	region	142689400	142771085	.	+	.	Name=MG-144;type=Clone Problem;chr=5;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000083.7	GRC	region	31364666	31406543	.	+	.	Name=MG-151;type=Clone Problem;chr=17;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000071.7	GRC	region	131478986	131621482	.	+	.	Name=MG-171;type=Clone Problem;chr=5;status=Resolved;affectVersion=na;fixVersion=GRCm39,GRCm38.p5
+NC_000071.7	GRC	region	107717418	107838988	.	+	.	Name=MG-180;type=Clone Problem;chr=5;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000071.7	GRC	region	38408622	38563992	.	+	.	Name=MG-186;type=Clone Problem;chr=5;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000071.7	GRC	region	92423857	92595280	.	+	.	Name=MG-188;type=Clone Problem;chr=5;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000071.7	GRC	region	90453996	90492957	.	+	.	Name=MG-204;type=Clone Problem;chr=5;status=Resolved;affectVersion=na;fixVersion=MGSCv37
+NC_000083.7	GRC	region	31364666	31406543	.	+	.	Name=MG-23;type=Clone Problem;chr=17;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000071.7	GRC	region	129861449	129880906	.	+	.	Name=MG-27;type=Gap;chr=5;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000071.7	GRC	region	100612643	100805253	.	+	.	Name=MG-3157;type=Clone Problem;chr=5;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000071.7	GRC	region	113552096	113684552	.	+	.	Name=MG-3160;type=Gap;chr=5;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000071.7	GRC	region	143396583	143568154	.	+	.	Name=MG-3206;type=GRC Housekeeping;chr=5;status=Resolved;affectVersion=MGSCv36;fixVersion=MGSCv37
+NC_000071.7	GRC	region	137178051	137181650	.	+	.	Name=MG-3489;type=Gap;chr=5;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000071.7	GRC	region	15058280	15982894	.	+	.	Name=MG-3584;type=Gap;chr=5;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000071.7	GRC	region	25948669	26356748	.	+	.	Name=MG-3585;type=Gap;chr=5;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000071.7	GRC	region	30436675	30550325	.	+	.	Name=MG-3586;type=Gap;chr=5;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000071.7	GRC	region	32827664	33103769	.	+	.	Name=MG-3587;type=Gap;chr=5;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm38
+NC_000071.7	GRC	region	36666300	37036436	.	+	.	Name=MG-3594;type=Gap;chr=5;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000071.7	GRC	region	74029889	74253678	.	+	.	Name=MG-3595;type=Gap;chr=5;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000071.7	GRC	region	76127493	76478246	.	+	.	Name=MG-3596;type=Gap;chr=5;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000071.7	GRC	region	94188898	94492025	.	+	.	Name=MG-3597;type=Gap;chr=5;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000071.7	GRC	region	124620978	125023141	.	+	.	Name=MG-3598;type=Gap;chr=5;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000071.7	GRC	region	128404048	128498191	.	+	.	Name=MG-3599;type=Gap;chr=5;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000071.7	GRC	region	129828659	129973282	.	+	.	Name=MG-3600;type=Gap;chr=5;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000071.7	GRC	region	137034304	137435290	.	+	.	Name=MG-3601;type=Gap;chr=5;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000071.7	GRC	region	138488262	138769942	.	+	.	Name=MG-3602;type=Gap;chr=5;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000071.7	GRC	region	142677986	142771085	.	+	.	Name=MG-3603;type=Gap;chr=5;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000071.7	GRC	region	143664792	143846596	.	+	.	Name=MG-3605;type=Gap;chr=5;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000071.7	GRC	region	145523249	145801775	.	+	.	Name=MG-3606;type=Gap;chr=5;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000071.7	GRC	region	149206799	149281810	.	+	.	Name=MG-3607;type=Gap;chr=5;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000071.7	GRC	region	143322967	143494428	.	+	.	Name=MG-3640;type=Gap;chr=5;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000071.7	GRC	region	107465067	107616123	.	+	.	Name=MG-3846;type=Variation;chr=5;status=Continuing Investigation;affectVersion=na;fixVersion=na
+NC_000071.7	GRC	region	111210236	111455677	.	+	.	Name=MG-3847;type=Clone Problem;chr=5;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000071.7	GRC	region	13421380	13575070	.	+	.	Name=MG-3854;type=Clone Problem;chr=5;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000071.7	GRC	region	30704647	30890395	.	+	.	Name=MG-3855;type=Clone Problem;chr=5;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000071.7	GRC	region	111210236	111455677	.	+	.	Name=MG-3856;type=Clone Problem;chr=5;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000071.7	GRC	region	134176892	134348685	.	+	.	Name=MG-3857;type=Clone Problem;chr=5;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000071.7	GRC	region	129755193	129864298	.	+	.	Name=MG-3886;type=Clone Problem;chr=5;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm38
+NT_166438.1	GRC	region	1	195993	.	+	.	Name=MG-3936;type=Localization Problem;chr=5;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NT_187059.1	GRC	region	874659	931943	.	+	.	Name=MG-3966;type=Localization Problem;chr=5;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NT_187059.1	GRC	region	931944	953012	.	+	.	Name=MG-3967;type=Localization Problem;chr=5;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000071.7	GRC	region	19893692	19994262	.	+	.	Name=MG-4029;type=Clone Problem;chr=5;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000071.7	GRC	region	15058280	15807158	.	+	.	Name=MG-4143;type=Gap;chr=5;status=Continuing Investigation;affectVersion=GRCm38;fixVersion=na
+NC_000071.7	GRC	region	74029889	74177660	.	+	.	Name=MG-4144;type=Gap;chr=5;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000071.7	GRC	region	124757531	124828559	.	+	.	Name=MG-4145;type=Gap;chr=5;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000071.7	GRC	region	30427029	30537535	.	+	.	Name=MG-4146;type=Gap;chr=5;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000071.7	GRC	region	129828659	129916169	.	+	.	Name=MG-4147;type=Gap;chr=5;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000071.7	GRC	region	137145088	137297567	.	+	.	Name=MG-4148;type=Gap;chr=5;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000071.7	GRC	region	138622669	138769942	.	+	.	Name=MG-4149;type=Gap;chr=5;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000071.7	GRC	region	113552096	113792136	.	+	.	Name=MG-4150;type=Gap;chr=5;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000071.7	GRC	region	36784285	36859334	.	+	.	Name=MG-4164;type=Gap;chr=5;status=Stalled;affectVersion=GRCm38;fixVersion=na
+NC_000071.7	GRC	region	15058280	15807158	.	+	.	Name=MG-4212;type=Gap;chr=5;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm38,GRCm38.p1
+NC_000071.7	GRC	region	105456300	105598002	.	+	.	Name=MG-4276;type=Clone Problem;chr=5;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000071.7	GRC	region	87819035	87993808	.	+	.	Name=MG-4278;type=Clone Problem;chr=5;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000074.7	GRC	region	95996864	96040733	.	+	.	Name=MG-43;type=Path Problem;chr=8;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000071.7	GRC	region	13421380	13575070	.	+	.	Name=MG-4341;type=Clone Problem;chr=5;status=Resolved;affectVersion=GRCm38;fixVersion=na
+NC_000071.7	GRC	region	134176892	134348685	.	+	.	Name=MG-4357;type=Clone Problem;chr=5;status=Resolved;affectVersion=GRCm38;fixVersion=na
+NC_000071.7	GRC	region	137180796	137199322	.	+	.	Name=MG-4359;type=Gap;chr=5;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000071.7	GRC	region	3050001	3178910	.	+	.	Name=MG-4360;type=Gap;chr=5;status=Continuing Investigation;affectVersion=GRCm38;fixVersion=na
+NC_000071.7	GRC	region	124757531	124767002	.	+	.	Name=MG-4376;type=Unknown;chr=5;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000071.7	GRC	region	137246312	137297567	.	+	.	Name=MG-4378;type=Gap;chr=5;status=Open;affectVersion=GRCm38;fixVersion=na
+NC_000083.7	GRC	region	31364666	31406543	.	+	.	Name=MG-6;type=Localization Problem;chr=17;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000071.7	GRC	region	143800837	143846596	.	+	.	Name=MG-64;type=Gap;chr=5;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000071.7	GRC	region	137297568	137435290	.	+	.	Name=MG-70;type=Clone Problem;chr=5;status=Resolved;affectVersion=na;fixVersion=MGSCv37
+NC_000071.7	GRC	region	124762394	124769681	.	+	.	Name=MG-82;type=Gap;chr=5;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000071.7	GRC	region	30493105	30499771	.	+	.	Name=MG-97;type=Gap;chr=5;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000072.7	GRC	region	52123006	52237487	.	+	.	Name=MG-148;type=Clone Problem;chr=6;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000072.7	GRC	region	30746045	30881257	.	+	.	Name=MG-159;type=Gap;chr=6;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000072.7	GRC	region	38552101	38733049	.	+	.	Name=MG-163;type=Clone Problem;chr=6;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000072.7	GRC	region	72273701	72428466	.	+	.	Name=MG-184;type=Clone Problem;chr=6;status=Resolved;affectVersion=na;fixVersion=GRCm39,GRCm38.p3
+NC_000072.7	GRC	region	142151492	142326114	.	+	.	Name=MG-206;type=Clone Problem;chr=6;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000072.7	GRC	region	148906793	149093870	.	+	.	Name=MG-3;type=Clone Problem;chr=6;status=Resolved;affectVersion=na;fixVersion=MGSCv37
+NC_000072.7	GRC	region	3050001	3199105	.	+	.	Name=MG-3502;type=Gap;chr=6;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000072.7	GRC	region	30697354	30881257	.	+	.	Name=MG-3512;type=Gap;chr=6;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000072.7	GRC	region	30746045	30881257	.	+	.	Name=MG-36;type=Gap;chr=6;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000072.7	GRC	region	47566122	47863857	.	+	.	Name=MG-3716;type=Gap;chr=6;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000072.7	GRC	region	139530787	139781018	.	+	.	Name=MG-3717;type=Gap;chr=6;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000072.7	GRC	region	145797813	146066158	.	+	.	Name=MG-3718;type=Gap;chr=6;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000072.7	GRC	region	149466671	149488044	.	+	.	Name=MG-3719;type=Gap;chr=6;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000072.7	GRC	region	133649603	133828710	.	+	.	Name=MG-3830;type=Clone Problem;chr=6;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000072.7	GRC	region	129839552	130203332	.	+	.	Name=MG-3840;type=Missing sequence;chr=6;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000072.7	GRC	region	129839552	130030180	.	+	.	Name=MG-3841;type=Missing sequence;chr=6;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000072.7	GRC	region	129839552	130290105	.	+	.	Name=MG-3842;type=Missing sequence;chr=6;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000072.7	GRC	region	130030181	130203332	.	+	.	Name=MG-3843;type=Missing sequence;chr=6;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000072.7	GRC	region	130290106	130402884	.	+	.	Name=MG-3844;type=Missing sequence;chr=6;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000072.7	GRC	region	130030181	130203332	.	+	.	Name=MG-3851;type=Missing sequence;chr=6;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000072.7	GRC	region	134989255	135188553	.	+	.	Name=MG-3902;type=Clone Problem;chr=6;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000072.7	GRC	region	39289123	39455813	.	+	.	Name=MG-3903;type=Variation;chr=6;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000072.7	GRC	region	30697354	30881257	.	+	.	Name=MG-3925;type=Missing sequence;chr=6;status=Resolved;affectVersion=na;fixVersion=na
+NC_000072.7	GRC	region	114523076	114689413	.	+	.	Name=MG-3935;type=Path Problem;chr=6;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000072.7	GRC	region	54024961	54251008	.	+	.	Name=MG-4067;type=Clone Problem;chr=6;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000072.7	GRC	region	136207740	136382158	.	+	.	Name=MG-4068;type=Clone Problem;chr=6;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000072.7	GRC	region	149460943	149470013	.	+	.	Name=MG-4069;type=Path Problem;chr=6;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000072.7	GRC	region	142027019	142326114	.	+	.	Name=MG-4183;type=GRC Housekeeping;chr=6;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000072.7	GRC	region	129613530	130637271	.	+	.	Name=MG-4237;type=Path Problem;chr=6;status=Resolved;affectVersion=GRCm38.p2;fixVersion=GRCm39,GRCm38.p3
+NC_000073.7	GRC	region	11117607	11455845	.	+	.	Name=MG-4284;type=Localization Problem;chr=7;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000072.7	GRC	region	144074038	144428427	.	+	.	Name=MG-4285;type=GRC Housekeeping;chr=6;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000072.7	GRC	region	52165961	52290355	.	+	.	Name=MG-4343;type=Unknown;chr=6;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000072.7	GRC	region	139637102	139660570	.	+	.	Name=MG-66;type=Gap;chr=6;status=Resolved;affectVersion=MGSCv36;fixVersion=GRCm39
+NC_000073.7	GRC	region	47553443	47704104	.	+	.	Name=MG-130;type=Variation;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000073.7	GRC	region	141155230	141213656	.	+	.	Name=MG-131;type=Clone Problem;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000073.7	GRC	region	4276506	4411598	.	+	.	Name=MG-14;type=Variation;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000073.7	GRC	region	3586070	4411598	.	+	.	Name=MG-145;type=Variation;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000073.7	GRC	region	13405951	13581960	.	+	.	Name=MG-147;type=Missing sequence;chr=7;status=Resolved;affectVersion=na;fixVersion=MGSCv37
+NC_000073.7	GRC	region	100037309	100046618	.	+	.	Name=MG-154;type=Clone Problem;chr=7;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000073.7	GRC	region	139413093	139595639	.	+	.	Name=MG-155;type=Clone Problem;chr=7;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000073.7	GRC	region	28773698	28957940	.	+	.	Name=MG-156;type=Clone Problem;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=MGSCv37
+NC_000073.7	GRC	region	38127250	38961226	.	+	.	Name=MG-157;type=Gap;chr=7;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000073.7	GRC	region	28428914	28589977	.	+	.	Name=MG-17;type=Variation;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000073.7	GRC	region	92722835	92735641	.	+	.	Name=MG-189;type=Clone Problem;chr=7;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000073.7	GRC	region	3586070	4411598	.	+	.	Name=MG-19;type=Variation;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000073.7	GRC	region	37874723	37988696	.	+	.	Name=MG-195;type=Clone Problem;chr=7;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000073.7	GRC	region	3609965	3945522	.	+	.	Name=MG-29;type=Variation;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000073.7	GRC	region	3518340	3586952	.	+	.	Name=MG-3162;type=Gap;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000073.7	GRC	region	3050001	3722747	.	+	.	Name=MG-3165;type=Gap;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000073.7	GRC	region	9370481	9589553	.	+	.	Name=MG-3166;type=Gap;chr=7;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000073.7	GRC	region	21198365	21570779	.	+	.	Name=MG-3167;type=Gap;chr=7;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000073.7	GRC	region	81709505	81945232	.	+	.	Name=MG-3168;type=Gap;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000073.7	GRC	region	105547910	105836017	.	+	.	Name=MG-3169;type=Gap;chr=7;status=Stalled;affectVersion=GRCm38;fixVersion=na
+NC_000073.7	GRC	region	131074196	131421620	.	+	.	Name=MG-3170;type=Gap;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000073.7	GRC	region	138476321	138788941	.	+	.	Name=MG-3171;type=Gap;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000073.7	GRC	region	141073239	141340431	.	+	.	Name=MG-3172;type=Gap;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p5
+NC_000073.7	GRC	region	22331194	22467654	.	+	.	Name=MG-3192;type=GRC Housekeeping;chr=7;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000073.7	GRC	region	21369426	22695399	.	+	.	Name=MG-3193;type=GRC Housekeeping;chr=7;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000073.7	GRC	region	3050001	3722747	.	+	.	Name=MG-3222;type=Gap;chr=7;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000073.7	GRC	region	138476321	138788941	.	+	.	Name=MG-3251;type=Missing sequence;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p5
+NC_000073.7	GRC	region	21369426	22687446	.	+	.	Name=MG-3593;type=Gap;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000073.7	GRC	region	127888277	127990837	.	+	.	Name=MG-3748;type=Clone Problem;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000073.7	GRC	region	59182461	59652833	.	+	.	Name=MG-3750;type=Gap;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000073.7	GRC	region	15091636	15238536	.	+	.	Name=MG-3760;type=Localization Problem;chr=7;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000073.7	GRC	region	3438648	3463515	.	+	.	Name=MG-3888;type=Clone Problem;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000073.7	GRC	region	3438648	3463515	.	+	.	Name=MG-3889;type=Clone Problem;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000073.7	GRC	region	55748383	55923229	.	+	.	Name=MG-3890;type=Variation;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000073.7	GRC	region	78676960	78886454	.	+	.	Name=MG-3891;type=Variation;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NT_166307.1	GRC	region	1	175968	.	+	.	Name=MG-39;type=Localization Problem;chr=7;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000073.7	GRC	region	141285755	141288071	.	+	.	Name=MG-3901;type=Clone Problem;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000073.7	GRC	region	59182461	59652833	.	+	.	Name=MG-3941;type=Path Problem;chr=7;status=Stalled;affectVersion=na;fixVersion=na
+NC_000073.7	GRC	region	7780529	8747576	.	+	.	Name=MG-3948;type=Gap;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000073.7	GRC	region	8747577	9589553	.	+	.	Name=MG-3949;type=Gap;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000073.7	GRC	region	7937994	9589553	.	+	.	Name=MG-3950;type=Gap;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000073.7	GRC	region	7937994	9459567	.	+	.	Name=MG-3951;type=Gap;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000073.7	GRC	region	8600675	8833393	.	+	.	Name=MG-3952;type=Gap;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000073.7	GRC	region	6168642	6552947	.	+	.	Name=MG-3955;type=Gap;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000073.7	GRC	region	7780529	8747576	.	+	.	Name=MG-3956;type=Gap;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000073.7	GRC	region	8747577	9589553	.	+	.	Name=MG-3957;type=Gap;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000073.7	GRC	region	20428843	22467654	.	+	.	Name=MG-3958;type=Gap;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000073.7	GRC	region	21057422	21239162	.	+	.	Name=MG-3959;type=Path Problem;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NT_166307.1	GRC	region	1	175968	.	+	.	Name=MG-3968;type=Localization Problem;chr=7;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NT_166307.1	GRC	region	1	175968	.	+	.	Name=MG-40;type=Localization Problem;chr=7;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000073.7	GRC	region	144773924	144876519	.	+	.	Name=MG-4081;type=GRC Housekeeping;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000073.7	GRC	region	3050001	3523738	.	+	.	Name=MG-4151;type=Gap;chr=7;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm38.p1,GRCm39
+NC_000073.7	GRC	region	3523739	3609964	.	+	.	Name=MG-4152;type=Gap;chr=7;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000073.7	GRC	region	38270600	38567637	.	+	.	Name=MG-4154;type=Gap;chr=7;status=Continuing Investigation;affectVersion=GRCm38;fixVersion=na
+NC_000073.7	GRC	region	38567638	38961226	.	+	.	Name=MG-4155;type=Gap;chr=7;status=Continuing Investigation;affectVersion=GRCm38;fixVersion=na
+NC_000073.7	GRC	region	59346584	59652833	.	+	.	Name=MG-4163;type=Gap;chr=7;status=Stalled;affectVersion=GRCm38;fixVersion=na
+NC_000073.7	GRC	region	138536440	138788941	.	+	.	Name=MG-4171;type=Gap;chr=7;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39,GRCm38.p5
+NC_000073.7	GRC	region	103919353	104188033	.	+	.	Name=MG-4185;type=GRC Housekeeping;chr=7;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000073.7	GRC	region	6168642	6442377	.	+	.	Name=MG-4279;type=GRC Housekeeping;chr=7;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000073.7	GRC	region	46448230	46627169	.	+	.	Name=MG-4333;type=Clone Problem;chr=7;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000073.7	GRC	region	11117607	11455845	.	+	.	Name=MG-4336;type=GRC Housekeeping;chr=7;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000073.7	GRC	region	130548150	130688944	.	+	.	Name=MG-4342;type=Clone Problem;chr=7;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000073.7	GRC	region	12947193	13098543	.	+	.	Name=MG-4344;type=Unknown;chr=7;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000073.7	GRC	region	3337277	3352035	.	+	.	Name=MG-4353;type=Clone Problem;chr=7;status=Resolved;affectVersion=GRCm38;fixVersion=na
+NC_000073.7	GRC	region	3050001	3186155	.	+	.	Name=MG-4361;type=Gap;chr=7;status=Continuing Investigation;affectVersion=GRCm38;fixVersion=na
+NC_000073.7	GRC	region	140834217	141054666	.	+	.	Name=MG-4384;type=GRC Housekeeping;chr=7;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000073.7	GRC	region	40932407	41137376	.	+	.	Name=MG-4389;type=GRC Housekeeping;chr=7;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000073.7	GRC	region	12947193	13098543	.	+	.	Name=MG-5;type=Clone Problem;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000073.7	GRC	region	3438648	3471567	.	+	.	Name=MG-59;type=Gap;chr=7;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000073.7	GRC	region	3353453	3379361	.	+	.	Name=MG-67;type=Gap;chr=7;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000073.7	GRC	region	47041226	47240852	.	+	.	Name=MG-72;type=Variation;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000073.7	GRC	region	104334917	104501078	.	+	.	Name=MG-93;type=Missing sequence;chr=7;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000073.7	GRC	region	106022989	106219533	.	+	.	Name=MG-98;type=Missing sequence;chr=7;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000074.7	GRC	region	129782988	129925489	.	+	.	Name=MG-100;type=Gap;chr=8;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000074.7	GRC	region	21302195	21439007	.	+	.	Name=MG-158;type=Missing sequence;chr=8;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000074.7	GRC	region	71126481	71298338	.	+	.	Name=MG-190;type=Clone Problem;chr=8;status=Resolved;affectVersion=na;fixVersion=GRCm39,GRCm38.p5
+NC_000074.7	GRC	region	54761349	54967608	.	+	.	Name=MG-202;type=Clone Problem;chr=8;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000074.7	GRC	region	93769209	94083760	.	+	.	Name=MG-3225;type=Path Problem;chr=8;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000074.7	GRC	region	19728062	20183729	.	+	.	Name=MG-3610;type=Gap;chr=8;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000074.7	GRC	region	19998145	21567898	.	+	.	Name=MG-3611;type=Gap;chr=8;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000074.7	GRC	region	21686993	22109191	.	+	.	Name=MG-3612;type=Gap;chr=8;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000074.7	GRC	region	34464465	34546937	.	+	.	Name=MG-3613;type=Gap;chr=8;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000074.7	GRC	region	39467069	39806000	.	+	.	Name=MG-3614;type=Gap;chr=8;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000074.7	GRC	region	55509784	56040358	.	+	.	Name=MG-3615;type=Gap;chr=8;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000074.7	GRC	region	65230930	65450346	.	+	.	Name=MG-3616;type=Gap;chr=8;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000074.7	GRC	region	73333393	73588911	.	+	.	Name=MG-3617;type=Gap;chr=8;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000074.7	GRC	region	105035040	105133659	.	+	.	Name=MG-3665;type=Clone Problem;chr=8;status=Resolved;affectVersion=MGSCv36;fixVersion=GRCm39
+NC_000074.7	GRC	region	71126481	71298338	.	+	.	Name=MG-3751;type=Clone Problem;chr=8;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p5
+NC_000074.7	GRC	region	21302195	21439007	.	+	.	Name=MG-3762;type=Localization Problem;chr=8;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000074.7	GRC	region	125716653	125893292	.	+	.	Name=MG-3763;type=Localization Problem;chr=8;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000074.7	GRC	region	20478730	20653724	.	+	.	Name=MG-3764;type=Localization Problem;chr=8;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000074.7	GRC	region	117814596	117856828	.	+	.	Name=MG-3858;type=Clone Problem;chr=8;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000074.7	GRC	region	121277521	121427452	.	+	.	Name=MG-3859;type=Clone Problem;chr=8;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000074.7	GRC	region	3706124	3892746	.	+	.	Name=MG-3869;type=Missing sequence;chr=8;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000074.7	GRC	region	117668180	117814595	.	+	.	Name=MG-3934;type=Clone Problem;chr=8;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000074.7	GRC	region	44363654	44598129	.	+	.	Name=MG-4013;type=Clone Problem;chr=8;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000074.7	GRC	region	129901132	129941452	.	+	.	Name=MG-4019;type=Gap;chr=8;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000074.7	GRC	region	65230930	65366759	.	+	.	Name=MG-4153;type=Gap;chr=8;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000074.7	GRC	region	19728062	20653724	.	+	.	Name=MG-4156;type=Gap;chr=8;status=Continuing Investigation;affectVersion=GRCm38;fixVersion=na
+NC_000074.7	GRC	region	19998145	20733151	.	+	.	Name=MG-4157;type=Gap;chr=8;status=Continuing Investigation;affectVersion=GRCm38;fixVersion=na
+NC_000074.7	GRC	region	19998145	21252194	.	+	.	Name=MG-4158;type=Gap;chr=8;status=Continuing Investigation;affectVersion=GRCm38;fixVersion=na
+NC_000074.7	GRC	region	21033152	21439007	.	+	.	Name=MG-4159;type=Gap;chr=8;status=Continuing Investigation;affectVersion=GRCm38;fixVersion=na
+NC_000074.7	GRC	region	55509784	56000464	.	+	.	Name=MG-4160;type=Gap;chr=8;status=Stalled;affectVersion=GRCm38;fixVersion=na
+NC_000074.7	GRC	region	72214385	72729077	.	+	.	Name=MG-4326;type=Missing sequence;chr=8;status=Under Review;affectVersion=GRCm38;fixVersion=na
+NC_000074.7	GRC	region	71126481	71298338	.	+	.	Name=MG-4351;type=Unknown;chr=8;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000074.7	GRC	region	87288917	87428439	.	+	.	Name=MG-4352;type=Clone Problem;chr=8;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000074.7	GRC	region	121277521	121427452	.	+	.	Name=MG-4356;type=Clone Problem;chr=8;status=Resolved;affectVersion=GRCm38;fixVersion=na
+NC_000074.7	GRC	region	3050001	3177432	.	+	.	Name=MG-4362;type=Gap;chr=8;status=Under Review;affectVersion=GRCm38;fixVersion=na
+NC_000074.7	GRC	region	94020748	94242574	.	+	.	Name=MG-62;type=Clone Problem;chr=8;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000074.7	GRC	region	65230930	65271625	.	+	.	Name=MG-77;type=Gap;chr=8;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000074.7	GRC	region	39467069	39610776	.	+	.	Name=MG-78;type=Gap;chr=8;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000075.7	GRC	region	108729655	108749154	.	+	.	Name=MG-117;type=Gap;chr=9;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p4
+NC_000075.7	GRC	region	124110267	124129100	.	+	.	Name=MG-132;type=Missing sequence;chr=9;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38,GRCm38.p2,GRCm39,GRCm38.p3
+NC_000075.7	GRC	region	13159701	13327578	.	+	.	Name=MG-161;type=Gap;chr=9;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000075.7	GRC	region	37466543	37676377	.	+	.	Name=MG-164;type=Variation;chr=9;status=Resolved;affectVersion=MGSCv36;fixVersion=GRCm39
+NC_000075.7	GRC	region	38367778	38536892	.	+	.	Name=MG-169;type=Variation;chr=9;status=Resolved;affectVersion=MGSCv36;fixVersion=na
+NC_000075.7	GRC	region	77997855	78191489	.	+	.	Name=MG-194;type=Clone Problem;chr=9;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000075.7	GRC	region	7388620	7596081	.	+	.	Name=MG-205;type=Clone Problem;chr=9;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000075.7	GRC	region	123699488	123733412	.	+	.	Name=MG-21;type=Gap;chr=9;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000075.7	GRC	region	69114448	69490397	.	+	.	Name=MG-3194;type=GRC Housekeeping;chr=9;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000075.7	GRC	region	123509814	123961466	.	+	.	Name=MG-3223;type=Missing sequence;chr=9;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000075.7	GRC	region	124011467	124251485	.	+	.	Name=MG-3224;type=Localization Problem;chr=9;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000075.7	GRC	region	124202172	124236069	.	+	.	Name=MG-3248;type=Missing sequence;chr=9;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000075.7	GRC	region	105635615	105770503	.	+	.	Name=MG-3726;type=Clone Problem;chr=9;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000075.7	GRC	region	123723148	123886551	.	+	.	Name=MG-3727;type=Missing sequence;chr=9;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000075.7	GRC	region	13076418	13588988	.	+	.	Name=MG-3728;type=Gap;chr=9;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000075.7	GRC	region	24822239	25455031	.	+	.	Name=MG-3729;type=Gap;chr=9;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000075.7	GRC	region	40252344	40681985	.	+	.	Name=MG-3730;type=Gap;chr=9;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000075.7	GRC	region	53522445	53818448	.	+	.	Name=MG-3731;type=Gap;chr=9;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000075.7	GRC	region	67334871	67671004	.	+	.	Name=MG-3732;type=Gap;chr=9;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000075.7	GRC	region	94098160	94423309	.	+	.	Name=MG-3733;type=Gap;chr=9;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000075.7	GRC	region	100821003	101116540	.	+	.	Name=MG-3734;type=Gap;chr=9;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000075.7	GRC	region	123509814	123892577	.	+	.	Name=MG-3735;type=Gap;chr=9;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000075.7	GRC	region	38536893	38696904	.	+	.	Name=MG-3754;type=Clone Problem;chr=9;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000075.7	GRC	region	108662154	108946830	.	+	.	Name=MG-3845;type=Gap;chr=9;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000075.7	GRC	region	124238133	124254093	.	+	.	Name=MG-3872;type=Gap;chr=9;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000075.7	GRC	region	120286619	120370585	.	+	.	Name=MG-3885;type=Clone Problem;chr=9;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000075.7	GRC	region	3000001	3176274	.	+	.	Name=MG-3922;type=Clone Problem;chr=9;status=Awaiting Elec Data;affectVersion=MGSCv37;fixVersion=na
+NC_000075.7	GRC	region	123886552	124254093	.	+	.	Name=MG-3926;type=Gap;chr=9;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000075.7	GRC	region	123886552	124254093	.	+	.	Name=MG-3938;type=Gap;chr=9;status=Awaiting Exptl Data;affectVersion=MGSCv37;fixVersion=na
+NC_000075.7	GRC	region	124238133	124254093	.	+	.	Name=MG-3946;type=Path Problem;chr=9;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000075.7	GRC	region	87716046	87976669	.	+	.	Name=MG-3964;type=GRC Housekeeping;chr=9;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000075.7	GRC	region	112647930	113042785	.	+	.	Name=MG-3965;type=Gap;chr=9;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000075.7	GRC	region	13168594	13324534	.	+	.	Name=MG-3979;type=Localization Problem;chr=9;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000075.7	GRC	region	38043210	38367777	.	+	.	Name=MG-4014;type=Variation;chr=9;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000075.7	GRC	region	38043210	38367777	.	+	.	Name=MG-4015;type=Variation;chr=9;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000075.7	GRC	region	123886552	124254093	.	+	.	Name=MG-4016;type=Clone Problem;chr=9;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000075.7	GRC	region	13076418	13237138	.	+	.	Name=MG-4172;type=Gap;chr=9;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000075.7	GRC	region	13153037	13435757	.	+	.	Name=MG-4173;type=Gap;chr=9;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000075.7	GRC	region	100942028	101011990	.	+	.	Name=MG-4174;type=Gap;chr=9;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000075.7	GRC	region	108662154	108782307	.	+	.	Name=MG-4175;type=Gap;chr=9;status=Resolved;affectVersion=GRCm38;fixVersion=na
+NC_000075.7	GRC	region	123680933	123886551	.	+	.	Name=MG-4176;type=Gap;chr=9;status=Continuing Investigation;affectVersion=GRCm38;fixVersion=na
+NC_000075.7	GRC	region	85700175	85978996	.	+	.	Name=MG-4189;type=GRC Housekeeping;chr=9;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000075.7	GRC	region	45434046	45651989	.	+	.	Name=MG-4190;type=GRC Housekeeping;chr=9;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000075.7	GRC	region	104306429	104628832	.	+	.	Name=MG-4191;type=GRC Housekeeping;chr=9;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000075.7	GRC	region	124129129	124197515	.	+	.	Name=MG-4226;type=Path Problem;chr=9;status=Resolved;affectVersion=na;fixVersion=GRCm39,GRCm38.p3
+NC_000075.7	GRC	region	124181334	124251485	.	+	.	Name=MG-4242;type=Path Problem;chr=9;status=Resolved;affectVersion=GRCm38.p3;fixVersion=GRCm39,GRCm38.p4
+NC_000075.7	GRC	region	124100843	124110166	.	+	.	Name=MG-4334;type=Path Problem;chr=9;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000075.7	GRC	region	123344956	123509813	.	+	.	Name=MG-4340;type=Clone Problem;chr=9;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000075.7	GRC	region	3000001	3176274	.	+	.	Name=MG-4363;type=Gap;chr=9;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000075.7	GRC	region	117957624	118070035	.	+	.	Name=MG-4391;type=GRC Housekeeping;chr=9;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000075.7	GRC	region	118078710	118303828	.	+	.	Name=MG-4392;type=GRC Housekeeping;chr=9;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000075.7	GRC	region	86642788	86653168	.	+	.	Name=MG-68;type=Gap;chr=9;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000075.7	GRC	region	80287266	80439689	.	+	.	Name=MG-73;type=Gap;chr=9;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000075.7	GRC	region	13287737	13312915	.	+	.	Name=MG-87;type=Missing sequence;chr=9;status=Resolved;affectVersion=MGSCv36;fixVersion=GRCm39
+NC_000076.7	GRC	region	21974380	22186337	.	+	.	Name=MG-139;type=Path Problem;chr=10;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000076.7	GRC	region	75262788	75378502	.	+	.	Name=MG-160;type=Clone Problem;chr=10;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000076.7	GRC	region	7120473	7296540	.	+	.	Name=MG-3503;type=Gap;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000076.7	GRC	region	3077278	7652153	.	+	.	Name=MG-3515;type=Gap;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000076.7	GRC	region	7453096	7460059	.	+	.	Name=MG-3518;type=Gap;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000076.7	GRC	region	7456479	7461241	.	+	.	Name=MG-3520;type=Gap;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000076.7	GRC	region	7460173	7487385	.	+	.	Name=MG-3522;type=Gap;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000076.7	GRC	region	57533227	58147055	.	+	.	Name=MG-3523;type=Gap;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000076.7	GRC	region	57698470	57723809	.	+	.	Name=MG-3524;type=Gap;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000076.7	GRC	region	57719969	57738819	.	+	.	Name=MG-3526;type=Gap;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000076.7	GRC	region	57723973	58147055	.	+	.	Name=MG-3529;type=Gap;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000076.7	GRC	region	67064093	67489500	.	+	.	Name=MG-3530;type=Gap;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p6
+NC_000076.7	GRC	region	67206810	67222910	.	+	.	Name=MG-3531;type=Gap;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000076.7	GRC	region	67214984	67224611	.	+	.	Name=MG-3533;type=Gap;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000076.7	GRC	region	67222949	67226336	.	+	.	Name=MG-3536;type=Gap;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000076.7	GRC	region	67225064	67228917	.	+	.	Name=MG-3539;type=Gap;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000076.7	GRC	region	67226408	67241513	.	+	.	Name=MG-3540;type=Gap;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000076.7	GRC	region	67230596	67249012	.	+	.	Name=MG-3541;type=Gap;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000076.7	GRC	region	67244890	67251640	.	+	.	Name=MG-3544;type=Gap;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000076.7	GRC	region	67249377	67258767	.	+	.	Name=MG-3545;type=Gap;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000076.7	GRC	region	67252020	67264484	.	+	.	Name=MG-3546;type=Gap;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000076.7	GRC	region	67258764	67266417	.	+	.	Name=MG-3547;type=Gap;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000076.7	GRC	region	67264558	67267190	.	+	.	Name=MG-3548;type=Gap;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000076.7	GRC	region	67266468	67275672	.	+	.	Name=MG-3549;type=Gap;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000076.7	GRC	region	67267434	67276630	.	+	.	Name=MG-3550;type=Gap;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000076.7	GRC	region	67275801	67286549	.	+	.	Name=MG-3551;type=Gap;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000076.7	GRC	region	67276789	67292398	.	+	.	Name=MG-3552;type=Gap;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000076.7	GRC	region	67287390	67316294	.	+	.	Name=MG-3553;type=Gap;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000076.7	GRC	region	74007891	74153926	.	+	.	Name=MG-3641;type=Gap;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000076.7	GRC	region	7296541	7443562	.	+	.	Name=MG-3753;type=Path Problem;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000076.7	GRC	region	62783501	62933570	.	+	.	Name=MG-3824;type=Clone Problem;chr=10;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000076.7	GRC	region	94600534	94662101	.	+	.	Name=MG-3826;type=Clone Problem;chr=10;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000076.7	GRC	region	77735324	77774354	.	+	.	Name=MG-3827;type=Clone Problem;chr=10;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000076.7	GRC	region	76771732	76931038	.	+	.	Name=MG-3915;type=Clone Problem;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000076.7	GRC	region	103842896	104003114	.	+	.	Name=MG-4;type=Clone Problem;chr=10;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000076.7	GRC	region	12636811	12831570	.	+	.	Name=MG-4070;type=Path Problem;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000076.7	GRC	region	103770489	104304996	.	+	.	Name=MG-4071;type=Path Problem;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000076.7	GRC	region	130303883	130392068	.	+	.	Name=MG-4072;type=Path Problem;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000076.7	GRC	region	5723534	6034486	.	+	.	Name=MG-4090;type=Unknown;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000076.7	GRC	region	6653241	6911267	.	+	.	Name=MG-4091;type=Unknown;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000076.7	GRC	region	4824332	4977214	.	+	.	Name=MG-4092;type=Unknown;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000076.7	GRC	region	4423474	4653757	.	+	.	Name=MG-4093;type=Unknown;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000076.7	GRC	region	4653758	4865362	.	+	.	Name=MG-4096;type=Unknown;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000076.7	GRC	region	3077278	3161502	.	+	.	Name=MG-4137;type=Gap;chr=10;status=Continuing Investigation;affectVersion=GRCm38;fixVersion=na
+NC_000076.7	GRC	region	7296541	7652153	.	+	.	Name=MG-4138;type=Gap;chr=10;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39,GRCm38.p6
+NC_000076.7	GRC	region	57533227	58147055	.	+	.	Name=MG-4141;type=Gap;chr=10;status=Awaiting Exptl Data;affectVersion=MGSCv37;fixVersion=na
+NC_000076.7	GRC	region	7296541	7652153	.	+	.	Name=MG-4262;type=Gap;chr=10;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000076.7	GRC	region	67064093	67489500	.	+	.	Name=MG-4263;type=Gap;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000076.7	GRC	region	57533227	58147055	.	+	.	Name=MG-4264;type=Gap;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p4
+NC_000076.7	GRC	region	71169985	71289496	.	+	.	Name=MG-4349;type=Unknown;chr=10;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000076.7	GRC	region	124909492	124973107	.	+	.	Name=MG-4373;type=Clone Problem;chr=10;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000076.7	GRC	region	14788813	14955410	.	+	.	Name=MG-4393;type=GRC Housekeeping;chr=10;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000076.7	GRC	region	19514594	19703950	.	+	.	Name=MG-4394;type=GRC Housekeeping;chr=10;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000076.7	GRC	region	86739081	86946883	.	+	.	Name=MG-4395;type=GRC Housekeeping;chr=10;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000076.7	GRC	region	100512480	100725404	.	+	.	Name=MG-4396;type=GRC Housekeeping;chr=10;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000077.7	GRC	region	102918309	103027310	.	+	.	Name=MG-192;type=Clone Problem;chr=11;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000077.7	GRC	region	34337080	34576994	.	+	.	Name=MG-3554;type=Gap;chr=11;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000077.7	GRC	region	88459808	88493769	.	+	.	Name=MG-3555;type=Gap;chr=11;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000077.7	GRC	region	88482667	88489408	.	+	.	Name=MG-3556;type=Gap;chr=11;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000077.7	GRC	region	121868555	121873369	.	+	.	Name=MG-3557;type=Gap;chr=11;status=Resolved;affectVersion=MGSCv37;fixVersion=MGSCv37
+NC_000077.7	GRC	region	3050001	3057212	.	+	.	Name=MG-3720;type=Gap;chr=11;status=Resolved;affectVersion=MGSCv37;fixVersion=MGSCv37
+NC_000077.7	GRC	region	87923884	88147159	.	+	.	Name=MG-3829;type=Clone Problem;chr=11;status=Resolved;affectVersion=na;fixVersion=GRCm38.p2,GRCm39
+NC_000077.7	GRC	region	94210469	94370446	.	+	.	Name=MG-3917;type=Clone Problem;chr=11;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000077.7	GRC	region	100960155	101031998	.	+	.	Name=MG-3918;type=Clone Problem;chr=11;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000077.7	GRC	region	101846331	102042838	.	+	.	Name=MG-3919;type=Clone Problem;chr=11;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000077.7	GRC	region	22715948	22926813	.	+	.	Name=MG-4073;type=Clone Problem;chr=11;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000077.7	GRC	region	37951809	37988645	.	+	.	Name=MG-4074;type=Clone Problem;chr=11;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000077.7	GRC	region	38051510	38060901	.	+	.	Name=MG-4075;type=Clone Problem;chr=11;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000077.7	GRC	region	96891765	97217916	.	+	.	Name=MG-4076;type=Path Problem;chr=11;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000077.7	GRC	region	121866555	121873368	.	+	.	Name=MG-4077;type=Clone Problem;chr=11;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm38
+NC_000077.7	GRC	region	34493469	34573982	.	+	.	Name=MG-41;type=Gap;chr=11;status=Resolved;affectVersion=na;fixVersion=na
+NC_000077.7	GRC	region	34337080	34576994	.	+	.	Name=MG-4256;type=Gap;chr=11;status=Resolved;affectVersion=MGSCv37,GRCm38;fixVersion=GRCm39
+NC_000077.7	GRC	region	7704071	7829512	.	+	.	Name=MG-4308;type=Clone Problem;chr=11;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39,GRCm38.p6
+NC_000077.7	GRC	region	70940334	71227553	.	+	.	Name=MG-4314;type=Variation;chr=11;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39,GRCm38.p6
+NC_000077.7	GRC	region	82824284	83241404	.	+	.	Name=MG-4315;type=Variation;chr=11;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39,GRCm38.p6
+NC_000077.7	GRC	region	48736059	49008328	.	+	.	Name=MG-4316;type=Variation;chr=11;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39,GRCm38.p6
+NC_000077.7	GRC	region	70964347	71190924	.	+	.	Name=MG-4317;type=Variation;chr=11;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39,GRCm38.p6
+NC_000077.7	GRC	region	82825490	83244623	.	+	.	Name=MG-4318;type=Variation;chr=11;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39,GRCm38.p6
+NC_000077.7	GRC	region	48735848	49008077	.	+	.	Name=MG-4319;type=Variation;chr=11;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39,GRCm38.p6
+NC_000077.7	GRC	region	70965187	78886006	.	+	.	Name=MG-4320;type=Variation;chr=11;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39,GRCm38.p6
+NC_000077.7	GRC	region	82825826	83189485	.	+	.	Name=MG-4321;type=Variation;chr=11;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39,GRCm38.p6
+NC_000077.7	GRC	region	53622900	53814392	.	+	.	Name=MG-4350;type=Clone Problem;chr=11;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000077.7	GRC	region	3050001	3057212	.	+	.	Name=MG-4364;type=Gap;chr=11;status=Reopened;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000077.7	GRC	region	88482667	88489408	.	+	.	Name=MG-76;type=Gap;chr=11;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000078.7	GRC	region	38886576	39086529	.	+	.	Name=MG-179;type=Clone Problem;chr=12;status=Resolved;affectVersion=na;fixVersion=MGSCv37
+NC_000078.7	GRC	region	53069510	53369446	.	+	.	Name=MG-3195;type=GRC Housekeeping;chr=12;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000078.7	GRC	region	18590606	18957149	.	+	.	Name=MG-3207;type=GRC Housekeeping;chr=12;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000078.7	GRC	region	29146133	29485515	.	+	.	Name=MG-3226;type=Gap;chr=12;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000078.7	GRC	region	112667733	112734944	.	+	.	Name=MG-3490;type=Clone Problem;chr=12;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p6
+NC_000078.7	GRC	region	18590606	18957149	.	+	.	Name=MG-3698;type=Gap;chr=12;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000078.7	GRC	region	83145575	83459656	.	+	.	Name=MG-37;type=Gap;chr=12;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000078.7	GRC	region	4703178	5080086	.	+	.	Name=MG-3702;type=Gap;chr=12;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000078.7	GRC	region	20173153	20549547	.	+	.	Name=MG-3703;type=Gap;chr=12;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000078.7	GRC	region	87523155	87872049	.	+	.	Name=MG-3706;type=Gap;chr=12;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000078.7	GRC	region	115840851	116191184	.	+	.	Name=MG-3707;type=Gap;chr=12;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000078.7	GRC	region	4408962	4703177	.	+	.	Name=MG-3849;type=Gap;chr=12;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000078.7	GRC	region	117875724	117982398	.	+	.	Name=MG-3860;type=Clone Problem;chr=12;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000078.7	GRC	region	21595516	23618604	.	+	.	Name=MG-3877;type=Path Problem;chr=12;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000078.7	GRC	region	118164885	118352761	.	+	.	Name=MG-3887;type=Clone Problem;chr=12;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm38
+NC_000078.7	GRC	region	21595516	21984653	.	+	.	Name=MG-3969;type=Gap;chr=12;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000078.7	GRC	region	22200920	23563913	.	+	.	Name=MG-3970;type=Gap;chr=12;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000078.7	GRC	region	22200920	23391947	.	+	.	Name=MG-3971;type=Gap;chr=12;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000078.7	GRC	region	22304709	22541320	.	+	.	Name=MG-3972;type=Gap;chr=12;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000078.7	GRC	region	22304709	23618604	.	+	.	Name=MG-3973;type=Gap;chr=12;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000078.7	GRC	region	35651593	35940765	.	+	.	Name=MG-3976;type=Gap;chr=12;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000078.7	GRC	region	119889973	119982792	.	+	.	Name=MG-3981;type=Gap;chr=12;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000078.7	GRC	region	34777173	34964917	.	+	.	Name=MG-4021;type=GRC Housekeeping;chr=12;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000078.7	GRC	region	93828560	94008423	.	+	.	Name=MG-4023;type=GRC Housekeeping;chr=12;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000078.7	GRC	region	95195367	95365138	.	+	.	Name=MG-4025;type=GRC Housekeeping;chr=12;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000078.7	GRC	region	113526543	113666816	.	+	.	Name=MG-4030;type=Clone Problem;chr=12;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000078.7	GRC	region	87494622	114422317	.	+	.	Name=MG-4037;type=Clone Problem;chr=12;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000078.7	GRC	region	41573492	41713656	.	+	.	Name=MG-4167;type=Gap;chr=12;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000078.7	GRC	region	109343288	109655968	.	+	.	Name=MG-4180;type=Gap;chr=12;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm38.p2,GRCm39
+NC_000078.7	GRC	region	109343288	109655968	.	+	.	Name=MG-4181;type=Gap;chr=12;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000078.7	GRC	region	104047773	104263723	.	+	.	Name=MG-4313;type=Clone Problem;chr=12;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000078.7	GRC	region	3050001	3205158	.	+	.	Name=MG-4365;type=Gap;chr=12;status=Continuing Investigation;affectVersion=GRCm38;fixVersion=na
+NC_000078.7	GRC	region	32013674	32178684	.	+	.	Name=MG-4382;type=GRC Housekeeping;chr=12;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000078.7	GRC	region	10942721	11114163	.	+	.	Name=MG-4397;type=GRC Housekeeping;chr=12;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000078.7	GRC	region	54576790	54740728	.	+	.	Name=MG-4398;type=GRC Housekeeping;chr=12;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000078.7	GRC	region	54836638	55009099	.	+	.	Name=MG-4399;type=GRC Housekeeping;chr=12;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000078.7	GRC	region	89782000	90039043	.	+	.	Name=MG-4400;type=GRC Housekeeping;chr=12;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000078.7	GRC	region	90088060	90281230	.	+	.	Name=MG-4401;type=GRC Housekeeping;chr=12;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000078.7	GRC	region	41614942	41622223	.	+	.	Name=MG-60;type=Gap;chr=12;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000079.7	GRC	region	119556406	119632041	.	+	.	Name=MG-110;type=Gap;chr=13;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000079.7	GRC	region	18541396	18736886	.	+	.	Name=MG-115;type=Clone Problem;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000079.7	GRC	region	120242404	120731665	.	+	.	Name=MG-119;type=Missing sequence;chr=13;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000079.7	GRC	region	120284323	120418411	.	+	.	Name=MG-136;type=Missing sequence;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000079.7	GRC	region	107951736	108123315	.	+	.	Name=MG-201;type=Clone Problem;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000079.7	GRC	region	120151597	120284322	.	+	.	Name=MG-25;type=Localization Problem;chr=13;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000079.7	GRC	region	92143966	92174139	.	+	.	Name=MG-31;type=Gap;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000079.7	GRC	region	119556406	120284322	.	+	.	Name=MG-3163;type=Gap;chr=13;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000079.7	GRC	region	11035333	11207289	.	+	.	Name=MG-3173;type=Gap;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000079.7	GRC	region	39770866	40071587	.	+	.	Name=MG-3174;type=Gap;chr=13;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000079.7	GRC	region	16561580	16881721	.	+	.	Name=MG-3175;type=Gap;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000079.7	GRC	region	47876855	48244156	.	+	.	Name=MG-3176;type=Gap;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000079.7	GRC	region	54451576	54693266	.	+	.	Name=MG-3177;type=Gap;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000079.7	GRC	region	102655784	102960696	.	+	.	Name=MG-3178;type=Gap;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000079.7	GRC	region	120079001	120264597	.	+	.	Name=MG-3227;type=Localization Problem;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000079.7	GRC	region	12795570	12868365	.	+	.	Name=MG-34;type=Missing sequence;chr=13;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000079.7	GRC	region	68574917	69005919	.	+	.	Name=MG-3737;type=Gap;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000079.7	GRC	region	116547072	116935900	.	+	.	Name=MG-3738;type=Gap;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000079.7	GRC	region	21765191	21986003	.	+	.	Name=MG-3746;type=Missing sequence;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000079.7	GRC	region	120151597	120284322	.	+	.	Name=MG-38;type=Localization Problem;chr=13;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000079.7	GRC	region	83764925	83779857	.	+	.	Name=MG-3825;type=Clone Problem;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000079.7	GRC	region	106229188	106405848	.	+	.	Name=MG-3848;type=Clone Problem;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000079.7	GRC	region	21425077	21463604	.	+	.	Name=MG-3861;type=Clone Problem;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000079.7	GRC	region	47128916	47213134	.	+	.	Name=MG-3862;type=Clone Problem;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000079.7	GRC	region	53250229	53482205	.	+	.	Name=MG-3863;type=Clone Problem;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000079.7	GRC	region	120673726	120775109	.	+	.	Name=MG-3868;type=Gap;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000079.7	GRC	region	120673726	120775109	.	+	.	Name=MG-3873;type=Gap;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000079.7	GRC	region	61599779	61715418	.	+	.	Name=MG-3881;type=Variation;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000079.7	GRC	region	21765191	22166820	.	+	.	Name=MG-3884;type=Path Problem;chr=13;status=Awaiting Elec Data;affectVersion=na;fixVersion=na
+NC_000079.7	GRC	region	53250229	53482205	.	+	.	Name=MG-3892;type=Clone Problem;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000079.7	GRC	region	21425077	21463604	.	+	.	Name=MG-3893;type=Clone Problem;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000079.7	GRC	region	21639626	21765190	.	+	.	Name=MG-3895;type=Variation;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000079.7	GRC	region	73404735	73535774	.	+	.	Name=MG-3896;type=Variation;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000079.7	GRC	region	93180910	93296602	.	+	.	Name=MG-3897;type=Variation;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000079.7	GRC	region	120418412	120673725	.	+	.	Name=MG-3937;type=Gap;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000079.7	GRC	region	68099267	68384841	.	+	.	Name=MG-3974;type=Gap;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000079.7	GRC	region	71466228	71828657	.	+	.	Name=MG-3975;type=Gap;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000079.7	GRC	region	76512286	76838101	.	+	.	Name=MG-3977;type=Gap;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000079.7	GRC	region	80947865	81298679	.	+	.	Name=MG-3978;type=GRC Housekeeping;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000079.7	GRC	region	120151597	120284322	.	+	.	Name=MG-3983;type=Localization Problem;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000079.7	GRC	region	65355931	65777902	.	+	.	Name=MG-4018;type=GRC Housekeeping;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000079.7	GRC	region	15378523	15555597	.	+	.	Name=MG-4022;type=GRC Housekeeping;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000079.7	GRC	region	63238642	63470369	.	+	.	Name=MG-4024;type=GRC Housekeeping;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000079.7	GRC	region	21639626	21765190	.	+	.	Name=MG-4038;type=Clone Problem;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000079.7	GRC	region	109609145	109924549	.	+	.	Name=MG-4039;type=GRC Housekeeping;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000079.7	GRC	region	83482565	83901104	.	+	.	Name=MG-4094;type=GRC Housekeeping;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000079.7	GRC	region	11065662	11207289	.	+	.	Name=MG-4177;type=Gap;chr=13;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000079.7	GRC	region	54501339	54546534	.	+	.	Name=MG-4178;type=Gap;chr=13;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000079.7	GRC	region	92097165	92278718	.	+	.	Name=MG-4179;type=Gap;chr=13;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000079.7	GRC	region	49829686	50159829	.	+	.	Name=MG-4182;type=GRC Housekeeping;chr=13;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000079.7	GRC	region	119556406	120151596	.	+	.	Name=MG-4195;type=Gap;chr=13;status=Continuing Investigation;affectVersion=GRCm38;fixVersion=na
+NC_000079.7	GRC	region	12488196	13582907	.	+	.	Name=MG-4229;type=GRC Housekeeping;chr=13;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000079.7	GRC	region	12868366	13233493	.	+	.	Name=MG-4230;type=Gap;chr=13;status=Continuing Investigation;affectVersion=GRCm38;fixVersion=na
+NC_000079.7	GRC	region	13233494	13397662	.	+	.	Name=MG-4251;type=GRC Housekeeping;chr=13;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000079.7	GRC	region	66413344	66737111	.	+	.	Name=MG-4330;type=GRC Housekeeping;chr=13;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000079.7	GRC	region	37205541	37368113	.	+	.	Name=MG-4348;type=Unknown;chr=13;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000079.7	GRC	region	3050001	3050754	.	+	.	Name=MG-4366;type=Gap;chr=13;status=Continuing Investigation;affectVersion=GRCm38;fixVersion=na
+NC_000079.7	GRC	region	120151597	120284322	.	+	.	Name=MG-44;type=Localization Problem;chr=13;status=Resolved;affectVersion=na;fixVersion=MGSCv37
+NC_000079.7	GRC	region	107642126	107846892	.	+	.	Name=MG-4402;type=GRC Housekeeping;chr=13;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000079.7	GRC	region	74057639	74249959	.	+	.	Name=MG-4403;type=GRC Housekeeping;chr=13;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000079.7	GRC	region	120517269	120673725	.	+	.	Name=MG-83;type=Missing sequence;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000079.7	GRC	region	120700518	120708784	.	+	.	Name=MG-85;type=Missing sequence;chr=13;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000080.7	GRC	region	11077214	14481994	.	+	.	Name=MG-1;type=Path Problem;chr=14;status=Open;affectVersion=na;fixVersion=na
+NC_000080.7	GRC	region	52587374	52712077	.	+	.	Name=MG-128;type=Missing sequence;chr=14;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000080.7	GRC	region	91502439	91826597	.	+	.	Name=MG-3228;type=Gap;chr=14;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000080.7	GRC	region	16662649	17177584	.	+	.	Name=MG-3229;type=Path Problem;chr=14;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000080.7	GRC	region	3063293	19712454	.	+	.	Name=MG-3625;type=Gap;chr=14;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000080.7	GRC	region	24566041	24813724	.	+	.	Name=MG-3626;type=Gap;chr=14;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000080.7	GRC	region	26350510	26633943	.	+	.	Name=MG-3627;type=Gap;chr=14;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p6
+NC_000080.7	GRC	region	41265360	41863447	.	+	.	Name=MG-3628;type=Gap;chr=14;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000080.7	GRC	region	41318341	42689976	.	+	.	Name=MG-3629;type=Gap;chr=14;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000080.7	GRC	region	43079455	43901037	.	+	.	Name=MG-3631;type=Gap;chr=14;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000080.7	GRC	region	44511262	44874658	.	+	.	Name=MG-3632;type=Gap;chr=14;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000080.7	GRC	region	54480602	54820891	.	+	.	Name=MG-3633;type=Gap;chr=14;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000080.7	GRC	region	67485374	68056782	.	+	.	Name=MG-3634;type=Gap;chr=14;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000080.7	GRC	region	91502439	91826597	.	+	.	Name=MG-3635;type=Gap;chr=14;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000080.7	GRC	region	100725495	100983470	.	+	.	Name=MG-3636;type=Gap;chr=14;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000080.7	GRC	region	41318341	42689976	.	+	.	Name=MG-3736;type=Gap;chr=14;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000080.7	GRC	region	18794051	19140131	.	+	.	Name=MG-3739;type=Path Problem;chr=14;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000080.7	GRC	region	18970497	19087962	.	+	.	Name=MG-3740;type=Path Problem;chr=14;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000080.7	GRC	region	16298028	17269306	.	+	.	Name=MG-3742;type=Gap;chr=14;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000080.7	GRC	region	15985936	19087962	.	+	.	Name=MG-3743;type=Gap;chr=14;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000080.7	GRC	region	69509808	69954061	.	+	.	Name=MG-3816;type=Gap;chr=14;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm38
+NC_000080.7	GRC	region	50668914	50834932	.	+	.	Name=MG-3822;type=Variation;chr=14;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000080.7	GRC	region	18794051	19087962	.	+	.	Name=MG-3832;type=Path Problem;chr=14;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm38
+NC_000080.7	GRC	region	15985936	19469772	.	+	.	Name=MG-3853;type=Path Problem;chr=14;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000080.7	GRC	region	44199526	44371249	.	+	.	Name=MG-3882;type=Clone Problem;chr=14;status=Under Review;affectVersion=MGSCv37;fixVersion=na
+NC_000080.7	GRC	region	16915692	19087962	.	+	.	Name=MG-3960;type=Gap;chr=14;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000080.7	GRC	region	18971725	19202156	.	+	.	Name=MG-3961;type=Gap;chr=14;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm38
+NC_000080.7	GRC	region	16662649	17162162	.	+	.	Name=MG-3962;type=Gap;chr=14;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000080.7	GRC	region	16540372	17177584	.	+	.	Name=MG-3963;type=Gap;chr=14;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000080.7	GRC	region	37988832	38468494	.	+	.	Name=MG-3984;type=Gap;chr=14;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000080.7	GRC	region	124832372	125033054	.	+	.	Name=MG-3986;type=Gap;chr=14;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000080.7	GRC	region	18409725	18653966	.	+	.	Name=MG-4026;type=GRC Housekeeping;chr=14;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000080.7	GRC	region	90693688	90853093	.	+	.	Name=MG-4027;type=GRC Housekeeping;chr=14;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000080.7	GRC	region	11805356	12073388	.	+	.	Name=MG-4033;type=Clone Problem;chr=14;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000080.7	GRC	region	3050001	19712454	.	+	.	Name=MG-4161;type=Gap;chr=14;status=Continuing Investigation;affectVersion=GRCm38;fixVersion=na
+NC_000080.7	GRC	region	24696475	24762764	.	+	.	Name=MG-4162;type=Gap;chr=14;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39,GRCm38.p6
+NC_000080.7	GRC	region	42514946	43022309	.	+	.	Name=MG-4168;type=Gap;chr=14;status=Continuing Investigation;affectVersion=GRCm38;fixVersion=na
+NC_000080.7	GRC	region	41318341	41863447	.	+	.	Name=MG-4169;type=Gap;chr=14;status=Continuing Investigation;affectVersion=GRCm38;fixVersion=na
+NC_000080.7	GRC	region	90429167	90733596	.	+	.	Name=MG-4187;type=GRC Housekeeping;chr=14;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000080.7	GRC	region	82644285	82962936	.	+	.	Name=MG-4188;type=GRC Housekeeping;chr=14;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000080.7	GRC	region	45764922	45768531	.	+	.	Name=MG-4355;type=Clone Problem;chr=14;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000080.7	GRC	region	19294941	19469772	.	+	.	Name=MG-4367;type=Gap;chr=14;status=Under Review;affectVersion=GRCm38;fixVersion=na
+NC_000080.7	GRC	region	10501107	10715472	.	+	.	Name=MG-4390;type=GRC Housekeeping;chr=14;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000080.7	GRC	region	25874699	26177118	.	+	.	Name=MG-4409;type=Path Problem;chr=14;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000080.7	GRC	region	50834933	51016332	.	+	.	Name=MG-84;type=Variation;chr=14;status=Resolved;affectVersion=MGSCv36;fixVersion=GRCm38
+NC_000081.7	GRC	region	38724596	39006247	.	+	.	Name=MG-12;type=Gap;chr=15;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000081.7	GRC	region	28316220	28495724	.	+	.	Name=MG-124;type=Clone Problem;chr=15;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000081.7	GRC	region	51731049	51888602	.	+	.	Name=MG-172;type=Clone Problem;chr=15;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000081.7	GRC	region	89056023	89211385	.	+	.	Name=MG-193;type=Clone Problem;chr=15;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000081.7	GRC	region	91647878	91850015	.	+	.	Name=MG-20;type=Clone Problem;chr=15;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000081.7	GRC	region	103744879	103795757	.	+	.	Name=MG-3244;type=Localization Problem;chr=15;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000081.7	GRC	region	101359794	101479941	.	+	.	Name=MG-35;type=Missing sequence;chr=15;status=Resolved;affectVersion=MGSCv36;fixVersion=GRCm39
+NC_000081.7	GRC	region	3081483	3216012	.	+	.	Name=MG-3645;type=Gap;chr=15;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000081.7	GRC	region	9013177	9266196	.	+	.	Name=MG-3646;type=Gap;chr=15;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000081.7	GRC	region	38582879	39006247	.	+	.	Name=MG-3647;type=Gap;chr=15;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p6
+NC_000081.7	GRC	region	103566995	103947398	.	+	.	Name=MG-3648;type=Gap;chr=15;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p6
+NC_000081.7	GRC	region	9266197	9397804	.	+	.	Name=MG-3954;type=Clone Problem;chr=15;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000081.7	GRC	region	63704687	64054015	.	+	.	Name=MG-4078;type=Path Problem;chr=15;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000081.7	GRC	region	68205074	68433091	.	+	.	Name=MG-4079;type=Clone Problem;chr=15;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000081.7	GRC	region	81422041	81613845	.	+	.	Name=MG-4080;type=Clone Problem;chr=15;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000081.7	GRC	region	9054943	9055018	.	+	.	Name=MG-4227;type=Clone Problem;chr=15;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000081.7	GRC	region	3081483	3216012	.	+	.	Name=MG-4259;type=Gap;chr=15;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p4
+NC_000081.7	GRC	region	38582879	39006247	.	+	.	Name=MG-4260;type=Gap;chr=15;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000081.7	GRC	region	38582879	39006247	.	+	.	Name=MG-4261;type=Gap;chr=15;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p4,GRCm38.p6
+NC_000081.7	GRC	region	9054943	9266196	.	+	.	Name=MG-4288;type=Clone Problem;chr=15;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39,GRCm38.p5
+NC_000081.7	GRC	region	8963882	9266196	.	+	.	Name=MG-4312;type=Gap;chr=15;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000081.7	GRC	region	101359794	101479941	.	+	.	Name=MG-4324;type=Clone Problem;chr=15;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000081.7	GRC	region	88322530	88472475	.	+	.	Name=MG-4404;type=GRC Housekeeping;chr=15;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000081.7	GRC	region	102758631	102943154	.	+	.	Name=MG-4405;type=GRC Housekeeping;chr=15;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000081.7	GRC	region	38854929	39057822	.	+	.	Name=MG-4408;type=GRC Housekeeping;chr=15;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000081.7	GRC	region	75968828	76157494	.	+	.	Name=MG-46;type=Clone Problem;chr=15;status=Reopened;affectVersion=MGSCv37;fixVersion=na
+NC_000081.7	GRC	region	9013177	9071310	.	+	.	Name=MG-55;type=Gap;chr=15;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000081.7	GRC	region	58055606	58212052	.	+	.	Name=MG-74;type=Clone Problem;chr=15;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p6
+NC_000081.7	GRC	region	103769207	103795757	.	+	.	Name=MG-86;type=Missing sequence;chr=15;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000082.7	GRC	region	58640015	58840947	.	+	.	Name=MG-113;type=Variation;chr=16;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000082.7	GRC	region	32607841	32737452	.	+	.	Name=MG-142;type=Clone Problem;chr=16;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000082.7	GRC	region	58840948	59050348	.	+	.	Name=MG-165;type=Variation;chr=16;status=Resolved;affectVersion=MGSCv36;fixVersion=GRCm39
+NC_000082.7	GRC	region	3050001	3279621	.	+	.	Name=MG-3179;type=Gap;chr=16;status=Reopened;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000082.7	GRC	region	4616523	4949391	.	+	.	Name=MG-3180;type=Gap;chr=16;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000082.7	GRC	region	64951201	65331605	.	+	.	Name=MG-3181;type=Gap;chr=16;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000082.7	GRC	region	97795042	97908968	.	+	.	Name=MG-3196;type=GRC Housekeeping;chr=16;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000082.7	GRC	region	38238851	38376494	.	+	.	Name=MG-3208;type=GRC Housekeeping;chr=16;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000082.7	GRC	region	59154462	59337816	.	+	.	Name=MG-3724;type=Variation;chr=16;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000082.7	GRC	region	59154462	59337816	.	+	.	Name=MG-3725;type=Variation;chr=16;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000082.7	GRC	region	20333546	20523863	.	+	.	Name=MG-3752;type=Clone Problem;chr=16;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000082.7	GRC	region	18213752	18310768	.	+	.	Name=MG-3833;type=Clone Problem;chr=16;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38.p2,GRCm39
+NC_000082.7	GRC	region	19644892	19762092	.	+	.	Name=MG-3864;type=Clone Problem;chr=16;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000082.7	GRC	region	97736444	97771344	.	+	.	Name=MG-3865;type=Clone Problem;chr=16;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000082.7	GRC	region	10947475	11126804	.	+	.	Name=MG-3898;type=Clone Problem;chr=16;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000082.7	GRC	region	36387021	36634375	.	+	.	Name=MG-3899;type=Variation;chr=16;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000082.7	GRC	region	23301335	23622153	.	+	.	Name=MG-3980;type=GRC Housekeeping;chr=16;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000082.7	GRC	region	58464701	58840947	.	+	.	Name=MG-3982;type=Gap;chr=16;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000082.7	GRC	region	93795041	94166348	.	+	.	Name=MG-3985;type=Gap;chr=16;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000082.7	GRC	region	93594715	93902512	.	+	.	Name=MG-4192;type=GRC Housekeeping;chr=16;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000082.7	GRC	region	65012402	65331605	.	+	.	Name=MG-4196;type=Gap;chr=16;status=Continuing Investigation;affectVersion=GRCm38;fixVersion=na
+NC_000082.7	GRC	region	18043527	18310768	.	+	.	Name=MG-4220;type=Clone Problem;chr=16;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39,GRCm38.p5
+NC_000082.7	GRC	region	97899186	97908968	.	+	.	Name=MG-4221;type=Clone Problem;chr=16;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000082.7	GRC	region	49339784	49497795	.	+	.	Name=MG-4307;type=Gap;chr=16;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000082.7	GRC	region	3050001	3236957	.	+	.	Name=MG-4368;type=Gap;chr=16;status=Continuing Investigation;affectVersion=GRCm38;fixVersion=na
+NC_000082.7	GRC	region	3079026	3279108	.	+	.	Name=MG-4375;type=GRC Housekeeping;chr=16;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000082.7	GRC	region	44550517	44749183	.	+	.	Name=MG-88;type=Missing sequence;chr=16;status=Continuing Investigation;affectVersion=MGSCv36;fixVersion=na
+NC_000083.7	GRC	region	53137005	53363598	.	+	.	Name=MG-127;type=Clone Problem;chr=17;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000083.7	GRC	region	35085611	35162630	.	+	.	Name=MG-162;type=Variation;chr=17;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000083.7	GRC	region	6771138	7092415	.	+	.	Name=MG-176;type=Path Problem;chr=17;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000083.7	GRC	region	36360842	36565598	.	+	.	Name=MG-181;type=Variation;chr=17;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000083.7	GRC	region	20953879	21104870	.	+	.	Name=MG-207;type=Clone Problem;chr=17;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000083.7	GRC	region	36785365	36919089	.	+	.	Name=MG-208;type=Variation;chr=17;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000083.7	GRC	region	47603184	47734561	.	+	.	Name=MG-209;type=Clone Problem;chr=17;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39,GRCm38.p6
+NC_000083.7	GRC	region	54252637	54445784	.	+	.	Name=MG-22;type=Localization Problem;chr=17;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000083.7	GRC	region	7967501	8193405	.	+	.	Name=MG-24;type=Localization Problem;chr=17;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000083.7	GRC	region	37564522	37655636	.	+	.	Name=MG-3164;type=Variation;chr=17;status=Resolved;affectVersion=MGSCv36;fixVersion=GRCm39
+NC_000083.7	GRC	region	90951583	91410298	.	+	.	Name=MG-3182;type=Clone Problem;chr=17;status=Resolved;affectVersion=MGSCv37;fixVersion=MGSCv37
+NC_000083.7	GRC	region	7494483	7658918	.	+	.	Name=MG-32;type=Variation;chr=17;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000083.7	GRC	region	15063645	15098613	.	+	.	Name=MG-3250;type=Clone Problem;chr=17;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000083.7	GRC	region	7547612	7912031	.	+	.	Name=MG-3491;type=Gap;chr=17;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000083.7	GRC	region	13736664	14068210	.	+	.	Name=MG-3492;type=Gap;chr=17;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000083.7	GRC	region	48227883	48734940	.	+	.	Name=MG-3493;type=Gap;chr=17;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000083.7	GRC	region	5860364	5978263	.	+	.	Name=MG-3765;type=Localization Problem;chr=17;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000083.7	GRC	region	55984210	56205561	.	+	.	Name=MG-3850;type=Clone Problem;chr=17;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000083.7	GRC	region	22802510	22935885	.	+	.	Name=MG-3866;type=Variation;chr=17;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000083.7	GRC	region	67980484	68161326	.	+	.	Name=MG-3867;type=Variation;chr=17;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000083.7	GRC	region	34118525	39032756	.	+	.	Name=MG-3876;type=GRC Housekeeping;chr=17;status=Open;affectVersion=na;fixVersion=na
+NC_000083.7	GRC	region	7658919	7737033	.	+	.	Name=MG-3880;type=Clone Problem;chr=17;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000083.7	GRC	region	35473023	35681828	.	+	.	Name=MG-3894;type=Missing sequence;chr=17;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38.p2,GRCm39
+NC_000083.7	GRC	region	47603184	47734561	.	+	.	Name=MG-3900;type=Clone Problem;chr=17;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000083.7	GRC	region	13451628	13736663	.	+	.	Name=MG-3907;type=Gap;chr=17;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000083.7	GRC	region	55751270	56003315	.	+	.	Name=MG-3908;type=Clone Problem;chr=17;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38.p2,GRCm39
+NC_000083.7	GRC	region	21649600	22147600	.	+	.	Name=MG-3940;type=Gap;chr=17;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000083.7	GRC	region	34127803	36565598	.	+	.	Name=MG-3943;type=Missing sequence;chr=17;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000083.7	GRC	region	36919090	37065347	.	+	.	Name=MG-3944;type=Variation;chr=17;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000083.7	GRC	region	74415923	74603110	.	+	.	Name=MG-3953;type=Gap;chr=17;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000083.7	GRC	region	7967501	8193405	.	+	.	Name=MG-3987;type=Localization Problem;chr=17;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000083.7	GRC	region	54252637	54445784	.	+	.	Name=MG-3988;type=Localization Problem;chr=17;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000083.7	GRC	region	3093794	3268393	.	+	.	Name=MG-3989;type=Gap;chr=17;status=Awaiting Elec Data;affectVersion=MGSCv37;fixVersion=na
+NC_000083.7	GRC	region	40224946	40610765	.	+	.	Name=MG-3990;type=GRC Housekeeping;chr=17;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000083.7	GRC	region	62156324	62463813	.	+	.	Name=MG-3991;type=Gap;chr=17;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000083.7	GRC	region	6771138	6971515	.	+	.	Name=MG-4002;type=Clone Problem;chr=17;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000083.7	GRC	region	23182676	23407550	.	+	.	Name=MG-4011;type=Clone Problem;chr=17;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000083.7	GRC	region	35477255	35553349	.	+	.	Name=MG-4040;type=Clone Problem;chr=17;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000083.7	GRC	region	35547560	35679906	.	+	.	Name=MG-4139;type=Clone Problem;chr=17;status=Awaiting Exptl Data;affectVersion=MGSCv37;fixVersion=na
+NC_000083.7	GRC	region	84728682	84968572	.	+	.	Name=MG-4186;type=GRC Housekeeping;chr=17;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000083.7	GRC	region	7658919	7912031	.	+	.	Name=MG-4198;type=Gap;chr=17;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39,GRCm38.p6
+NC_000083.7	GRC	region	13783611	13904222	.	+	.	Name=MG-4199;type=Gap;chr=17;status=Continuing Investigation;affectVersion=GRCm38;fixVersion=na
+NC_000083.7	GRC	region	48227883	48616021	.	+	.	Name=MG-4200;type=Gap;chr=17;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39,GRCm38.p6
+NC_000083.7	GRC	region	56054385	56205561	.	+	.	Name=MG-4201;type=Clone Problem;chr=17;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000083.7	GRC	region	54994430	55231503	.	+	.	Name=MG-4222;type=Gap;chr=17;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm38.p2,GRCm39
+NC_000083.7	GRC	region	35473023	35928805	.	+	.	Name=MG-4231;type=Gap;chr=17;status=Continuing Investigation;affectVersion=GRCm38.p2;fixVersion=na
+NC_000083.7	GRC	region	6313037	6823698	.	+	.	Name=MG-4238;type=Gap;chr=17;status=Continuing Investigation;affectVersion=GRCm38;fixVersion=na
+NC_000083.7	GRC	region	36512963	36783350	.	+	.	Name=MG-4287;type=GRC Housekeeping;chr=17;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000083.7	GRC	region	35731829	35965152	.	+	.	Name=MG-4337;type=GRC Housekeeping;chr=17;status=Resolved;affectVersion=GRCm38B;fixVersion=GRCm39
+NC_000083.7	GRC	region	21843613	21911448	.	+	.	Name=MG-4339;type=Clone Problem;chr=17;status=Resolved;affectVersion=GRCm38;fixVersion=na
+NC_000083.7	GRC	region	22859094	23009357	.	+	.	Name=MG-4383;type=GRC Housekeeping;chr=17;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000083.7	GRC	region	83851141	84060666	.	+	.	Name=MG-4406;type=GRC Housekeeping;chr=17;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000083.7	GRC	region	14663736	14826937	.	+	.	Name=MG-4407;type=GRC Housekeeping;chr=17;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000083.7	GRC	region	36360842	36565598	.	+	.	Name=MG-48;type=Variation;chr=17;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000083.7	GRC	region	34540909	34663547	.	+	.	Name=MG-91;type=Variation;chr=17;status=Resolved;affectVersion=MGSCv36;fixVersion=GRCm38
+NC_000083.7	GRC	region	34663548	34882989	.	+	.	Name=MG-95;type=Variation;chr=17;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000083.7	GRC	region	95104756	95180739	.	+	.	Name=MG-96;type=Gap;chr=17;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000083.7	GRC	region	35473023	35681828	.	+	.	Name=MG-99;type=Missing sequence;chr=17;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000084.7	GRC	region	68538975	68859507	.	+	.	Name=MG-174;type=Clone Problem;chr=18;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000084.7	GRC	region	48509235	48787919	.	+	.	Name=MG-175;type=Path Problem;chr=18;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000084.7	GRC	region	76599313	76863229	.	+	.	Name=MG-3699;type=Gap;chr=18;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p6
+NC_000084.7	GRC	region	77960076	78160557	.	+	.	Name=MG-3700;type=Gap;chr=18;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p6
+NC_000084.7	GRC	region	82188123	82261676	.	+	.	Name=MG-3701;type=Gap;chr=18;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000084.7	GRC	region	10636012	11482511	.	+	.	Name=MG-3835;type=Clone Problem;chr=18;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38.p1,GRCm39
+NC_000084.7	GRC	region	19456987	19666038	.	+	.	Name=MG-3992;type=Gap;chr=18;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000084.7	GRC	region	87455688	87600333	.	+	.	Name=MG-4031;type=Clone Problem;chr=18;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000084.7	GRC	region	19824694	19959720	.	+	.	Name=MG-4032;type=Clone Problem;chr=18;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000084.7	GRC	region	82196221	82261676	.	+	.	Name=MG-4166;type=Gap;chr=18;status=Continuing Investigation;affectVersion=GRCm38;fixVersion=na
+NC_000084.7	GRC	region	3000001	3149450	.	+	.	Name=MG-4369;type=Gap;chr=18;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000084.7	GRC	region	77960076	78160557	.	+	.	Name=MG-80;type=Gap;chr=18;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000085.7	GRC	region	4063986	4227855	.	+	.	Name=MG-153;type=Clone Problem;chr=19;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38.p1,GRCm39
+NC_000085.7	GRC	region	6791109	6976345	.	+	.	Name=MG-3218;type=Gap;chr=19;status=Resolved;affectVersion=na;fixVersion=na
+NC_000085.7	GRC	region	3050001	3211471	.	+	.	Name=MG-3650;type=Gap;chr=19;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000085.7	GRC	region	6587081	6976345	.	+	.	Name=MG-3651;type=Gap;chr=19;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000085.7	GRC	region	61217337	61254965	.	+	.	Name=MG-3652;type=Gap;chr=19;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000085.7	GRC	region	12040823	12226061	.	+	.	Name=MG-3823;type=Missing sequence;chr=19;status=Resolved;affectVersion=MGSCv36;fixVersion=GRCm39
+NC_000085.7	GRC	region	37336994	37339961	.	+	.	Name=MG-4223;type=Clone Problem;chr=19;status=Resolved;affectVersion=na;fixVersion=na
+NC_000085.7	GRC	region	6587081	6976345	.	+	.	Name=MG-4249;type=Gap;chr=19;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p4
+NC_000085.7	GRC	region	5958551	5967618	.	+	.	Name=MG-4346;type=Clone Problem;chr=19;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000085.7	GRC	region	3050001	3211471	.	+	.	Name=MG-4370;type=Gap;chr=19;status=Continuing Investigation;affectVersion=GRCm38;fixVersion=na
+NC_000085.7	GRC	region	7887021	8072250	.	+	.	Name=MG-4385;type=GRC Housekeeping;chr=19;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000085.7	GRC	region	49893760	50085187	.	+	.	Name=MG-4386;type=GRC Housekeeping;chr=19;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000085.7	GRC	region	37153499	37323557	.	+	.	Name=MG-65;type=Clone Problem;chr=19;status=Resolved;affectVersion=na;fixVersion=GRCm39,GRCm38.p5
+NC_000086.8	GRC	region	139893382	139945663	.	+	.	Name=MG-104;type=Gap;chr=X;status=Resolved;affectVersion=MGSCv36;fixVersion=GRCm39,GRCm38.p6
+NC_000086.8	GRC	region	36872048	37075424	.	+	.	Name=MG-116;type=Gap;chr=X;status=Resolved;affectVersion=na;fixVersion=na
+NT_165789.3	GRC	region	180232	225926	.	+	.	Name=MG-3158;type=Gap;chr=X;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000086.8	GRC	region	125717273	125768597	.	+	.	Name=MG-3159;type=Clone Problem;chr=X;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000086.8	GRC	region	123879883	124687370	.	+	.	Name=MG-3209;type=GRC Housekeeping;chr=X;status=Resolved;affectVersion=na;fixVersion=MGSCv37
+NC_000086.8	GRC	region	4645553	5020944	.	+	.	Name=MG-3210;type=GRC Housekeeping;chr=X;status=Resolved;affectVersion=na;fixVersion=MGSCv37
+NC_000086.8	GRC	region	3250178	3779017	.	+	.	Name=MG-3211;type=GRC Housekeeping;chr=X;status=Resolved;affectVersion=na;fixVersion=na
+NC_000086.8	GRC	region	30755702	33135199	.	+	.	Name=MG-3212;type=GRC Housekeeping;chr=X;status=Resolved;affectVersion=na;fixVersion=na
+NC_000086.8	GRC	region	126580983	127005783	.	+	.	Name=MG-3214;type=GRC Housekeeping;chr=X;status=Resolved;affectVersion=na;fixVersion=na
+NC_000086.8	GRC	region	59317322	59807321	.	+	.	Name=MG-3231;type=Gap;chr=X;status=Resolved;affectVersion=na;fixVersion=GRCm39,GRCm38.p4
+NT_165789.3	GRC	region	94970	471677	.	+	.	Name=MG-3232;type=Localization Problem;chr=X;status=Continuing Investigation;affectVersion=na;fixVersion=na
+NC_000086.8	GRC	region	36339104	36627810	.	+	.	Name=MG-3233;type=Gap;chr=X;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	147871540	148096412	.	+	.	Name=MG-3234;type=Clone Problem;chr=X;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000078.7	GRC	region	49310395	49331198	.	+	.	Name=MG-3235;type=Clone Problem;chr=12;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000072.7	GRC	region	79344439	79382325	.	+	.	Name=MG-3236;type=Clone Problem;chr=6;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000080.7	GRC	region	106588434	106630518	.	+	.	Name=MG-3237;type=Clone Problem;chr=14;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000081.7	GRC	region	63990877	64013857	.	+	.	Name=MG-3238;type=Clone Problem;chr=15;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000074.7	GRC	region	95032115	95058606	.	+	.	Name=MG-3240;type=Clone Problem;chr=8;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000079.7	GRC	region	47896773	47937390	.	+	.	Name=MG-3241;type=Clone Problem;chr=13;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000086.8	GRC	region	25387506	25615540	.	+	.	Name=MG-3242;type=Clone Problem;chr=X;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000086.8	GRC	region	29264352	29485354	.	+	.	Name=MG-3243;type=Clone Problem;chr=X;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000086.8	GRC	region	168763242	169326591	.	+	.	Name=MG-3246;type=Missing sequence;chr=X;status=Awaiting Exptl Data;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	168570955	168792110	.	+	.	Name=MG-3247;type=Path Problem;chr=X;status=Awaiting Exptl Data;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	3157087	3250177	.	+	.	Name=MG-3653;type=Gap;chr=X;status=Resolved;affectVersion=MGSCv37;fixVersion=MGSCv37
+NC_000086.8	GRC	region	3471877	3779017	.	+	.	Name=MG-3654;type=Gap;chr=X;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	4645553	5088342	.	+	.	Name=MG-3655;type=Gap;chr=X;status=Awaiting Exptl Data;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	6667375	6920635	.	+	.	Name=MG-3656;type=Gap;chr=X;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p6
+NC_000086.8	GRC	region	24669027	24971371	.	+	.	Name=MG-3657;type=Gap;chr=X;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	26814013	27293719	.	+	.	Name=MG-3658;type=Gap;chr=X;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	27293720	27432286	.	+	.	Name=MG-3659;type=Gap;chr=X;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000086.8	GRC	region	28055586	28290533	.	+	.	Name=MG-3660;type=Gap;chr=X;status=Awaiting Exptl Data;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	28781403	29311570	.	+	.	Name=MG-3661;type=Gap;chr=X;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	30092973	30468266	.	+	.	Name=MG-3662;type=Gap;chr=X;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	30674070	30891130	.	+	.	Name=MG-3663;type=Gap;chr=X;status=Awaiting Exptl Data;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	30891131	31430723	.	+	.	Name=MG-3664;type=Gap;chr=X;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	31225237	31684055	.	+	.	Name=MG-3666;type=Gap;chr=X;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	31684056	32037648	.	+	.	Name=MG-3667;type=Gap;chr=X;status=Awaiting Exptl Data;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	32037649	32571449	.	+	.	Name=MG-3668;type=Gap;chr=X;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	24777813	25293928	.	+	.	Name=MG-3673;type=Gap;chr=X;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	32345715	32913915	.	+	.	Name=MG-3675;type=Gap;chr=X;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	32200336	32913915	.	+	.	Name=MG-3676;type=Gap;chr=X;status=Resolved;affectVersion=MGSCv37;fixVersion=MGSCv37
+NC_000086.8	GRC	region	4007706	33710760	.	+	.	Name=MG-3677;type=Gap;chr=X;status=Resolved;affectVersion=MGSCv37;fixVersion=MGSCv37
+NC_000086.8	GRC	region	33320667	33753172	.	+	.	Name=MG-3678;type=Gap;chr=X;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	33550686	33978139	.	+	.	Name=MG-3679;type=Gap;chr=X;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	33803173	34177276	.	+	.	Name=MG-3681;type=Gap;chr=X;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	36872048	37075424	.	+	.	Name=MG-3682;type=Gap;chr=X;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p6
+NC_000086.8	GRC	region	52533850	52585102	.	+	.	Name=MG-3683;type=Gap;chr=X;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p6
+NC_000086.8	GRC	region	53735268	54158076	.	+	.	Name=MG-3684;type=Gap;chr=X;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	53973415	54289353	.	+	.	Name=MG-3685;type=Gap;chr=X;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	110147609	110376138	.	+	.	Name=MG-3686;type=Gap;chr=X;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p6
+NC_000086.8	GRC	region	123481136	124076004	.	+	.	Name=MG-3687;type=Gap;chr=X;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	123879883	124198276	.	+	.	Name=MG-3688;type=Gap;chr=X;status=Under Review;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	124126005	124403675	.	+	.	Name=MG-3689;type=Gap;chr=X;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	124250762	124687370	.	+	.	Name=MG-3690;type=Gap;chr=X;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	124453676	124823969	.	+	.	Name=MG-3691;type=Gap;chr=X;status=Under Review;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	126580983	127005783	.	+	.	Name=MG-3692;type=Gap;chr=X;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000086.8	GRC	region	139895382	139945663	.	+	.	Name=MG-3693;type=Gap;chr=X;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	155914330	156146953	.	+	.	Name=MG-3694;type=Gap;chr=X;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000086.8	GRC	region	168763242	169203804	.	+	.	Name=MG-3695;type=Gap;chr=X;status=Awaiting Exptl Data;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	169173348	169326592	.	+	.	Name=MG-3696;type=Gap;chr=X;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	169253805	169326592	.	+	.	Name=MG-3697;type=Gap;chr=X;status=Resolved;affectVersion=MGSCv37;fixVersion=MGSCv37
+NC_000086.8	GRC	region	41593387	41728011	.	+	.	Name=MG-3834;type=Clone Problem;chr=X;status=Resolved;affectVersion=MGSCv37;fixVersion=MGSCv37
+NC_000086.8	GRC	region	169173348	169326592	.	+	.	Name=MG-3870;type=Missing sequence;chr=X;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000086.8	GRC	region	125527851	125719272	.	+	.	Name=MG-3910;type=Gap;chr=X;status=Stalled;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	139229287	139422805	.	+	.	Name=MG-3912;type=Clone Problem;chr=X;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000086.8	GRC	region	93752299	94107188	.	+	.	Name=MG-3916;type=Gap;chr=X;status=Stalled;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	4162000	4514155	.	+	.	Name=MG-4003;type=Path Problem;chr=X;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000086.8	GRC	region	72229021	72306696	.	+	.	Name=MG-4034;type=Clone Problem;chr=X;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000086.8	GRC	region	3050001	3157086	.	+	.	Name=MG-4035;type=Gap;chr=X;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	3050001	3087419	.	+	.	Name=MG-4036;type=Gap;chr=X;status=Under Review;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	3561381	3949338	.	+	.	Name=MG-4055;type=Gap;chr=X;status=Under Review;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	3949339	4300458	.	+	.	Name=MG-4056;type=Gap;chr=X;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	130156134	130261032	.	+	.	Name=MG-4057;type=Gap;chr=X;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NC_000086.8	GRC	region	21770966	21976489	.	+	.	Name=MG-4082;type=Clone Problem;chr=X;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000086.8	GRC	region	40298914	156494399	.	+	.	Name=MG-4083;type=Clone Problem;chr=X;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000086.8	GRC	region	70743554	70749788	.	+	.	Name=MG-4084;type=Clone Problem;chr=X;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000086.8	GRC	region	70747789	70917298	.	+	.	Name=MG-4085;type=Clone Problem;chr=X;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000086.8	GRC	region	76920511	77093991	.	+	.	Name=MG-4086;type=Clone Problem;chr=X;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000086.8	GRC	region	134644615	135059309	.	+	.	Name=MG-4087;type=Path Problem;chr=X;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000086.8	GRC	region	151153862	151327598	.	+	.	Name=MG-4088;type=Clone Problem;chr=X;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000086.8	GRC	region	168570955	169326592	.	+	.	Name=MG-4124;type=GRC Housekeeping;chr=X;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000086.8	GRC	region	52577639	52585102	.	+	.	Name=MG-4142;type=Gap;chr=X;status=Resolved;affectVersion=GRCm38;fixVersion=na
+NC_000086.8	GRC	region	25487318	25501279	.	+	.	Name=MG-4207;type=GRC Housekeeping;chr=X;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000086.8	GRC	region	36872048	37075424	.	+	.	Name=MG-4214;type=Gap;chr=X;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38.p1,GRCm39,GRCm38.p6
+NC_000086.8	GRC	region	24777813	25293928	.	+	.	Name=MG-4247;type=Gap;chr=X;status=Resolved;affectVersion=MGSCv37;fixVersion=na
+NC_000086.8	GRC	region	27990507	29311570	.	+	.	Name=MG-4254;type=Gap;chr=X;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39,GRCm38.p4
+NC_000086.8	GRC	region	27990507	29311570	.	+	.	Name=MG-4255;type=Gap;chr=X;status=Resolved;affectVersion=MGSCv37,GRCm38;fixVersion=GRCm39,GRCm38.p4
+NC_000086.8	GRC	region	6690777	6701706	.	+	.	Name=MG-79;type=Gap;chr=X;status=Resolved;affectVersion=na;fixVersion=na
+NC_000087.8	GRC	region	806171	912642	.	+	.	Name=MG-3811;type=Localization Problem;chr=Y;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000087.8	GRC	region	28705044	28976839	.	+	.	Name=MG-3812;type=Localization Problem;chr=Y;status=Resolved;affectVersion=na;fixVersion=na
+NC_000087.8	GRC	region	28815829	28987259	.	+	.	Name=MG-3813;type=Localization Problem;chr=Y;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000087.8	GRC	region	63288561	90855967	.	+	.	Name=MG-3947;type=GRC Housekeeping;chr=Y;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NC_000087.8	GRC	region	12499587	90855967	.	+	.	Name=MG-4140;type=GRC Housekeeping;chr=Y;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000087.8	GRC	region	45798088	46342276	.	+	.	Name=MG-4209;type=Gap;chr=Y;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm38.p1,GRCm39
+NC_000087.8	GRC	region	66028231	66464258	.	+	.	Name=MG-4210;type=Gap;chr=Y;status=Continuing Investigation;affectVersion=GRCm38;fixVersion=na
+NC_000087.8	GRC	region	66028231	66464258	.	+	.	Name=MG-4211;type=Gap;chr=Y;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm38.p1,GRCm39
+NC_000087.8	GRC	region	49221518	49552997	.	+	.	Name=MG-4213;type=Gap;chr=Y;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm38.p1,GRCm39
+NC_000087.8	GRC	region	21616975	21913808	.	+	.	Name=MG-4335;type=Gap;chr=Y;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm39
+NC_000087.8	GRC	region	110001	225078	.	+	.	Name=MG-4371;type=Gap;chr=Y;status=Resolved;affectVersion=na;fixVersion=GRCm39
+NC_000087.8	GRC	region	66299819	66696627	.	+	.	Name=MG-4377;type=Gap;chr=Y;status=Under Review;affectVersion=GRCm38;fixVersion=na
+NC_000087.8	GRC	region	4050275	4181802	.	+	.	Name=MG-4414;type=Clone Problem;chr=Y;status=Resolved;affectVersion=GRCm38;fixVersion=GRCm38
+NC_000087.8	GRC	region	90716705	90855967	.	+	.	Name=MG-61;type=Missing sequence;chr=Y;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NT_187064.1	GRC	region	1	114452	.	+	.	Name=MG-105;type=Missing sequence;chr=Un;status=Under Review;affectVersion=MGSCv37;fixVersion=na
+NC_000067.7	GRC	region	182891582	183051991	.	+	.	Name=MG-3766;type=Localization Problem;chr=1;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000078.7	GRC	region	105113973	105171109	.	+	.	Name=MG-3767;type=Localization Problem;chr=12;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NT_166438.1	GRC	region	1	195993	.	+	.	Name=MG-3769;type=Localization Problem;chr=5;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000072.7	GRC	region	114528575	114688443	.	+	.	Name=MG-3770;type=Localization Problem;chr=6;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000081.7	GRC	region	103888509	103929701	.	+	.	Name=MG-3771;type=Localization Problem;chr=15;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NT_166443.1	GRC	region	1	22974	.	+	.	Name=MG-3772;type=Localization Problem;chr=Un;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NT_166444.1	GRC	region	1	31704	.	+	.	Name=MG-3773;type=Localization Problem;chr=Un;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000079.7	GRC	region	120406961	120588077	.	+	.	Name=MG-3774;type=Localization Problem;chr=13;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000074.7	GRC	region	20556954	20587658	.	+	.	Name=MG-3775;type=Localization Problem;chr=8;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000076.7	GRC	region	7324342	7347584	.	+	.	Name=MG-3777;type=Localization Problem;chr=10;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NT_166450.1	GRC	region	1	47073	.	+	.	Name=MG-3778;type=Localization Problem;chr=Un;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NT_166451.1	GRC	region	1	42057	.	+	.	Name=MG-3779;type=Localization Problem;chr=Un;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NT_166452.1	GRC	region	1	20208	.	+	.	Name=MG-3780;type=Localization Problem;chr=Un;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NT_166454.1	GRC	region	1	26764	.	+	.	Name=MG-3782;type=Localization Problem;chr=Un;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000079.7	GRC	region	120472989	120570574	.	+	.	Name=MG-3783;type=Localization Problem;chr=13;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NT_166456.1	GRC	region	1	28664	.	+	.	Name=MG-3784;type=Localization Problem;chr=Un;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000067.7	GRC	region	93912299	93927705	.	+	.	Name=MG-3786;type=Localization Problem;chr=1;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NT_166462.1	GRC	region	1	31602	.	+	.	Name=MG-3790;type=Localization Problem;chr=Un;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NT_166463.1	GRC	region	1	72385	.	+	.	Name=MG-3791;type=Localization Problem;chr=Un;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NT_166465.1	GRC	region	1	25871	.	+	.	Name=MG-3793;type=Localization Problem;chr=Un;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NT_166466.1	GRC	region	1	23158	.	+	.	Name=MG-3794;type=Localization Problem;chr=Un;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NT_166467.1	GRC	region	1	38659	.	+	.	Name=MG-3795;type=Localization Problem;chr=Un;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NT_166469.1	GRC	region	1	35240	.	+	.	Name=MG-3796;type=Localization Problem;chr=Un;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000070.7	GRC	region	156658307	156682449	.	+	.	Name=MG-3797;type=Localization Problem;chr=4;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NT_166471.1	GRC	region	1	24685	.	+	.	Name=MG-3798;type=Localization Problem;chr=Un;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NT_166473.1	GRC	region	1	28772	.	+	.	Name=MG-3800;type=Localization Problem;chr=Un;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NT_166474.1	GRC	region	1	24668	.	+	.	Name=MG-3801;type=Localization Problem;chr=Un;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NT_166476.1	GRC	region	1	23629	.	+	.	Name=MG-3803;type=Localization Problem;chr=Un;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000069.7	GRC	region	3000001	3054783	.	+	.	Name=MG-3804;type=Localization Problem;chr=3;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NT_166478.1	GRC	region	1	24323	.	+	.	Name=MG-3805;type=Localization Problem;chr=Un;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NT_166480.1	GRC	region	1	21240	.	+	.	Name=MG-3807;type=Localization Problem;chr=Un;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000079.7	GRC	region	120736351	120782849	.	+	.	Name=MG-3809;type=Localization Problem;chr=13;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NC_000079.7	GRC	region	120264703	120699756	.	+	.	Name=MG-3810;type=Localization Problem;chr=13;status=Resolved;affectVersion=na;fixVersion=GRCm38
+NT_187059.1	GRC	region	718886	874658	.	+	.	Name=MG-3993;type=Localization Problem;chr=5;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NT_187059.1	GRC	region	311586	478465	.	+	.	Name=MG-3994;type=Localization Problem;chr=5;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NT_187059.1	GRC	region	195406	311585	.	+	.	Name=MG-3995;type=Localization Problem;chr=5;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NT_187059.1	GRC	region	617864	718885	.	+	.	Name=MG-3996;type=Localization Problem;chr=5;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NT_187059.1	GRC	region	478466	617863	.	+	.	Name=MG-3997;type=Localization Problem;chr=5;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NT_166451.1	GRC	region	1	42057	.	+	.	Name=MG-4098;type=Localization Problem;chr=Un;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NT_166462.1	GRC	region	1	31602	.	+	.	Name=MG-4099;type=Localization Problem;chr=Un;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NT_166465.1	GRC	region	1	25871	.	+	.	Name=MG-4100;type=Localization Problem;chr=Un;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NT_166466.1	GRC	region	1	23158	.	+	.	Name=MG-4101;type=Localization Problem;chr=Un;status=Continuing Investigation;affectVersion=na;fixVersion=na
+NT_166467.1	GRC	region	1	38659	.	+	.	Name=MG-4102;type=Localization Problem;chr=Un;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NT_166469.1	GRC	region	1	35240	.	+	.	Name=MG-4103;type=Localization Problem;chr=Un;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000070.7	GRC	region	156658307	156682449	.	+	.	Name=MG-4104;type=Localization Problem;chr=4;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38
+NT_166474.1	GRC	region	1	24668	.	+	.	Name=MG-4105;type=Localization Problem;chr=Un;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NC_000069.7	GRC	region	3000001	3054783	.	+	.	Name=MG-4106;type=Localization Problem;chr=3;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm39
+NT_166478.1	GRC	region	1	24323	.	+	.	Name=MG-4110;type=Localization Problem;chr=Un;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NT_166443.1	GRC	region	1	22974	.	+	.	Name=MG-4111;type=Localization Problem;chr=Un;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NT_166444.1	GRC	region	1	31704	.	+	.	Name=MG-4112;type=Localization Problem;chr=Un;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NT_166480.1	GRC	region	1	21240	.	+	.	Name=MG-4113;type=Localization Problem;chr=Un;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NT_166456.1	GRC	region	1	28664	.	+	.	Name=MG-4114;type=Localization Problem;chr=Un;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NT_166471.1	GRC	region	1	24685	.	+	.	Name=MG-4116;type=Localization Problem;chr=Un;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NT_166454.1	GRC	region	1	26764	.	+	.	Name=MG-4117;type=Localization Problem;chr=Un;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NT_166473.1	GRC	region	1	28772	.	+	.	Name=MG-4118;type=Localization Problem;chr=Un;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NT_166452.1	GRC	region	1	20208	.	+	.	Name=MG-4119;type=Localization Problem;chr=Un;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NT_166463.1	GRC	region	1	72385	.	+	.	Name=MG-4120;type=Localization Problem;chr=Un;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NT_166450.1	GRC	region	1	47073	.	+	.	Name=MG-4121;type=Localization Problem;chr=Un;status=Continuing Investigation;affectVersion=MGSCv37;fixVersion=na
+NW_023337853.1	GRC	region	1	31129	.	+	.	Name=MG-4232;type=Missing sequence;chr=Un;status=Under Review;affectVersion=GRCm38;fixVersion=na
+NC_000086.8	GRC	region	4934142	33876463	.	+	.	Name=MG-4234;type=Localization Problem;chr=X;status=Resolved;affectVersion=GRCm38;fixVersion=na
+NC_000078.7	GRC	region	109655969	109734025	.	+	.	Name=MG-173;type=Unknown;chr=12;status=Resolved;affectVersion=na;fixVersion=na
+NC_000076.7	GRC	region	6360234	6653240	.	+	.	Name=MG-4097;type=Unknown;chr=10;status=Resolved;affectVersion=MGSCv37;fixVersion=GRCm38

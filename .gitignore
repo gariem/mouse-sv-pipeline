@@ -1,0 +1,6 @@
+work/
+.nextflow/
+.idea/
+*.log
+*.log.*
+.nextflow
