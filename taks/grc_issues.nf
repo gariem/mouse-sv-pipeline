@@ -1,12 +1,13 @@
 #!/usr/bin/env nextflow
 
 params.issues_url = "https://ftp.ncbi.nlm.nih.gov/pub/grc/mouse/GRC/Issue_Mapping/GRCm39_issues.gff3"
-params.output_bed = "./data/GRCm39_issues.bed"
+params.output_bed = "./data/issues/GRCm39_issues.bed"
 
 final_name = file(params.output_bed).getName()
 final_dir = file(params.output_bed).getParent()
 
 process download_issues {
+    
     publishDir final_dir, mode: "copy"
 
     output:
@@ -22,10 +23,10 @@ process issues_to_bed {
     publishDir final_dir, mode: "copy"
 
     input:
-        file("GRCm39_issues.gff3") from gff_issues
+        file "GRCm39_issues.gff3" from gff_issues
     
     output:
-        file("${final_name}")
+        file "${final_name}"
 
     """
      awk  -F'\t' 'BEGIN {OFS = FS} \
