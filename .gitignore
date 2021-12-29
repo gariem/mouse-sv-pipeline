@@ -6,3 +6,6 @@ work/
 .nextflow
 data/merged
 data/input
+
+out/
+results/

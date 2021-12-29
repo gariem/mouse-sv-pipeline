@@ -1,14 +1,20 @@
 #!/usr/bin/env nextflow
 
 params.strain = "DBA_2J"
+
 params.input_dir = "./data/input"
 params.input_files = "${params.input_dir}/${params.strain}-*.vcf"
+params.output_dir = "./data/merged"
 
 params.mappings = "./data/input/mappings.txt"
 
 params.bcftools = '/home/egarcia/appdir/bcftools/bin/bcftools'
 params.survivor = '/home/egarcia/workspace/github/SURVIVOR/Debug/SURVIVOR'
 
+params.max_dist = '100'
+params.min_callers = '1'
+params.same_type = '1'
+params.min_size = '30'
 
 Channel.fromPath(params.input_files).set{input_files}
 
@@ -46,7 +52,7 @@ process mapped_vcf_from_bed {
         file bed_file from bed_files.flatten()
     
     output:
-        file '*.vcf' into vcf_files
+        file "${params.strain}-*.vcf" into vcf_files
 
     script:
 
@@ -72,13 +78,13 @@ vcf_files.map{ file ->
 
 
 // Join by-type VCF Files into single per-caller VCF File
-process join_mapped_vcf {
+process join_mapped_vcfs {
 
     input:
         set caller, file(mapped_vcf) from grouped_vcfs
 
     output:
-        file '*.vcf' into final_vcf
+        file '*.vcf' into final_vcfs
 
     """
     for FILE in ${mapped_vcf}
@@ -94,4 +100,22 @@ process join_mapped_vcf {
     """
 }
 
-final_vcf.view()
+
+process merge_mapped_vcfs {
+
+    publishDir file("${params.output_dir}"), mode: "copy", pattern: "*.vcf"
+
+    input:
+        file (vcf_to_merge) from final_vcfs.collect()
+
+    output:
+        file "${params.strain}-merged_*.vcf" into merged_vcf
+
+
+    """
+        echo "${vcf_to_merge}" | tr " " "\n" > '${params.strain}-merged-inputlist.txt'
+
+        ${params.survivor} merge '${params.strain}-merged-inputlist.txt' ${params.max_dist} ${params.min_callers} ${params.same_type} 1 0 ${params.min_size} '${params.strain}-merged_${params.max_dist}_${params.min_callers}_${params.min_size}.vcf'
+    """ 
+
+}
