@@ -6,6 +6,6 @@ work/
 .nextflow
 data/merged
 data/input
-
+data/validated
 out/
 results/

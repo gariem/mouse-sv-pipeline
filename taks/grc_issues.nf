@@ -8,8 +8,6 @@ final_dir = file(params.output_bed).getParent()
 
 process download_issues {
     
-    publishDir final_dir, mode: "copy"
-
     output:
         file "GRCm39_issues.gff3" into gff_issues
 
