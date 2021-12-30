@@ -27,9 +27,9 @@ process issues_to_bed {
         file "${final_name}"
 
     """
-     awk  -F'\t' 'BEGIN {OFS = FS} \
-     {split(\$9,info,";"); split(info[3],chr,"="); split(info[1],key,"="); \
-     split(info[2],issue,"="); if (chr[2]!="Un" && \$4!="") print chr[2],\$4,\$5,issue[2]" ("key[2]")"}' "GRCm39_issues.gff3" > ${final_name}
+    awk  -F'\t' 'BEGIN {OFS = FS} \
+    {split(\$9,info,";"); split(info[3],chr,"="); split(info[1],key,"="); \
+    split(info[2],issue,"="); if (chr[2]!="Un" && \$4!="") print chr[2],\$4,\$5,issue[2]" ("key[2]")"}' "GRCm39_issues.gff3" > ${final_name}
     """
 
 }

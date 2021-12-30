@@ -100,7 +100,7 @@ process join_mapped_vcfs {
     """
 }
 
-
+// Mege VCF Files using SURVIVOR
 process merge_mapped_vcfs {
 
     publishDir file("${params.output_dir}"), mode: "copy", pattern: "*.vcf"
@@ -113,9 +113,9 @@ process merge_mapped_vcfs {
 
 
     """
-        echo "${vcf_to_merge}" | tr " " "\n" > '${params.strain}-merged-inputlist.txt'
+    echo "${vcf_to_merge}" | tr ' ' '\n' > '${params.strain}-merged-inputlist.txt'
 
-        ${params.survivor} merge '${params.strain}-merged-inputlist.txt' ${params.max_dist} ${params.min_callers} ${params.same_type} 1 0 ${params.min_size} '${params.strain}-merged_${params.max_dist}_${params.min_callers}_${params.min_size}.vcf'
+    ${params.survivor} merge '${params.strain}-merged-inputlist.txt' ${params.max_dist} ${params.min_callers} ${params.same_type} 1 0 ${params.min_size} '${params.strain}-merged_${params.max_dist}_${params.min_callers}_${params.min_size}.vcf'
     """ 
 
 }

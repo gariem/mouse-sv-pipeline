@@ -9,7 +9,7 @@ params.remap_dest = 'GCF_000001635.27'
 params.alias_src = 'mm10'
 params.alias_dest = 'mm39'
 
-params.output_dir = './data/validated'
+params.output_dir = './data/validated_test'
 
 
 process untar {
