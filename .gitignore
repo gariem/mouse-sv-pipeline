@@ -7,5 +7,7 @@ work/
 data/merged
 data/input
 data/validated
+data/previous
+data/previous_mm10
 out/
 results/

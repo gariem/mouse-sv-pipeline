@@ -9,7 +9,7 @@ params.remap_dest = 'GCF_000001635.27'
 params.alias_src = 'mm10'
 params.alias_dest = 'mm39'
 
-params.output_dir = './data/validated_test'
+params.output_dir = './data/validated'
 
 
 process untar {
@@ -28,7 +28,7 @@ process untar {
 
 process uplift_files {
 
-    maxForks 4
+    maxForks 2
     publishDir file(params.output_dir), mode: "copy"
 
     input:
@@ -44,4 +44,3 @@ process uplift_files {
     perl ${params.remap_api} --mode asm-asm --from ${params.remap_src} --dest ${params.remap_dest} --annotation ${input_bed}  --annot_out ${new_name}
     """
 }
-
