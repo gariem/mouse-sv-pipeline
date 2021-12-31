@@ -4,11 +4,7 @@ work/
 *.log
 *.log.*
 .nextflow
-data/merged
-data/input
-data/validated
-data/previous
-data/previous_mm10
-data/reports/raw
-out/
-results/
+*.vcf
+*.bed
+*.data
+*.gz
