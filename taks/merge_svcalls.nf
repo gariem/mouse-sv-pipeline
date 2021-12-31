@@ -6,7 +6,7 @@ params.input_dir = "./data/input"
 params.input_files = "${params.input_dir}/${params.strain}-*.vcf"
 params.output_dir = "./data/merged"
 
-params.mappings = "./data/input/mappings.txt"
+params.mappings = "./data/input/merge_mappings.txt"
 
 params.bcftools = '/home/egarcia/appdir/bcftools/bin/bcftools'
 params.survivor = '/home/egarcia/workspace/github/SURVIVOR/Debug/SURVIVOR'
@@ -40,7 +40,7 @@ process mapped_bed_from_vcf {
         
         ${params.bcftools} query -i"\$MAPPING" -f'%CHROM\\t%POS0\\t%END0\\t%SVLEN\\n' ${vcf_file} | \
         awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print \$1,\$2,\$3,\$4}' >> "${params.strain}-${caller}-\$TYPE.bed"
-    done < $mappings_file
+    done < ${mappings_file}
     """
 }
 

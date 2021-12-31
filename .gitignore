@@ -9,5 +9,6 @@ data/input
 data/validated
 data/previous
 data/previous_mm10
+data/reports/raw
 out/
 results/
