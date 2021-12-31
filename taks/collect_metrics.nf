@@ -4,7 +4,9 @@ params.input_files = './data/merged/DBA_2J-merged_100_1_30.vcf'
 params.previous_dir = './data/previous'
 params.validated_dir = './data/validated'
 
-params.mappings = "./data/input/merge_mappings.txt"
+
+params.merge_mappings = "./data/input/merge_mappings.txt"
+params.metrics_mappings = "./data/input/metrics_mappings.txt"
 
 params.out_dir = './data/reports/raw'
 
@@ -18,10 +20,10 @@ process general_metrics {
 
     input:
         file vcf_file from input_files
-        file mappings_file from file(params.mappings)
+        file mappings_file from file(params.merge_mappings)
 
     output:
-        file '*.bed' into bed_files
+        file '*.bed' into unflattened_bed_files
 
     script:
 
@@ -57,19 +59,68 @@ process general_metrics {
     """
 }
 
-
-process type_metrics {
+process validated_metrics {
 
     input:
-        file bed_file from bed_files.flatten()
-    
+        file bed_file from unflattened_bed_files.flatten()
+        file mappings_file from file(params.metrics_mappings)
+
+    output:
+        file '*.bed' optional true into compare_beds
+
     script:
     
+    validated_dir = file(params.validated_dir)
+
     name_arr = bed_file.getName().tokenize(".")
-    data_file = file("${params.out_dir}/${name_arr.get(0)}.data")
+    name = name_arr.get(0)
     type = name_arr.get(1)
+
+    strain = name_arr.get(0).tokenize("-").get(0)
+
+    data_file = file("${params.out_dir}/${name_arr.get(0)}.data")
+
     """
     TYPE_COUNT="\$(cat ${bed_file} | wc -l)"
     echo "${type}=\$TYPE_COUNT" >> ${data_file}
+
+    echo "\$(cat ${mappings_file} | grep ${type} || true;)" > compare_to.txt
+
+    if [[ -s compare_to.txt ]]
+    then
+        while read -r line
+        do
+            VALIDATED_TYPE="\$(echo \$line | cut -d '=' -f 1)"
+            VALIDATED_FILE=${validated_dir}/${strain}.\$VALIDATED_TYPE.mm39.bed
+
+            if [[ -e \$VALIDATED_FILE ]]
+            then
+                echo "File exists: \$VALIDATED_FILE -> ${type}_\$VALIDATED_TYPE.${strain}.\$VALIDATED_TYPE.bed"
+                cp \$VALIDATED_FILE "${type}_\$VALIDATED_TYPE.${strain}.\$VALIDATED_TYPE.bed"
+                cp ${bed_file} "${type}_\$VALIDATED_TYPE.${name}.${type}.bed"
+            fi
+        done < compare_to.txt
+    fi
+    """
+}
+
+compare_beds
+        .flatten()
+        .map { file ->
+            def key = file.name.toString().tokenize('.').get(0)
+            return tuple(key, file)
+        }
+        .groupTuple()
+        .set{ grouped_beds }
+
+process intersect_files {
+
+    echo true
+    
+    input:
+        set key, file(bed) from grouped_beds
+    
+    """
+    echo "intersect files and report results here"
     """
 }
