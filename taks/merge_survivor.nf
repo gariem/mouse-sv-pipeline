@@ -109,13 +109,13 @@ process merge_mapped_vcfs {
         file (vcf_to_merge) from final_vcfs.collect()
 
     output:
-        file "${params.strain}-merged_*.vcf" into merged_vcf
+        file "${params.strain}-survivor*.vcf" into merged_vcf
 
 
     """
     echo "${vcf_to_merge}" | tr ' ' '\n' > '${params.strain}-merged-inputlist.txt'
 
-    ${params.survivor} merge '${params.strain}-merged-inputlist.txt' ${params.max_dist} ${params.min_callers} ${params.same_type} 1 0 ${params.min_size} '${params.strain}-merged_${params.max_dist}_${params.min_callers}_${params.min_size}.vcf'
+    ${params.survivor} merge '${params.strain}-merged-inputlist.txt' ${params.max_dist} ${params.min_callers} ${params.same_type} 1 0 ${params.min_size} '${params.strain}-survivor_${params.max_dist}_${params.min_callers}_${params.min_size}.vcf'
     """ 
 
 }
