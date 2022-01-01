@@ -1,14 +1,15 @@
 #!/usr/bin/env nextflow
 
-params.input_files = './data/merged/DBA_2J-merged_100_1_30.vcf'
+params.input_files = './data/merged/DBA_2J-merged_100_1_20.vcf'
+params.out_dir = './data/reports/raw'
 params.previous_dir = './data/previous'
 params.validated_dir = './data/validated'
-
 
 params.merge_mappings = "./data/input/merge_mappings.txt"
 params.metrics_mappings = "./data/input/metrics_mappings.txt"
 
-params.out_dir = './data/reports/raw'
+params.intersect_window_a = '0'
+params.intersect_window_b = '20'
 
 params.bcftools = '/home/egarcia/appdir/bcftools/bin/bcftools'
 
@@ -16,7 +17,7 @@ Channel.fromPath(params.input_files).set{input_files}
 
 process general_metrics {
 
-    publishDir file(params.out_dir), mode: "copy", pattern: "*.data"
+    //publishDir file(params.out_dir), mode: "move", pattern: "*.data"
 
     input:
         file vcf_file from input_files
@@ -32,14 +33,18 @@ process general_metrics {
     data_file = file("${params.out_dir}/${vcf_name}.data")
 
     """
+    mkdir -p ${file(params.out_dir)}
     TOTAL_CALLS="\$(${params.bcftools} view --no-header ${vcf_file} | wc -l)"
-    SINGLE_CALLER="\$(${params.bcftools} query -i"SUPP='1'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | wc -l)"
-    DOUBLE_CALLER="\$(${params.bcftools} query -i"SUPP='2'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | wc -l)"
+    SUP1="\$(${params.bcftools} query -i"SUPP='1'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | wc -l)"
+    SUP2="\$(${params.bcftools} query -i"SUPP='2'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | wc -l)"
 
-    echo "STRAIN=${strain}" > ${data_file}
+    echo "SRC_FILE=${vcf_file.getName()}" > ${data_file}
+    echo "STRAIN=${strain}" >> ${data_file}
     echo "TOTAL=\$TOTAL_CALLS" >> ${data_file}
-    echo "SUP1=\$SINGLE_CALLER" >> ${data_file}
-    echo "SUP2=\$DOUBLE_CALLER" >> ${data_file}
+    echo "SUP1=\$SUP1" >> ${data_file}
+    echo "SUP2=\$SUP2" >> ${data_file}
+    echo "WINDOW_A=${params.intersect_window_a}" >> ${data_file}
+    echo "WINDOW_B=${params.intersect_window_a}" >> ${data_file}
 
     for ((i=1;i<=19;i++)); 
     do 
@@ -96,8 +101,8 @@ process validated_metrics {
             if [[ -e \$VALIDATED_FILE ]]
             then
                 echo "File exists: \$VALIDATED_FILE -> ${type}_\$VALIDATED_TYPE.${strain}.\$VALIDATED_TYPE.bed"
-                cp \$VALIDATED_FILE "${type}_\$VALIDATED_TYPE.${strain}.\$VALIDATED_TYPE.bed"
-                cp ${bed_file} "${type}_\$VALIDATED_TYPE.${name}.${type}.bed"
+                cat \$VALIDATED_FILE | uniq -u > "${type}_\$VALIDATED_TYPE.A.${strain}.\$VALIDATED_TYPE.bed"
+                cp ${bed_file} "${type}_\$VALIDATED_TYPE.B.${name}.${type}.bed"
             fi
         done < compare_to.txt
     fi
@@ -113,14 +118,64 @@ compare_beds
         .groupTuple()
         .set{ grouped_beds }
 
-process intersect_files {
 
+process intersect_files {
+    
+    input:
+        set key, file(bed_files) from grouped_beds
+        val window_a from params.intersect_window_a
+        val window_b from params.intersect_window_b
+    output:
+        file '*.dummy' into final_dummies
+
+    script:
+
+    if (bed_files[0].getName().contains('.A.')){
+        file_a = bed_files[0]
+        file_b = bed_files[1]
+    } else {
+        file_a = bed_files[1]
+        file_b = bed_files[0]
+    }
+    
+    process = file_a.getName().tokenize(".").get(0)
+    data_file=file("${params.out_dir}/${file_b.getName().tokenize(".").get(2)}.data")
+
+    """
+    A_TOTAL="\$(cat ${file_a} | wc -l)"
+    A_NAME="\$(echo ${file_a} | cut -d '.' -f 4)"
+
+    DATA_FILE="\$(echo ${file_b} | cut -d '.' -f 3).data"
+
+    awk -F'\\t' 'BEGIN {OFS = FS} {print \$1,\$2-${window_a},\$3+${window_a},\$4}' ${file_a} > FILE_A
+    awk -F'\\t' 'BEGIN {OFS = FS} {print \$1,\$2-${window_b},\$3+${window_b},\$4}' ${file_b} > FILE_B
+
+    bedtools intersect -a FILE_A -b FILE_B -wa > intersect_wa
+
+    A_INTERSECTED="\$(cat intersect_wa | uniq -u | wc -l)"
+
+    echo "\${A_NAME}_TOTAL=\$A_TOTAL" >> ${data_file}
+    echo "\${A_NAME}_INTERSECTED=\$A_INTERSECTED" >> ${data_file}
+
+    touch "${file_b.getName().tokenize(".").get(2)}.${process}.dummy"
+    """
+}
+
+process generate_csv {
     echo true
     
     input:
-        set key, file(bed) from grouped_beds
+        file dummies from final_dummies.collect()
+
+    script:
+
+    data_file_name = "${dummies[0].getName().tokenize(".").get(0)}.data"
+    data_file = file("${params.out_dir}/${data_file_name}")
+    csv_file_name = "${dummies[0].getName().tokenize(".").get(0)}-${params.intersect_window_a}_${params.intersect_window_b}.raw.csv"
+    csv_file = file("${params.out_dir}/${csv_file_name}")
     
     """
-    echo "intersect files and report results here"
+    cut -d '=' -f 1 < ${data_file} | awk -v RS= -v OFS=, '{\$1 = \$1} 1' > ${csv_file}
+    cut -d '=' -f 2 < ${data_file} | awk -v RS= -v OFS=, '{\$1 = \$1} 1' >> ${csv_file}
     """
 }
