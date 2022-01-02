@@ -1,6 +1,7 @@
 #!/usr/bin/env nextflow
 
-params.raw_metrics = "./data/reports/raw/*.raw.csv"
+params.strain = 'DBA_2J'
+params.raw_metrics = "./data/reports/raw/${params.strain}-*.raw.csv"
 params.out_dir = "./data/reports"
 
 Channel.fromPath(params.raw_metrics).set{files}
@@ -31,9 +32,9 @@ process process_list {
     input:
         file list from list_file
         file csvs from csvs_files
-
+        val strain from params.strain
     output:
-        file 'report_data.csv'
+        file "*-report_data.csv"
     
     """
 #!python
@@ -47,7 +48,7 @@ with open('${list}', "r") as list:
         file_data = pd.read_csv(file.replace("\\n", ""), low_memory=False)
         data = data.append(file_data)
 
-data.to_csv('report_data.csv', index=False, header=True)
+data.to_csv("${strain}"+"-report_data.csv", index=False, header=True)
 
 
     """
