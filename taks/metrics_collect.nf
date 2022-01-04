@@ -33,6 +33,8 @@ process general_metrics {
     strain = vcf_name.tokenize("-").get(0) 
     data_file = file("${params.out_dir}/${vcf_name}.data")
 
+    filter_flag = (filter_hets == 1 || vcf_name.contains("_nohets")) ? 1 : 0
+
     """
     mkdir -p ${file(params.out_dir)}
     TOTAL_CALLS="\$(${params.bcftools} view --no-header ${vcf_file} | awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print}' | wc -l)"
@@ -44,7 +46,7 @@ process general_metrics {
 
     echo "SRC_FILE=${vcf_file.getName()}" > ${data_file}
     echo "STRAIN=${strain}" >> ${data_file}
-    echo "GFILTER=${filter_hets}" >> ${data_file}
+    echo "FILTER=${filter_flag}" >> ${data_file}
     echo "TOTAL=\$TOTAL_CALLS" >> ${data_file}
 
     echo "SUP1=\$SUP1" >> ${data_file}
