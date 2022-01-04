@@ -9,3 +9,5 @@ work/
 *.data
 *.gz
 *.raw.csv
+*.bam
+*.bai

@@ -8,6 +8,8 @@ params.validated_dir = './data/validated'
 params.merge_mappings = "./data/input/merge_mappings.txt"
 params.metrics_mappings = "./data/input/metrics_mappings.txt"
 
+params.filter_hets = '0'
+
 params.intersect_window_a = '0'
 params.intersect_window_b = '20'
 
@@ -17,11 +19,10 @@ Channel.fromPath(params.input_files).set{input_files}
 
 process general_metrics {
 
-    //publishDir file(params.out_dir), mode: "move", pattern: "*.data"
-
     input:
         file vcf_file from input_files
         file mappings_file from file(params.merge_mappings)
+        val filter_hets from params.filter_hets
 
     output:
         file '*.bed' into unflattened_bed_files
@@ -34,31 +35,58 @@ process general_metrics {
 
     """
     mkdir -p ${file(params.out_dir)}
-    TOTAL_CALLS="\$(${params.bcftools} view --no-header ${vcf_file} | wc -l)"
-    SUP1="\$(${params.bcftools} query -i"SUPP='1'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | wc -l)"
-    SUP2="\$(${params.bcftools} query -i"SUPP='2'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | wc -l)"
+    TOTAL_CALLS="\$(${params.bcftools} view --no-header ${vcf_file} | awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print}' | wc -l)"
+    SUP1="\$(${params.bcftools} query -i"SUPP='1'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print}' | wc -l)"
+    SUP2="\$(${params.bcftools} query -i"SUPP='2'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print}' | wc -l)"
+
+    HOM_COUNT="\$(${params.bcftools} query -i"GT='HOM'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print}' | wc -l)"
+    HET_COUNT="\$(${params.bcftools} query -i"GT='HET'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print}' | wc -l)"
 
     echo "SRC_FILE=${vcf_file.getName()}" > ${data_file}
     echo "STRAIN=${strain}" >> ${data_file}
+    echo "GFILTER=${filter_hets}" >> ${data_file}
     echo "TOTAL=\$TOTAL_CALLS" >> ${data_file}
+
     echo "SUP1=\$SUP1" >> ${data_file}
     echo "SUP2=\$SUP2" >> ${data_file}
+
+    echo "HOMs=\$HOM_COUNT" >> ${data_file}
+    echo "HETs=\$HET_COUNT" >> ${data_file}
+
     echo "WINDOW_A=${params.intersect_window_a}" >> ${data_file}
     echo "WINDOW_B=${params.intersect_window_a}" >> ${data_file}
 
     for ((i=1;i<=19;i++)); 
     do 
-        CHROM_COUNT="\$(${params.bcftools} query -i"CHROM='\$i'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | wc -l)"
+        if [ "${filter_hets}" == "1" ]; then
+            QUERY="CHROM='\$i' && GT='HOM'"
+        else
+            QUERY="CHROM='\$i'"
+        fi
+
+        CHROM_COUNT="\$(${params.bcftools} query -i"\$QUERY" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | wc -l)"
         echo "chr\$i=\$CHROM_COUNT" >> ${data_file}
     done
 
-    CHROM_COUNT="\$(${params.bcftools} query -i"CHROM='X'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | wc -l)"
+    if [ "${filter_hets}" == "1" ]; then
+        CHROM_COUNT="\$(${params.bcftools} query -i"CHROM='X' && GT='HOM'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | wc -l)"
+    else
+        CHROM_COUNT="\$(${params.bcftools} query -i"CHROM='X'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | wc -l)"
+    fi
+    
     echo "chrX=\$CHROM_COUNT" >> ${data_file}
 
     while read -r line
     do
         TYPE="\$(echo \$line | cut -d ':' -f 1)"
-        ${params.bcftools} query -i"SVTYPE='\$TYPE'" -f'%CHROM\\t%POS0\\t%END0\\t%SVLEN\\n' ${vcf_file} | \
+
+        if [ "${filter_hets}" == "1" ]; then
+            QUERY="SVTYPE='\$TYPE' && GT='HOM'"
+        else
+            QUERY="SVTYPE='\$TYPE' "
+        fi
+
+        ${params.bcftools} query -i"\$QUERY" -f'%CHROM\\t%POS0\\t%END0\\t%SVLEN\\n' ${vcf_file} | \
             awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print \$1,\$2,\$3,\$4}' >> "${vcf_name}.\$TYPE.bed"
     done < ${mappings_file}
     """
@@ -166,14 +194,21 @@ process generate_csv {
     
     input:
         file dummies from final_dummies.collect()
+        val filter_hets from params.filter_hets
 
     script:
 
     data_file_name = "${dummies[0].getName().tokenize(".").get(0)}.data"
     data_file = file("${params.out_dir}/${data_file_name}")
-    csv_file_name = "${dummies[0].getName().tokenize(".").get(0)}-${params.intersect_window_a}_${params.intersect_window_b}.raw.csv"
-    csv_file = file("${params.out_dir}/${csv_file_name}")
     
+    if(filter_hets == 1){
+        csv_file_name = "${dummies[0].getName().tokenize(".").get(0)}-${params.intersect_window_a}_${params.intersect_window_b}_nohets.raw.csv"
+    }else{
+        csv_file_name = "${dummies[0].getName().tokenize(".").get(0)}-${params.intersect_window_a}_${params.intersect_window_b}.raw.csv"
+    }
+    
+    csv_file = file("${params.out_dir}/${csv_file_name}")
+
     """
     cut -d '=' -f 1 < ${data_file} | awk -v RS= -v OFS=, '{\$1 = \$1} 1' > ${csv_file}
     cut -d '=' -f 2 < ${data_file} | awk -v RS= -v OFS=, '{\$1 = \$1} 1' >> ${csv_file}

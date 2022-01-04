@@ -7,6 +7,7 @@ params.input_files = "${params.input_dir}/${params.strain}-*.vcf"
 params.output_dir = "./data/merged"
 
 params.mappings = "./data/input/merge_mappings.txt"
+params.filter_hets = '0'
 
 params.bcftools = '/home/egarcia/appdir/bcftools/bin/bcftools'
 params.survivor = '/home/egarcia/workspace/github/SURVIVOR/Debug/SURVIVOR'
@@ -21,9 +22,12 @@ Channel.fromPath(params.input_files).set{input_files}
 // Generate BED files by type according to the values in data/input/mappings.txt 
 process mapped_bed_from_vcf {
 
+    echo true
+
     input:
         file vcf_file from input_files
         file mappings_file from file(params.mappings)
+        val filter_hets from params.filter_hets
 
     output:
         file "${params.strain}-*.bed" into bed_files
@@ -36,8 +40,13 @@ process mapped_bed_from_vcf {
     while read -r line
     do
         TYPE="\$(echo \$line | cut -d ':' -f 1)"
-        MAPPING="\$(echo \$line | cut -d ':' -f 2)"
         
+        if [ "${filter_hets}" == "1" ]; then
+            MAPPING="\$(echo "\$line && GT='HOM'" | cut -d ':' -f 2)"
+        else
+            MAPPING="\$(echo \$line | cut -d ':' -f 2)"
+        fi
+
         ${params.bcftools} query -i"\$MAPPING" -f'%CHROM\\t%POS0\\t%END0\\t%SVLEN\\n' ${vcf_file} | \
         awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print \$1,\$2,\$3,\$4}' >> "${params.strain}-${caller}-\$TYPE.bed"
     done < ${mappings_file}
@@ -107,6 +116,7 @@ process merge_mapped_vcfs {
 
     input:
         file (vcf_to_merge) from final_vcfs.collect()
+        val filter_hets from params.filter_hets
 
     output:
         file "${params.strain}-survivor*.vcf" into merged_vcf
@@ -115,7 +125,12 @@ process merge_mapped_vcfs {
     """
     echo "${vcf_to_merge}" | tr ' ' '\n' > '${params.strain}-merged-inputlist.txt'
 
-    ${params.survivor} merge '${params.strain}-merged-inputlist.txt' ${params.max_dist} ${params.min_callers} ${params.same_type} 1 0 ${params.min_size} '${params.strain}-survivor_${params.max_dist}_${params.min_callers}_${params.min_size}.vcf'
+    SUB=""
+    if [ "${filter_hets}" == "1" ]; then
+        SUB="_nohets"
+    fi
+
+    ${params.survivor} merge '${params.strain}-merged-inputlist.txt' ${params.max_dist} ${params.min_callers} ${params.same_type} 1 0 ${params.min_size} "${params.strain}-survivor_${params.max_dist}_${params.min_callers}_${params.min_size}\$SUB.vcf"
     """ 
 
 }
