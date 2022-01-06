@@ -113,11 +113,15 @@ process validated_metrics {
 
     strain = name_arr.get(0).tokenize("-").get(0)
 
+    previous = file("${params.previous_dir}/${strain}.${type}.mm39.bed")
     data_file = file("${params.out_dir}/${name_arr.get(0)}.data")
 
     """
     TYPE_COUNT="\$(cat ${bed_file} | wc -l)"
+    PREV_TYPE_COUNT="\$(cat ${previous} | wc -l)"
+
     echo "${type}=\$TYPE_COUNT" >> ${data_file}
+    echo "${type}0=\$PREV_TYPE_COUNT" >> ${data_file}
 
     echo "\$(cat ${mappings_file} | grep ${type} || true;)" > compare_to.txt
 
@@ -130,7 +134,6 @@ process validated_metrics {
 
             if [[ -e \$VALIDATED_FILE ]]
             then
-                echo "File exists: \$VALIDATED_FILE -> ${type}_\$VALIDATED_TYPE.${strain}.\$VALIDATED_TYPE.bed"
                 cat \$VALIDATED_FILE | uniq -u > "${type}_\$VALIDATED_TYPE.A.${strain}.\$VALIDATED_TYPE.bed"
                 cp ${bed_file} "${type}_\$VALIDATED_TYPE.B.${name}.${type}.bed"
             fi
