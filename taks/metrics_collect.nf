@@ -40,23 +40,25 @@ process general_metrics {
     TOTAL_CALLS="\$(${params.bcftools} view --no-header ${vcf_file} | awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print}' | wc -l)"
     SUP1="\$(${params.bcftools} query -i"SUPP='1'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print}' | wc -l)"
     SUP2="\$(${params.bcftools} query -i"SUPP='2'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print}' | wc -l)"
+    SUP3="\$(${params.bcftools} query -i"SUPP='3'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print}' | wc -l)"
 
     HOM_COUNT="\$(${params.bcftools} query -i"GT='HOM'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print}' | wc -l)"
     HET_COUNT="\$(${params.bcftools} query -i"GT='HET'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print}' | wc -l)"
 
-    echo "SRC_FILE=${vcf_file.getName()}" > ${data_file}
     echo "STRAIN=${strain}" >> ${data_file}
+    echo "SRC_FILE=${vcf_file.getName()}" > ${data_file}
     echo "FILTER=${filter_flag}" >> ${data_file}
     echo "TOTAL=\$TOTAL_CALLS" >> ${data_file}
 
-    echo "SUP1=\$SUP1" >> ${data_file}
-    echo "SUP2=\$SUP2" >> ${data_file}
+    echo "S1=\$SUP1" >> ${data_file}
+    echo "S2=\$SUP2" >> ${data_file}
+    echo "S3=\$SUP3" >> ${data_file}
 
-    echo "HOMs=\$HOM_COUNT" >> ${data_file}
-    echo "HETs=\$HET_COUNT" >> ${data_file}
+    echo "HOM=\$HOM_COUNT" >> ${data_file}
+    echo "HET=\$HET_COUNT" >> ${data_file}
 
-    echo "WINDOW_A=${params.intersect_window_a}" >> ${data_file}
-    echo "WINDOW_B=${params.intersect_window_a}" >> ${data_file}
+    echo "W_A=${params.intersect_window_a}" >> ${data_file}
+    echo "W_B=${params.intersect_window_a}" >> ${data_file}
 
     for ((i=1;i<=19;i++)); 
     do 
@@ -187,8 +189,8 @@ process intersect_files {
 
     A_INTERSECTED="\$(cat intersect_wa | uniq -u | wc -l)"
 
-    echo "\${A_NAME}_TOTAL=\$A_TOTAL" >> ${data_file}
-    echo "\${A_NAME}_INTERSECTED=\$A_INTERSECTED" >> ${data_file}
+    echo "\${A_NAME}_TOT=\$A_TOTAL" >> ${data_file}
+    echo "\${A_NAME}_INT=\$A_INTERSECTED" >> ${data_file}
 
     touch "${file_b.getName().tokenize(".").get(2)}.${process}.dummy"
     """
