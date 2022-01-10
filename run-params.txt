@@ -1,4 +1,4 @@
-strains=A_J,AKR_J,BALB_cJ,C3H_HeJ,C57BL_6NJ,DBA_2J,LP_J
+strains=DBA_2J
 survivor.max_dist=20,30,50,100,200
 survivor.min_size=10,15,20
 survivor.min_callers=1,2

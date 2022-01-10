@@ -1,6 +1,6 @@
 STRAIN_VALUES="$(cat run-params.txt | grep 'strains=' | cut -d '=' -f 2 )"
 SURVIVOR_MAX_DIST_VALUES="$(cat run-params.txt | grep 'survivor.max_dist=' | cut -d '=' -f 2 )"
-SURVIVOR_MIN_SIZE_VALUES="$(cat run-params.txt | grep 'survivor.min_callers=' | cut -d '=' -f 2 )"
+SURVIVOR_MIN_SIZE_VALUES="$(cat run-params.txt | grep 'survivor.min_size=' | cut -d '=' -f 2 )"
 SURVIVOR_MIN_CALLERS_VALUES="$(cat run-params.txt | grep 'survivor.min_callers=' | cut -d '=' -f 2 )"
 COMBI_MIN_COVERAGE_VALUES="$(cat run-params.txt | grep 'combi.min_coverage=' | cut -d '=' -f 2 )"
 INTERSECT_WINDOW_VALUES="$(cat run-params.txt | grep 'intersect.window=' | cut -d '=' -f 2 )"
@@ -40,6 +40,7 @@ do
         do 
             echo "nextflow run taks/metrics_collect.nf --intersect_window_a $WINDOW --intersect_window_b $WINDOW --filter_hets $FILTER --input_files ./data/input/$STRAIN-sniffles.vcf" >> $CMD_FILE
             echo "nextflow run taks/metrics_collect.nf --intersect_window_a $WINDOW --intersect_window_b $WINDOW --filter_hets $FILTER --input_files ./data/input/$STRAIN-pbsv.vcf" >> $CMD_FILE
+            echo "nextflow run taks/metrics_collect.nf --intersect_window_a $WINDOW --intersect_window_b $WINDOW --filter_hets $FILTER --input_files ./data/input/$STRAIN-cutesv.vcf" >> $CMD_FILE
 
             for MIN_COVERAGE in $(echo $COMBI_MIN_COVERAGE_VALUES | sed "s/,/ /g")
             do
@@ -67,7 +68,7 @@ do
     done
     echo "echo \"$STRAIN Finished\"" >> $CMD_FILE
     echo "Launchin script from: $CMD_FILE"
-    bash $CMD_FILE &
+    bash $CMD_FILE
 done
 
-#nextflow run taks/metrics_consolidate.nf
+nextflow run taks/metrics_consolidate.nf
