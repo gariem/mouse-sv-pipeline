@@ -9,9 +9,6 @@ params.output_dir = "./data/merged"
 params.mappings = "./data/input/merge_mappings.txt"
 params.filter_hets = '0'
 
-params.bcftools = '/home/egarcia/appdir/bcftools/bin/bcftools'
-params.survivor = '/home/egarcia/workspace/github/SURVIVOR/Debug/SURVIVOR'
-
 params.max_dist = '100'
 params.min_callers = '1'
 params.same_type = '1'
@@ -47,7 +44,7 @@ process mapped_bed_from_vcf {
             MAPPING="\$(echo \$line | cut -d ':' -f 2)"
         fi
 
-        ${params.bcftools} query -i"\$MAPPING" -f'%CHROM\\t%POS0\\t%END0\\t%SVLEN\\n' ${vcf_file} | \
+        bcftools query -i"\$MAPPING" -f'%CHROM\\t%POS0\\t%END0\\t%SVLEN\\n' ${vcf_file} | \
         awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print \$1,\$2,\$3,\$4}' >> "${params.strain}-${caller}-\$TYPE.bed"
     done < ${mappings_file}
     """
@@ -71,7 +68,7 @@ process mapped_vcf_from_bed {
     type = name_parts.get(2)
 
     """
-    ${params.survivor} bedtovcf ${bed_file} ${type} '${strain}-${caller}-${type}.vcf'
+    SURVIVOR bedtovcf ${bed_file} ${type} '${strain}-${caller}-${type}.vcf'
     """
 
 }
@@ -100,9 +97,9 @@ process join_mapped_vcfs {
     do
         if [[ -f ${params.strain}-${caller}-joint.vcf ]]
         then
-            ${params.bcftools} view --no-header \$FILE >> '${params.strain}-${caller}-joint.vcf'
+            bcftools view --no-header \$FILE >> '${params.strain}-${caller}-joint.vcf'
         else
-            ${params.bcftools} view \$FILE > '${params.strain}-${caller}-joint.vcf'
+            bcftools view \$FILE > '${params.strain}-${caller}-joint.vcf'
         fi
         
     done
@@ -130,7 +127,7 @@ process merge_mapped_vcfs {
         SUB="_nohets"
     fi
 
-    ${params.survivor} merge '${params.strain}-merged-inputlist.txt' ${params.max_dist} ${params.min_callers} ${params.same_type} 1 0 ${params.min_size} "${params.strain}-survivor_${params.max_dist}_${params.min_callers}_${params.min_size}\$SUB.vcf"
+    SURVIVOR merge '${params.strain}-merged-inputlist.txt' ${params.max_dist} ${params.min_callers} ${params.same_type} 1 0 ${params.min_size} "${params.strain}-survivor_${params.max_dist}_${params.min_callers}_${params.min_size}\$SUB.vcf"
     """ 
 
 }

@@ -8,10 +8,7 @@ params.min_callers = '1'
 params.same_type = '1'
 params.min_size = '30'
 
-params.survivor = '/home/egarcia/workspace/github/SURVIVOR/Debug/SURVIVOR'
-
 Channel.fromPath("${params.input_dir}/${params.strain}-*.vcf").set{vcf_files_ch}
-
 
 // Transform channel, group by caller (from file name)
 vcf_files_ch.map{ file ->
@@ -54,7 +51,7 @@ process merge_with_survivor{
     echo "${sniffles_file}" >> '${params.strain}-merged-inputlist.txt'
     echo "${cutesv_file}" >> '${params.strain}-merged-inputlist.txt'
 
-    ${params.survivor} merge '${params.strain}-merged-inputlist.txt' ${params.max_dist} ${params.min_callers} ${params.same_type} 1 0 ${params.min_size} "${params.strain}-unmapped_${params.max_dist}_${params.min_callers}_${params.min_size}.vcf"
+    SURVIVOR merge '${params.strain}-merged-inputlist.txt' ${params.max_dist} ${params.min_callers} ${params.same_type} 1 0 ${params.min_size} "${params.strain}-unmapped_${params.max_dist}_${params.min_callers}_${params.min_size}.vcf"
 
     """
 }

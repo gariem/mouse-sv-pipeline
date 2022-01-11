@@ -1,0 +1,7 @@
+strains=DBA_2J
+survivor.max_dist=20
+survivor.min_size=20
+survivor.min_callers=2
+combi.min_coverage=3
+intersect.window=10
+filter_hets=1

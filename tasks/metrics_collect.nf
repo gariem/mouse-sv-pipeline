@@ -13,8 +13,6 @@ params.filter_hets = '0'
 params.intersect_window_a = '0'
 params.intersect_window_b = '20'
 
-params.bcftools = '/home/egarcia/appdir/bcftools/bin/bcftools'
-
 Channel.fromPath(params.input_files).set{input_files}
 
 process general_metrics {
@@ -37,13 +35,14 @@ process general_metrics {
 
     """
     mkdir -p ${file(params.out_dir)}
-    TOTAL_CALLS="\$(${params.bcftools} view --no-header ${vcf_file} | awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print}' | wc -l)"
-    SUP1="\$(${params.bcftools} query -i"SUPP='1'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print}' | wc -l)"
-    SUP2="\$(${params.bcftools} query -i"SUPP='2'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print}' | wc -l)"
-    SUP3="\$(${params.bcftools} query -i"SUPP='3'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print}' | wc -l)"
 
-    HOM_COUNT="\$(${params.bcftools} query -i"GT='HOM'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print}' | wc -l)"
-    HET_COUNT="\$(${params.bcftools} query -i"GT='HET'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print}' | wc -l)"
+    TOTAL_CALLS="\$(bcftools view --no-header ${vcf_file} | awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print}' | wc -l)"
+    SUP1="\$(bcftools query -i"SUPP='1'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print}' | wc -l)"
+    SUP2="\$(bcftools query -i"SUPP='2'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print}' | wc -l)"
+    SUP3="\$(bcftools query -i"SUPP='3'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print}' | wc -l)"
+
+    HOM_COUNT="\$(bcftools query -i"GT='HOM'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print}' | wc -l)"
+    HET_COUNT="\$(bcftools query -i"GT='HET'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print}' | wc -l)"
 
     echo "STRAIN=${strain}" >> ${data_file}
     echo "SRC_FILE=${vcf_file.getName()}" > ${data_file}
@@ -68,14 +67,14 @@ process general_metrics {
             QUERY="CHROM='\$i'"
         fi
 
-        CHROM_COUNT="\$(${params.bcftools} query -i"\$QUERY" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | wc -l)"
+        CHROM_COUNT="\$(bcftools query -i"\$QUERY" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | wc -l)"
         echo "chr\$i=\$CHROM_COUNT" >> ${data_file}
     done
 
     if [ "${filter_hets}" == "1" ]; then
-        CHROM_COUNT="\$(${params.bcftools} query -i"CHROM='X' && GT='HOM'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | wc -l)"
+        CHROM_COUNT="\$(bcftools query -i"CHROM='X' && GT='HOM'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | wc -l)"
     else
-        CHROM_COUNT="\$(${params.bcftools} query -i"CHROM='X'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | wc -l)"
+        CHROM_COUNT="\$(bcftools query -i"CHROM='X'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | wc -l)"
     fi
     
     echo "chrX=\$CHROM_COUNT" >> ${data_file}
@@ -90,7 +89,7 @@ process general_metrics {
             QUERY="SVTYPE='\$TYPE' "
         fi
 
-        ${params.bcftools} query -i"\$QUERY" -f'%CHROM\\t%POS0\\t%END0\\t%SVLEN\\n' ${vcf_file} | \
+        bcftools query -i"\$QUERY" -f'%CHROM\\t%POS0\\t%END0\\t%SVLEN\\n' ${vcf_file} | \
             awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print \$1,\$2,\$3,\$4}' >> "${vcf_name}.\$TYPE.bed"
     done < ${mappings_file}
     """
@@ -174,13 +173,12 @@ process intersect_files {
     }
     
     process = file_a.getName().tokenize(".").get(0)
-    data_file=file("${params.out_dir}/${file_b.getName().tokenize(".").get(2)}.data")
+    source_file = file_b.getName().tokenize(".").get(2)
+    data_file=file("${params.out_dir}/${source_file}.data")
 
     """
     A_TOTAL="\$(cat ${file_a} | wc -l)"
     A_NAME="\$(echo ${file_a} | cut -d '.' -f 4)"
-
-    DATA_FILE="\$(echo ${file_b} | cut -d '.' -f 3).data"
 
     awk -F'\\t' 'BEGIN {OFS = FS} {print \$1,\$2-${window_a},\$3+${window_a},\$4}' ${file_a} > FILE_A
     awk -F'\\t' 'BEGIN {OFS = FS} {print \$1,\$2-${window_b},\$3+${window_b},\$4}' ${file_b} > FILE_B
@@ -189,15 +187,14 @@ process intersect_files {
 
     A_INTERSECTED="\$(cat intersect_wa | uniq -u | wc -l)"
 
-    echo "\${A_NAME}_TOT=\$A_TOTAL" >> ${data_file}
-    echo "\${A_NAME}_INT=\$A_INTERSECTED" >> ${data_file}
+    #echo "\${A_NAME}_TOT=\$A_TOTAL" >> ${data_file}
+    #echo "\${A_NAME}_INT=\$A_INTERSECTED" >> ${data_file}
 
-    touch "${file_b.getName().tokenize(".").get(2)}.${process}.dummy"
+    touch "${source_file}.${process}.dummy"
     """
 }
 
 process generate_csv {
-    echo true
     
     input:
         file dummies from final_dummies.collect()
