@@ -1,9 +1,9 @@
 #!/usr/bin/env nextflow
 
-params.strain = "DBA_2J"
+params.strain = "*"
 
 params.input_dir = "./data/input"
-params.input_files = "${params.input_dir}/${params.strain}-*.vcf"
+params.input_files = "${params.input_dir}/${params.strain}*.vcf"
 params.output_dir = "./data/merged"
 
 params.mappings = "./data/input/merge_mappings.txt"
@@ -25,12 +25,13 @@ process mapped_bed_from_vcf {
         val filter_hets from params.filter_hets
 
     output:
-        file "${params.strain}-*.bed" into bed_files
+        file "*.bed" into bed_files
     
     script:
 
-    caller = vcf_file.getName().toString().tokenize('-').get(1).tokenize('.').get(0)
-    
+    fileName = vcf_file.getName().toString().tokenize('.').get(0)
+    caller = fileName.tokenize('-').get(1)
+    strain = fileName.tokenize('-').get(0)
     """
     while read -r line
     do
@@ -43,7 +44,7 @@ process mapped_bed_from_vcf {
         fi
 
         bcftools query -i"\$MAPPING" -f'%CHROM\\t%POS0\\t%END0\\t%SVLEN\\n' ${vcf_file} | \
-        awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print \$1,\$2,\$3,\$4}' >> "${params.strain}-${caller}-\$TYPE.bed"
+        awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print \$1,\$2,\$3,\$4}' >> "${strain}-${caller}-\$TYPE.bed"
     done < ${mappings_file}
     """
 }
@@ -75,8 +76,9 @@ process mapped_vcf_from_bed {
 
 // Transform channel, group by caller (from file name)
 vcf_files.map{ file ->
-    def caller = file.name.toString().tokenize('-').get(1)
-    return tuple(caller, file)
+    def name_parts = file.getName().toString().tokenize('.').get(0).tokenize('-')
+    def strain_caller = name_parts.get(0) + '-' + name_parts.get(1)
+    return tuple(strain_caller, file)
 }
 .groupTuple()
 .set{ grouped_vcfs }
@@ -86,25 +88,48 @@ vcf_files.map{ file ->
 process join_mapped_vcfs {
 
     input:
-        set caller, file(mapped_vcf) from grouped_vcfs
+        set strain_caller, file(mapped_vcf) from grouped_vcfs
 
     output:
         file '*.vcf' into final_vcfs
 
+    script:
+
+
     """
     for FILE in ${mapped_vcf}
     do
-        if [[ -f ${params.strain}-${caller}-joint.vcf ]]
+        if [[ -f ${strain_caller}-joint.vcf ]]
         then
-            bcftools view --no-header \$FILE >> '${params.strain}-${caller}-joint.vcf'
+            bcftools view --no-header \$FILE >> '${strain_caller}-joint.vcf'
         else
-            bcftools view \$FILE > '${params.strain}-${caller}-joint.vcf'
+            bcftools view \$FILE > '${strain_caller}-joint.vcf'
         fi
     done
-
     rm -rf ${mapped_vcf}
     """
 }
+
+final_vcfs.flatMap{ file ->
+    def strain = file.getName().toString().tokenize('-').get(0)
+    def max_dist_arr = params.max_dist.toString().split(',')
+    def min_size_arr = params.min_size.toString().split(',')
+    def min_callers_arr = params.min_callers.toString().split(',')
+
+    def tuples = []
+
+    for(max_dist in max_dist_arr){
+        for(min_callers in min_callers_arr){
+            for(min_size in min_size_arr){
+                tuples.add(tuple(strain, max_dist, min_callers, min_size, file))
+            }
+        }
+    }
+    return tuples
+}
+.groupTuple(by: [0, 1, 2, 3])
+.set{ grouped_final_vcfs }
+
 
 // Mege VCF Files using SURVIVOR
 process merge_mapped_vcfs {
@@ -112,23 +137,20 @@ process merge_mapped_vcfs {
     publishDir file("${params.output_dir}"), mode: "move", pattern: "*.vcf"
 
     input:
-        file (vcf_to_merge) from final_vcfs.collect()
+        set strain, max_dist, min_callers, min_size, file(vcf_to_merge) from grouped_final_vcfs
         val filter_hets from params.filter_hets
 
     output:
-        file "${params.strain}-survivor*.vcf" into merged_vcf
+        file "${strain}-survivor*.vcf" into merged_vcf
 
 
     """
-    echo "${vcf_to_merge}" | tr ' ' '\n' > '${params.strain}-merged-inputlist.txt'
-
+    echo "${vcf_to_merge}" | tr ' ' '\n' > '${strain}-merged-inputlist.txt'
     SUB=""
     if [ "${filter_hets}" == "1" ]; then
         SUB="_nohets"
     fi
-
-    SURVIVOR merge '${params.strain}-merged-inputlist.txt' ${params.max_dist} ${params.min_callers} ${params.same_type} 1 0 ${params.min_size} "${params.strain}-survivor_${params.max_dist}_${params.min_callers}_${params.min_size}\$SUB.vcf"
-
+    SURVIVOR merge '${strain}-merged-inputlist.txt' ${max_dist} ${min_callers} ${params.same_type} 1 0 ${params.min_size} "${strain}-survivor_${max_dist}_${min_callers}_${min_size}\$SUB.vcf"
     rm -rf ${vcf_to_merge}
     """ 
 

@@ -69,7 +69,7 @@ do
     done
     echo "echo \"$STRAIN Finished\"" >> $CMD_FILE
     echo "Launchin script from: $CMD_FILE"
-    bash $CMD_FILE &
+    #bash $CMD_FILE &
 done
 
 # echo "nextflow run tasks/metrics_consolidate.nf"

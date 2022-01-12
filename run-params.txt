@@ -1,7 +1,7 @@
-strains=A_J,AKR_J,BALB_cJ,C3H_HeJ,C57BL_6NJ,DBA_2J,LP_J,CBA_J
-survivor.max_dist=20,30,50,100,200,250,300,500
-survivor.min_size=10,15,20,30,50
+strains=C57BL_6NJ,DBA_2J,LP_J
+survivor.max_dist=30,50,100,200,500
+survivor.min_size=15,30,50
 survivor.min_callers=1,2,3
-combi.min_coverage=3,5,10,15,20
-intersect.window=0,2,5,10,20,30,50
+combi.min_coverage=3,5,10
+intersect.window=10,20,30,50
 filter_hets=1,0

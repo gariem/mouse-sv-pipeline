@@ -44,8 +44,8 @@ process general_metrics {
     HOM_COUNT="\$(bcftools query -i"GT='HOM'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print}' | wc -l)"
     HET_COUNT="\$(bcftools query -i"GT='HET'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print}' | wc -l)"
 
-    echo "STRAIN=${strain}" >> ${data_file}
-    echo "SRC_FILE=${vcf_file.getName()}" > ${data_file}
+    echo "STRAIN=${strain}" > ${data_file}
+    echo "SRC_FILE=${vcf_file.getName()}" >> ${data_file}
     echo "FILTER=${filter_flag}" >> ${data_file}
     echo "TOTAL=\$TOTAL_CALLS" >> ${data_file}
 
