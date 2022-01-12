@@ -18,7 +18,7 @@ vcf_files_ch.map{ file ->
 
 process merge_with_combi{
 
-    publishDir file(params.output_dir), mode: "copy"
+    publishDir file(params.output_dir), mode: "move"
 
     input:
         set strain, file(vcf_files) from grouped_vcfs
@@ -47,5 +47,6 @@ process merge_with_combi{
 
     """
     perl ${combisv} -pbsv ${pbsv_file} -sniffles  ${sniffles_file} -cutesv ${cutesv_file} -o "${strain}-combisv_c${min_coverage}.vcf" -c ${min_coverage}
+    find . -type f -not -name '${strain}-combisv_c${min_coverage}.vcf' -delete
     """
 }

@@ -21,7 +21,7 @@ vcf_files_ch.map{ file ->
 
 process merge_with_survivor{
 
-    publishDir file(params.output_dir), mode: "copy"
+    publishDir file(params.output_dir), mode: "move"
 
     input:
         set strain, file(vcf_files) from grouped_vcfs
@@ -53,5 +53,6 @@ process merge_with_survivor{
 
     SURVIVOR merge '${params.strain}-merged-inputlist.txt' ${params.max_dist} ${params.min_callers} ${params.same_type} 1 0 ${params.min_size} "${params.strain}-unmapped_${params.max_dist}_${params.min_callers}_${params.min_size}.vcf"
 
+    rm -rf '${params.strain}-merged-inputlist.txt'
     """
 }

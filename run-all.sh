@@ -1,4 +1,4 @@
-PARAMS_FILE="run-params-test.txt"
+PARAMS_FILE="run-params$1.txt"
 STRAIN_VALUES="$(cat $PARAMS_FILE | grep 'strains=' | cut -d '=' -f 2 )"
 SURVIVOR_MAX_DIST_VALUES="$(cat $PARAMS_FILE | grep 'survivor.max_dist=' | cut -d '=' -f 2 )"
 SURVIVOR_MIN_SIZE_VALUES="$(cat $PARAMS_FILE | grep 'survivor.min_size=' | cut -d '=' -f 2 )"

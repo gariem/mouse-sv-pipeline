@@ -135,8 +135,8 @@ process validated_metrics {
 
             if [[ -e \$VALIDATED_FILE ]]
             then
-                cat \$VALIDATED_FILE | uniq -u > "${type}_\$VALIDATED_TYPE.A.${strain}.\$VALIDATED_TYPE.bed"
-                cp ${bed_file} "${type}_\$VALIDATED_TYPE.B.${name}.${type}.bed"
+                ln -s \$VALIDATED_FILE "${type}_\$VALIDATED_TYPE.A.${strain}.\$VALIDATED_TYPE.bed"
+                ln -s ${bed_file} "${type}_\$VALIDATED_TYPE.B.${name}.${type}.bed"
             fi
         done < compare_to.txt
     fi
@@ -187,8 +187,10 @@ process intersect_files {
 
     A_INTERSECTED="\$(cat intersect_wa | uniq -u | wc -l)"
 
-    #echo "\${A_NAME}_TOT=\$A_TOTAL" >> ${data_file}
-    #echo "\${A_NAME}_INT=\$A_INTERSECTED" >> ${data_file}
+    echo "\${A_NAME}_TOT=\$A_TOTAL" >> ${data_file}
+    echo "\${A_NAME}_INT=\$A_INTERSECTED" >> ${data_file}
+
+    rm -rf FILE_A FILE_B intersect_wa
 
     touch "${source_file}.${process}.dummy"
     """

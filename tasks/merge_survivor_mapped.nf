@@ -19,8 +19,6 @@ Channel.fromPath(params.input_files).set{input_files}
 // Generate BED files by type according to the values in data/input/mappings.txt 
 process mapped_bed_from_vcf {
 
-    echo true
-
     input:
         file vcf_file from input_files
         file mappings_file from file(params.mappings)
@@ -69,6 +67,7 @@ process mapped_vcf_from_bed {
 
     """
     SURVIVOR bedtovcf ${bed_file} ${type} '${strain}-${caller}-${type}.vcf'
+    rm ${bed_file}
     """
 
 }
@@ -101,15 +100,16 @@ process join_mapped_vcfs {
         else
             bcftools view \$FILE > '${params.strain}-${caller}-joint.vcf'
         fi
-        
     done
+
+    rm -rf ${mapped_vcf}
     """
 }
 
 // Mege VCF Files using SURVIVOR
 process merge_mapped_vcfs {
 
-    publishDir file("${params.output_dir}"), mode: "copy", pattern: "*.vcf"
+    publishDir file("${params.output_dir}"), mode: "move", pattern: "*.vcf"
 
     input:
         file (vcf_to_merge) from final_vcfs.collect()
@@ -128,6 +128,8 @@ process merge_mapped_vcfs {
     fi
 
     SURVIVOR merge '${params.strain}-merged-inputlist.txt' ${params.max_dist} ${params.min_callers} ${params.same_type} 1 0 ${params.min_size} "${params.strain}-survivor_${params.max_dist}_${params.min_callers}_${params.min_size}\$SUB.vcf"
+
+    rm -rf ${vcf_to_merge}
     """ 
 
 }
