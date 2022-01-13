@@ -11,3 +11,4 @@ work/
 *.raw.csv
 *.bam
 *.bai
+data/reports/raw/*.csv
