@@ -11,31 +11,47 @@ params.merge_mappings = "./data/input/merge_mappings.txt"
 params.metrics_mappings = "./data/input/metrics_mappings.txt"
 
 params.filter_hets = '0'
-
 params.intersect_window = '20'
 
 Channel.fromPath(params.input_files).set{input_files}
 
+
+input_files.flatMap{ file ->
+    def key = file.name.toString().tokenize('.').get(0)
+    
+    def filter_hets_arr = params.filter_hets.toString().split(',')
+    def tuples = []
+
+    for(filter_hets in filter_hets_arr){
+        tuples.add(tuple(key,filter_hets,file))
+    }
+
+    return tuples
+}
+.groupTuple(by: [0, 1])
+.set{ grouped_inputs }
+
+
 process general_metrics {
 
-    echo true
-
     input:
-        file vcf_file from input_files
+        set key, filter, file(vcf_files) from grouped_inputs
+        
         file merge_mappings_file from file(params.merge_mappings)
         file metrics_mappings_file from file(params.metrics_mappings)
-        val filter_hets from params.filter_hets
 
     output:
         file "${vcf_name}.*.*" into prepared_files
 
     script:
 
+    vcf_file = vcf_files
     vcf_name = vcf_file.getName().tokenize(".").get(0)
     strain = vcf_name.tokenize("-").get(0) 
     data_file = "${vcf_name}.data"
 
-    filter_flag = (filter_hets == 1 || vcf_name.contains("_nohets")) ? 1 : 0
+    filter_flag = (filter == '1' || vcf_name.contains("_all")) ? 0 : 1
+    filter_name = filter == '1' ? "hom" : "all"
 
     prev_dir = file(params.previous_dir)
     validated_dir = file(params.validated_dir)
@@ -67,7 +83,7 @@ process general_metrics {
 
     for ((i=1;i<=19;i++)); 
     do 
-        if [ "${filter_hets}" == "1" ]; then
+        if [ "${filter}" == "1" ]; then
             QUERY="CHROM='\$i' && GT='HOM'"
         else
             QUERY="CHROM='\$i'"
@@ -77,7 +93,7 @@ process general_metrics {
         echo "chr\$i=\$CHROM_COUNT" >> ${data_file}
     done
 
-    if [ "${filter_hets}" == "1" ]; then
+    if [ "${filter}" == "1" ]; then
         CHROM_COUNT="\$(bcftools query -i"CHROM='X' && GT='HOM'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | wc -l)"
     else
         CHROM_COUNT="\$(bcftools query -i"CHROM='X'" -f'%CHROM\\t%POS\\t%END\\n' ${vcf_file} | wc -l)"
@@ -91,7 +107,7 @@ process general_metrics {
     do
         TYPE="\$(echo \$mappings_line | cut -d ':' -f 1)"
 
-        if [ "${filter_hets}" == "1" ]; then
+        if [ "${filter}" == "1" ]; then
             QUERY="SVTYPE='\$TYPE' && GT='HOM'"
         else
             QUERY="SVTYPE='\$TYPE' "
@@ -119,11 +135,9 @@ process general_metrics {
 
                 if [[ -e \$VALIDATED_FILE ]]
                 then
-                    ln -s \$VALIDATED_FILE "${vcf_name}.\${TYPE}.\${VALIDATED_TYPE}.A.${strain}.\${VALIDATED_TYPE}.bed"
-                    ln -s "Temp.${vcf_name}.\$TYPE.bed" "${vcf_name}.\${TYPE}.\$VALIDATED_TYPE.B.${vcf_name}.\${TYPE}.bed"
-                    ln -s ${data_file} "${vcf_name}.\${TYPE}.\${VALIDATED_TYPE}.data"
-                else
-                    rm "Temp.${vcf_name}.\$TYPE.bed"
+                    ln -s \$VALIDATED_FILE "${vcf_name}.${filter_name}.\${TYPE}.\${VALIDATED_TYPE}.A.${strain}.\${VALIDATED_TYPE}.bed"
+                    ln -s "Temp.${vcf_name}.\$TYPE.bed" "${vcf_name}.${filter_name}.\${TYPE}.\$VALIDATED_TYPE.B.${vcf_name}.\${TYPE}.bed"
+                    ln -s ${data_file} "${vcf_name}.${filter_name}.\${TYPE}.\${VALIDATED_TYPE}.data"
                 fi
             done < compare_to.txt
         fi
@@ -134,7 +148,7 @@ process general_metrics {
 
 prepared_files.flatten().flatMap{ file ->
     def parts = file.name.toString().tokenize('.')
-    key = parts.get(0) + '.' + parts.get(1) + '.' + parts.get(2)
+    key = parts.get(0) + '.' + parts.get(1) + '.' + parts.get(2) + '.' + parts.get(3)
 
     def intersect_w_arr = params.intersect_window.toString().split(',')
     def tuples = []
@@ -145,75 +159,83 @@ prepared_files.flatten().flatMap{ file ->
 
     return tuples
 }
-.groupTuple(by: [0, 1])
+.groupTuple(by: [0, 1], size: 3)
 .set{ grouped_files }
 
-grouped_files.view()
+process intersect_files {
 
+    input:
+        set key, window, file(input_files) from grouped_files
 
-// process intersect_files {
+    output:
+        file '*.metrics' into metrics_files
+
+    script:
+ 
+
+    for(int i = 0;i<=2;i++) {
+        vcfName = input_files.get(i).getName()
+        if(vcfName.contains('.A.') && vcfName.endsWith('.bed')){
+            file_a = input_files.get(i)
+            continue
+        }
+        if(vcfName.contains('.B.') && vcfName.endsWith('.bed')){
+            file_b = input_files.get(i)
+            continue
+        }
+        if(vcfName.endsWith('.data')){
+            src_data_file = input_files.get(i)
+            continue
+        }
+    }
     
-//     input:
-//         set key, file(bed_files) from grouped_beds
-//         val window_a from params.intersect_window
-//     output:
-//         file '*.dummy' into final_dummies
+    data_file=key + "." + window + ".metrics"
 
-//     script:
+    """
+    A_TOTAL="\$(cat ${file_a} | wc -l)"
+    A_NAME="\$(echo ${file_a} | cut -d '.' -f 4)"
 
-//     if (bed_files[0].getName().contains('.A.')){
-//         file_a = bed_files[0]
-//         file_b = bed_files[1]
-//     } else {
-//         file_a = bed_files[1]
-//         file_b = bed_files[0]
-//     }
+    awk -F'\\t' 'BEGIN {OFS = FS} {print \$1,\$2-${window},\$3+${window},\$4}' ${file_a} > FILE_A
+    awk -F'\\t' 'BEGIN {OFS = FS} {print \$1,\$2-${window},\$3+${window},\$4}' ${file_b} > FILE_B
+
+    bedtools intersect -a FILE_A -b FILE_B -wa > intersect_wa
+
+    A_INTERSECTED="\$(cat intersect_wa | uniq -u | wc -l)"
+
+    cat ${src_data_file} > ${data_file}
+
+    echo "W_AB=${window}" >> ${data_file}
+    echo "\${A_NAME}_TOT=\$A_TOTAL" >> ${data_file}
+    echo "\${A_NAME}_INT=\$A_INTERSECTED" >> ${data_file}
+
+    rm -rf FILE_A FILE_B intersect_wa
+    """
+}
+
+metrics_files.map{ file ->
+    def parts = file.name.toString().tokenize('.')
+    key = parts.get(0) + '.' + parts.get(1) + '.' + parts.get(4)
+    return tuple(key, file)
+}
+.groupTuple(size: 4)
+.set{ metrics_grouped }
+
+process join_metrics() {
+
+    publishDir file("${params.out_dir}"), mode: "move", pattern: "*.csv"
+
+    input:
+        set key, file(metrics) from metrics_grouped
     
-//     process = file_a.getName().tokenize(".").get(0)
-//     source_file = file_b.getName().tokenize(".").get(2)
-//     data_file=file("${params.out_dir}/${source_file}.data")
+    output:
+        file '*.csv' into final_metrics
 
-//     """
-//     A_TOTAL="\$(cat ${file_a} | wc -l)"
-//     A_NAME="\$(echo ${file_a} | cut -d '.' -f 4)"
+    """
+    cat ${metrics} | awk '!x[\$0]++' > tmp
 
-//     awk -F'\\t' 'BEGIN {OFS = FS} {print \$1,\$2-${window_a},\$3+${window_a},\$4}' ${file_a} > FILE_A
-//     awk -F'\\t' 'BEGIN {OFS = FS} {print \$1,\$2-${window_a},\$3+${window_a},\$4}' ${file_b} > FILE_B
+    cut -d '=' -f 1 < tmp | awk -v RS= -v OFS=, '{\$1 = \$1} 1' > "${key}.csv"
+    cut -d '=' -f 2 < tmp | awk -v RS= -v OFS=, '{\$1 = \$1} 1' >> "${key}.csv"
 
-//     bedtools intersect -a FILE_A -b FILE_B -wa > intersect_wa
-
-//     A_INTERSECTED="\$(cat intersect_wa | uniq -u | wc -l)"
-
-//     echo "\${A_NAME}_TOT=\$A_TOTAL" >> ${data_file}
-//     echo "\${A_NAME}_INT=\$A_INTERSECTED" >> ${data_file}
-
-//     rm -rf FILE_A FILE_B intersect_wa
-
-//     touch "${source_file}.${process}.dummy"
-//     """
-// }
-
-// process generate_csv {
-    
-//     input:
-//         file dummies from final_dummies.collect()
-//         val filter_hets from params.filter_hets
-
-//     script:
-
-//     data_file_name = "${dummies[0].getName().tokenize(".").get(0)}.data"
-//     data_file = file("${params.out_dir}/${data_file_name}")
-    
-//     if(filter_hets == 1){
-//         csv_file_name = "${dummies[0].getName().tokenize(".").get(0)}-${params.intersect_window}_${params.intersect_window}_nohets.raw.csv"
-//     }else{
-//         csv_file_name = "${dummies[0].getName().tokenize(".").get(0)}-${params.intersect_window}_${params.intersect_window}.raw.csv"
-//     }
-    
-//     csv_file = file("${params.out_dir}/${csv_file_name}")
-
-//     """
-//     cut -d '=' -f 1 < ${data_file} | awk -v RS= -v OFS=, '{\$1 = \$1} 1' > ${csv_file}
-//     cut -d '=' -f 2 < ${data_file} | awk -v RS= -v OFS=, '{\$1 = \$1} 1' >> ${csv_file}
-//     """
-// }
+    rm tmp
+    """
+}

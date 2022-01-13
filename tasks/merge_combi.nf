@@ -1,4 +1,4 @@
-params.strain = "C57BL_6NJ"
+params.strain = "*"
 
 params.input_dir = "./data/input"
 params.output_dir = "./data/merged"
@@ -9,11 +9,19 @@ params.combi_exe = './templates/combiSV2.1.pl'
 
 Channel.fromPath("${params.input_dir}/${params.strain}-*vcf").set{vcf_files_ch}
 
-vcf_files_ch.map{ file ->
+vcf_files_ch.flatMap{ file ->
     def strain = file.getName().tokenize(".").get(0).tokenize('-').get(0)
-    return tuple(strain, file)
+
+    def min_coverage_arr = params.min_coverage.toString().split(',')
+    def tuples = []
+
+    for(min_coverage in min_coverage_arr){
+        tuples.add(tuple(strain,min_coverage,file))
+    }
+
+    return tuples
 }
-.groupTuple()
+.groupTuple(by: [0, 1])
 .set{ grouped_vcfs }
 
 process merge_with_combi{
@@ -21,9 +29,8 @@ process merge_with_combi{
     publishDir file(params.output_dir), mode: "move"
 
     input:
-        set strain, file(vcf_files) from grouped_vcfs
+        set strain, min_coverage, file(vcf_files) from grouped_vcfs
         file combisv from file(params.combi_exe)
-        val min_coverage from params.min_coverage
 
     output:
         file "${strain}-combisv_c*.vcf"

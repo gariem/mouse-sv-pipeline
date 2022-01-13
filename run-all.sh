@@ -7,69 +7,73 @@ COMBI_MIN_COVERAGE_VALUES="$(cat $PARAMS_FILE | grep 'combi.min_coverage=' | cut
 INTERSECT_WINDOW_VALUES="$(cat $PARAMS_FILE | grep 'intersect.window=' | cut -d '=' -f 2 )"
 FILTER_VALUES="$(cat $PARAMS_FILE | grep 'filter_hets=' | cut -d '=' -f 2 )"
 
-mkdir -p ./work/commands
+echo "========== PARAMS =========="
+cat $PARAMS_FILE
+echo ""
+echo "============================"
+
+echo "Cleaning work, merge, and reports folders"
+rm -rf work ./data/merged ./data/reports
+echo "\tDone -> Clean"
+
+echo "Collecting metrics From source VCFs"
+nextflow run tasks/metrics_collect.nf \
+    --intersect_window $INTERSECT_WINDOW_VALUES \
+    --filter_hets $FILTER_VALUES \
+    --input_dir ./data/input
+
+echo "\tDone -> Source Metrics"
+
+echo "Merging with CombiSV"
+    nextflow run tasks/merge_combi.nf \
+        --min_coverage $COMBI_MIN_COVERAGE_VALUES
+
+echo "\tDone -> Merge [CombiSV]"
+
+echo "Collecting metrics for CombiSV"
+    nextflow run tasks/metrics_collect.nf \
+        --intersect_window $INTERSECT_WINDOW_VALUES \
+        --filter_hets $FILTER_VALUES \
+        --input_dir ./data/merged 
+
+echo "\tDone -> Metrics [CombiSV]"
+
+echo "Merging with mapped method"
+nextflow run tasks/merge_survivor_mapped.nf \
+    --max_dist $SURVIVOR_MAX_DIST_VALUES \
+    --min_callers $SURVIVOR_MIN_CALLERS_VALUES \
+    --min_size $SURVIVOR_MIN_SIZE_VALUES \
+    --filter_hets $FILTER_VALUES
+
+echo " -> Done"
+
+echo "Merging with survivor"
+    nextflow run tasks/merge_survivor_simple.nf \
+        --max_dist $SURVIVOR_MAX_DIST_VALUES \
+        --min_callers $SURVIVOR_MIN_CALLERS_VALUES \
+        --min_size $SURVIVOR_MIN_SIZE_VALUES 
+
+echo " -> Done"
 
 for STRAIN in $(echo $STRAIN_VALUES | sed "s/,/ /g")
 do
-    CMD_FILE=./work/commands/$STRAIN.sh
-    echo "#Commands for Strain $STRAIN" > $CMD_FILE
+    echo "Collecting metrics for merged $STRAIN [Mapped]"
+    nextflow run tasks/metrics_collect.nf \
+        --intersect_window $INTERSECT_WINDOW_VALUES \
+        --filter_hets 0 \
+        --input_dir ./data/merged \
+        --strain "$STRAIN-mapped"
 
-    echo "Processing strain: $STRAIN"
-    for MAX_DIST in $(echo $SURVIVOR_MAX_DIST_VALUES | sed "s/,/ /g")
-    do 
-        for MIN_SIZE in $(echo $SURVIVOR_MIN_SIZE_VALUES | sed "s/,/ /g")
-        do 
-            for MIN_CALLERS in $(echo $SURVIVOR_MIN_CALLERS_VALUES | sed "s/,/ /g")
-            do
-                for FILTER in $(echo $FILTER_VALUES | sed "s/,/ /g")
-                do 
-                    echo "nextflow run tasks/merge_survivor_mapped.nf --strain $STRAIN --max_dist $MAX_DIST --min_callers $MIN_CALLERS --min_size $MIN_SIZE --filter_hets $FILTER" >> $CMD_FILE
-                    echo "nextflow run tasks/merge_survivor_simple.nf --strain $STRAIN --max_dist $MAX_DIST --min_callers $MIN_CALLERS --min_size $MIN_SIZE --filter_hets $FILTER" >> $CMD_FILE
-                done
-            done
-        done
-    done
+    echo " -> Done ($STRAIN [Mapped])"
 
-    for MIN_COVERAGE in $(echo $COMBI_MIN_COVERAGE_VALUES | sed "s/,/ /g")
-    do 
-        echo "nextflow run tasks/merge_combi.nf --strain $STRAIN --min_coverage $MIN_COVERAGE" >> $CMD_FILE
-    done
+    echo "Collecting metrics for merged $STRAIN [Survivor]"
+    nextflow run tasks/metrics_collect.nf \
+        --intersect_window $INTERSECT_WINDOW_VALUES \
+        --filter_hets $FILTER_VALUES \
+        --input_dir ./data/merged \
+        --strain "$STRAIN-mapped"
 
-    for WINDOW in $(echo $INTERSECT_WINDOW_VALUES | sed "s/,/ /g")
-    do
-        for FILTER in $(echo $FILTER_VALUES | sed "s/,/ /g")
-        do 
-            echo "nextflow run tasks/metrics_collect.nf --intersect_window_a $WINDOW --intersect_window_b $WINDOW --filter_hets $FILTER --input_files ./data/input/$STRAIN-sniffles.vcf" >> $CMD_FILE
-            echo "nextflow run tasks/metrics_collect.nf --intersect_window_a $WINDOW --intersect_window_b $WINDOW --filter_hets $FILTER --input_files ./data/input/$STRAIN-pbsv.vcf" >> $CMD_FILE
-            echo "nextflow run tasks/metrics_collect.nf --intersect_window_a $WINDOW --intersect_window_b $WINDOW --filter_hets $FILTER --input_files ./data/input/$STRAIN-cutesv.vcf" >> $CMD_FILE
-
-            for MIN_COVERAGE in $(echo $COMBI_MIN_COVERAGE_VALUES | sed "s/,/ /g")
-            do
-                echo "nextflow run tasks/metrics_collect.nf --intersect_window_a $WINDOW --intersect_window_b $WINDOW --filter_hets $FILTER --input_files ./data/merged/$STRAIN-combisv_c$MIN_COVERAGE.vcf" >> $CMD_FILE
-            done
-        done
-
-        for MAX_DIST in $(echo $SURVIVOR_MAX_DIST_VALUES | sed "s/,/ /g")
-        do 
-            for MIN_SIZE in $(echo $SURVIVOR_MIN_SIZE_VALUES | sed "s/,/ /g")
-            do 
-                for MIN_CALLERS in $(echo $SURVIVOR_MIN_CALLERS_VALUES | sed "s/,/ /g")
-                do
-                    echo "nextflow run tasks/metrics_collect.nf --intersect_window_a $WINDOW --intersect_window_b $WINDOW --input_files ./data/merged/$STRAIN-survivor_${MAX_DIST}_${MIN_CALLERS}_${MIN_SIZE}.vcf" >> $CMD_FILE
-                    echo "nextflow run tasks/metrics_collect.nf --intersect_window_a $WINDOW --intersect_window_b $WINDOW --input_files ./data/merged/$STRAIN-survivor_${MAX_DIST}_${MIN_CALLERS}_${MIN_SIZE}_nohets.vcf" >> $CMD_FILE
-
-                    for FILTER in $(echo $FILTER_VALUES | sed "s/,/ /g")
-                    do 
-                        echo "nextflow run tasks/metrics_collect.nf --intersect_window_a $WINDOW --intersect_window_b $WINDOW --filter_hets $FILTER --input_files ./data/merged/$STRAIN-unmapped_${MAX_DIST}_${MIN_CALLERS}_${MIN_SIZE}.vcf" >> $CMD_FILE
-                    done
-                done
-            done
-        done
-        
-    done
-    echo "echo \"$STRAIN Finished\"" >> $CMD_FILE
-    echo "Launchin script from: $CMD_FILE"
-    #bash $CMD_FILE &
+    echo " -> Done ($STRAIN [Survivor])"
 done
 
-# echo "nextflow run tasks/metrics_consolidate.nf"
+nextflow run tasks/metrics_consolidate.nf

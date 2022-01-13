@@ -1,7 +1,7 @@
-strains=DBA_2J
-survivor.max_dist=20
-survivor.min_size=20
-survivor.min_callers=2
+strains=DBA_2J,C57BL_6NJ
+survivor.max_dist=100
+survivor.min_size=14
+survivor.min_callers=1
 combi.min_coverage=3
-intersect.window=10
-filter_hets=1
+intersect.window=20
+filter_hets=1,0

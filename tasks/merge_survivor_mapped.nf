@@ -16,11 +16,27 @@ params.min_size = '30'
 
 Channel.fromPath(params.input_files).set{input_files}
 
+input_files.flatMap{ file ->
+    def key = file.name.toString().tokenize('.').get(0)
+    
+    def filter_hets_arr = params.filter_hets.toString().split(',')
+    def tuples = []
+
+    for(filter_hets in filter_hets_arr){
+        tuples.add(tuple(key,filter_hets,file))
+    }
+
+    return tuples
+}
+.groupTuple(by: [0, 1])
+.set{ grouped_inputs }
+
+
 // Generate BED files by type according to the values in data/input/mappings.txt 
 process mapped_bed_from_vcf {
 
     input:
-        file vcf_file from input_files
+        set key, filter, file(vcf_file) from grouped_inputs
         file mappings_file from file(params.mappings)
         val filter_hets from params.filter_hets
 
@@ -29,9 +45,10 @@ process mapped_bed_from_vcf {
     
     script:
 
-    fileName = vcf_file.getName().toString().tokenize('.').get(0)
-    caller = fileName.tokenize('-').get(1)
-    strain = fileName.tokenize('-').get(0)
+    filter_name = filter == '1' ? "hom" : "all"
+
+    caller = key.tokenize('-').get(1)
+    strain = key.tokenize('-').get(0)
     """
     while read -r line
     do
@@ -44,7 +61,7 @@ process mapped_bed_from_vcf {
         fi
 
         bcftools query -i"\$MAPPING" -f'%CHROM\\t%POS0\\t%END0\\t%SVLEN\\n' ${vcf_file} | \
-        awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print \$1,\$2,\$3,\$4}' >> "${strain}-${caller}-\$TYPE.bed"
+        awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print \$1,\$2,\$3,\$4}' >> "${strain}-${caller}-${filter_name}-\$TYPE.bed"
     done < ${mappings_file}
     """
 }
@@ -57,17 +74,18 @@ process mapped_vcf_from_bed {
         file bed_file from bed_files.flatten()
     
     output:
-        file "${params.strain}-*.vcf" into vcf_files
+        file "*.vcf" into vcf_files
 
     script:
 
     name_parts = bed_file.getName().toString().tokenize('.').get(0).tokenize('-')
     strain = name_parts.get(0)
     caller = name_parts.get(1)
-    type = name_parts.get(2)
+    filter_name = name_parts.get(2)
+    type = name_parts.get(3)
 
     """
-    SURVIVOR bedtovcf ${bed_file} ${type} '${strain}-${caller}-${type}.vcf'
+    SURVIVOR bedtovcf ${bed_file} ${type} '${strain}-${caller}-${filter_name}-${type}.vcf'
     rm ${bed_file}
     """
 
@@ -77,8 +95,8 @@ process mapped_vcf_from_bed {
 // Transform channel, group by caller (from file name)
 vcf_files.map{ file ->
     def name_parts = file.getName().toString().tokenize('.').get(0).tokenize('-')
-    def strain_caller = name_parts.get(0) + '-' + name_parts.get(1)
-    return tuple(strain_caller, file)
+    def strain_caller_filter = name_parts.get(0) + '-' + name_parts.get(1) + '-' + name_parts.get(2)
+    return tuple(strain_caller_filter, file)
 }
 .groupTuple()
 .set{ grouped_vcfs }
@@ -88,7 +106,7 @@ vcf_files.map{ file ->
 process join_mapped_vcfs {
 
     input:
-        set strain_caller, file(mapped_vcf) from grouped_vcfs
+        set strain_caller_filter, file(mapped_vcf) from grouped_vcfs
 
     output:
         file '*.vcf' into final_vcfs
@@ -99,11 +117,11 @@ process join_mapped_vcfs {
     """
     for FILE in ${mapped_vcf}
     do
-        if [[ -f ${strain_caller}-joint.vcf ]]
+        if [[ -f ${strain_caller_filter}-joint.vcf ]]
         then
-            bcftools view --no-header \$FILE >> '${strain_caller}-joint.vcf'
+            bcftools view --no-header \$FILE >> '${strain_caller_filter}-joint.vcf'
         else
-            bcftools view \$FILE > '${strain_caller}-joint.vcf'
+            bcftools view \$FILE > '${strain_caller_filter}-joint.vcf'
         fi
     done
     rm -rf ${mapped_vcf}
@@ -112,6 +130,7 @@ process join_mapped_vcfs {
 
 final_vcfs.flatMap{ file ->
     def strain = file.getName().toString().tokenize('-').get(0)
+    def filter = file.getName().toString().tokenize('-').get(2)
     def max_dist_arr = params.max_dist.toString().split(',')
     def min_size_arr = params.min_size.toString().split(',')
     def min_callers_arr = params.min_callers.toString().split(',')
@@ -121,13 +140,13 @@ final_vcfs.flatMap{ file ->
     for(max_dist in max_dist_arr){
         for(min_callers in min_callers_arr){
             for(min_size in min_size_arr){
-                tuples.add(tuple(strain, max_dist, min_callers, min_size, file))
+                tuples.add(tuple(strain, filter, max_dist, min_callers, min_size, file))
             }
         }
     }
     return tuples
 }
-.groupTuple(by: [0, 1, 2, 3])
+.groupTuple(by: [0, 1, 2, 3, 4])
 .set{ grouped_final_vcfs }
 
 
@@ -137,21 +156,16 @@ process merge_mapped_vcfs {
     publishDir file("${params.output_dir}"), mode: "move", pattern: "*.vcf"
 
     input:
-        set strain, max_dist, min_callers, min_size, file(vcf_to_merge) from grouped_final_vcfs
-        val filter_hets from params.filter_hets
+        set strain, filter_hets, max_dist, min_callers, min_size, file(vcf_to_merge) from grouped_final_vcfs
 
     output:
-        file "${strain}-survivor*.vcf" into merged_vcf
+        file "${strain}-mapped*.vcf" into merged_vcf
 
 
     """
     echo "${vcf_to_merge}" | tr ' ' '\n' > '${strain}-merged-inputlist.txt'
-    SUB=""
-    if [ "${filter_hets}" == "1" ]; then
-        SUB="_nohets"
-    fi
-    SURVIVOR merge '${strain}-merged-inputlist.txt' ${max_dist} ${min_callers} ${params.same_type} 1 0 ${params.min_size} "${strain}-survivor_${max_dist}_${min_callers}_${min_size}\$SUB.vcf"
+
+    SURVIVOR merge '${strain}-merged-inputlist.txt' ${max_dist} ${min_callers} ${params.same_type} 1 0 ${params.min_size} "${strain}-mapped_${max_dist}_${min_callers}_${min_size}_${filter_hets}.vcf"
     rm -rf ${vcf_to_merge}
     """ 
-
 }

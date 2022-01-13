@@ -1,7 +1,7 @@
 #!/usr/bin/env nextflow
 
 params.strain = 'DBA_2J'
-params.raw_metrics = "./data/reports/raw/*.raw.csv"
+params.raw_metrics = "./data/reports/raw/*.csv"
 params.out_dir = "./data/reports"
 
 Channel.fromPath(params.raw_metrics).set{files}
@@ -37,7 +37,7 @@ process process_list {
         file "report_data.csv"
     
     """
-#!python
+#!python3
 
 import pandas as pd
 
