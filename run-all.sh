@@ -12,17 +12,20 @@ cat $PARAMS_FILE
 echo "\n"
 echo "============================\n"
 
-# echo "Cleaning work, merge, and reports folders"
-# rm -rf work ./data/merged ./data/reports
-# echo "\tDone -> Clean\n"
+echo "Cleaning work, merge, and reports folders"
+rm -rf ./work
+rm -rf ./data/reports
+# rm -rf ./data/merged 
+echo "\tDone -> Clean\n"
 
-# echo "Collecting metrics From source VCFs"
-# nextflow run tasks/metrics_collect.nf \
-#     --intersect_window $INTERSECT_WINDOW_VALUES \
-#     --filter_hets $FILTER_VALUES \
-#     --input_dir ./data/input
+echo "Collecting metrics From source VCFs"
+nextflow run tasks/metrics_collect.nf \
+    --intersect_window $INTERSECT_WINDOW_VALUES \
+    --filter_hets $FILTER_VALUES \
+    --input_dir ./data/input
 
-# echo "\tDone -> Source Metrics\n"
+rm -rf ./work
+echo "\tDone -> Source Metrics\n"
 
 # echo "Merging with CombiSV"
 #     nextflow run tasks/merge_combi.nf \
@@ -30,12 +33,13 @@ echo "============================\n"
 
 # echo "\tDone -> Merge [CombiSV]\n"
 
-# echo "Collecting metrics for CombiSV"
-#     nextflow run tasks/metrics_collect.nf \
-#         --intersect_window $INTERSECT_WINDOW_VALUES \
-#         --filter_hets $FILTER_VALUES \
-#         --input_dir ./data/merged 
+echo "Collecting metrics for CombiSV"
+    nextflow run tasks/metrics_collect.nf \
+        --intersect_window $INTERSECT_WINDOW_VALUES \
+        --filter_hets $FILTER_VALUES \
+        --input_dir ./data/merged 
 
+rm -rf ./work
 # echo "\tDone -> Metrics [CombiSV]\n"
 
 # echo "Merging with mapped method"
@@ -64,8 +68,9 @@ do
         --input_dir ./data/merged \
         --strain "$STRAIN-mapped"
 
-    echo " -> Done ($STRAIN [Mapped])\n"
     rm -rf ./work
+    echo " -> Done ($STRAIN [Mapped])\n"
+    
 
     echo "Collecting metrics for merged $STRAIN [Survivor]"
     nextflow run tasks/metrics_collect.nf \
@@ -74,8 +79,9 @@ do
         --input_dir ./data/merged \
         --strain "$STRAIN-mapped"
 
-    echo " -> Done ($STRAIN [Survivor])\n"
     rm -rf ./work
+    echo " -> Done ($STRAIN [Survivor])\n"
+    
 done
 
 nextflow run tasks/metrics_consolidate.nf
