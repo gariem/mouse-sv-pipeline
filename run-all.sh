@@ -9,51 +9,51 @@ FILTER_VALUES="$(cat $PARAMS_FILE | grep 'filter_hets=' | cut -d '=' -f 2 )"
 
 echo "========== PARAMS =========="
 cat $PARAMS_FILE
-echo ""
-echo "============================"
+echo "\n"
+echo "============================\n"
 
-echo "Cleaning work, merge, and reports folders"
-rm -rf work ./data/merged ./data/reports
-echo "\tDone -> Clean"
+# echo "Cleaning work, merge, and reports folders"
+# rm -rf work ./data/merged ./data/reports
+# echo "\tDone -> Clean\n"
 
-echo "Collecting metrics From source VCFs"
-nextflow run tasks/metrics_collect.nf \
-    --intersect_window $INTERSECT_WINDOW_VALUES \
-    --filter_hets $FILTER_VALUES \
-    --input_dir ./data/input
+# echo "Collecting metrics From source VCFs"
+# nextflow run tasks/metrics_collect.nf \
+#     --intersect_window $INTERSECT_WINDOW_VALUES \
+#     --filter_hets $FILTER_VALUES \
+#     --input_dir ./data/input
 
-echo "\tDone -> Source Metrics"
+# echo "\tDone -> Source Metrics\n"
 
-echo "Merging with CombiSV"
-    nextflow run tasks/merge_combi.nf \
-        --min_coverage $COMBI_MIN_COVERAGE_VALUES
+# echo "Merging with CombiSV"
+#     nextflow run tasks/merge_combi.nf \
+#         --min_coverage $COMBI_MIN_COVERAGE_VALUES
 
-echo "\tDone -> Merge [CombiSV]"
+# echo "\tDone -> Merge [CombiSV]\n"
 
-echo "Collecting metrics for CombiSV"
-    nextflow run tasks/metrics_collect.nf \
-        --intersect_window $INTERSECT_WINDOW_VALUES \
-        --filter_hets $FILTER_VALUES \
-        --input_dir ./data/merged 
+# echo "Collecting metrics for CombiSV"
+#     nextflow run tasks/metrics_collect.nf \
+#         --intersect_window $INTERSECT_WINDOW_VALUES \
+#         --filter_hets $FILTER_VALUES \
+#         --input_dir ./data/merged 
 
-echo "\tDone -> Metrics [CombiSV]"
+# echo "\tDone -> Metrics [CombiSV]\n"
 
-echo "Merging with mapped method"
-nextflow run tasks/merge_survivor_mapped.nf \
-    --max_dist $SURVIVOR_MAX_DIST_VALUES \
-    --min_callers $SURVIVOR_MIN_CALLERS_VALUES \
-    --min_size $SURVIVOR_MIN_SIZE_VALUES \
-    --filter_hets $FILTER_VALUES
+# echo "Merging with mapped method"
+# nextflow run tasks/merge_survivor_mapped.nf \
+#     --max_dist $SURVIVOR_MAX_DIST_VALUES \
+#     --min_callers $SURVIVOR_MIN_CALLERS_VALUES \
+#     --min_size $SURVIVOR_MIN_SIZE_VALUES \
+#     --filter_hets $FILTER_VALUES
 
-echo " -> Done"
+# echo " -> Done\n"
 
-echo "Merging with survivor"
-    nextflow run tasks/merge_survivor_simple.nf \
-        --max_dist $SURVIVOR_MAX_DIST_VALUES \
-        --min_callers $SURVIVOR_MIN_CALLERS_VALUES \
-        --min_size $SURVIVOR_MIN_SIZE_VALUES 
+# echo "Merging with survivor"
+#     nextflow run tasks/merge_survivor_simple.nf \
+#         --max_dist $SURVIVOR_MAX_DIST_VALUES \
+#         --min_callers $SURVIVOR_MIN_CALLERS_VALUES \
+#         --min_size $SURVIVOR_MIN_SIZE_VALUES 
 
-echo " -> Done"
+# echo " -> Done"
 
 for STRAIN in $(echo $STRAIN_VALUES | sed "s/,/ /g")
 do
@@ -64,7 +64,8 @@ do
         --input_dir ./data/merged \
         --strain "$STRAIN-mapped"
 
-    echo " -> Done ($STRAIN [Mapped])"
+    echo " -> Done ($STRAIN [Mapped])\n"
+    rm -rf ./work
 
     echo "Collecting metrics for merged $STRAIN [Survivor]"
     nextflow run tasks/metrics_collect.nf \
@@ -73,7 +74,8 @@ do
         --input_dir ./data/merged \
         --strain "$STRAIN-mapped"
 
-    echo " -> Done ($STRAIN [Survivor])"
+    echo " -> Done ($STRAIN [Survivor])\n"
+    rm -rf ./work
 done
 
 nextflow run tasks/metrics_consolidate.nf

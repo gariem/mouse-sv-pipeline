@@ -79,8 +79,6 @@ process general_metrics {
     echo "HOM=\$HOM_COUNT" >> ${data_file}
     echo "HET=\$HET_COUNT" >> ${data_file}
 
-    echo "W_AB=${params.intersect_window}" >> ${data_file}
-
     for ((i=1;i<=19;i++)); 
     do 
         if [ "${filter}" == "1" ]; then
@@ -232,6 +230,7 @@ process join_metrics() {
 
     """
     cat ${metrics} | awk '!x[\$0]++' > tmp
+    #cat ${metrics} | sort | uniq > tmp
 
     cut -d '=' -f 1 < tmp | awk -v RS= -v OFS=, '{\$1 = \$1} 1' > "${key}.csv"
     cut -d '=' -f 2 < tmp | awk -v RS= -v OFS=, '{\$1 = \$1} 1' >> "${key}.csv"
