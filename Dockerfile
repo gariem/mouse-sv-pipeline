@@ -24,4 +24,6 @@ RUN git clone https://github.com/gariem/SURVIVOR.git && cd SURVIVOR/Debug && mak
 
 ENV LD_LIBRARY_PATH=/usr/local/lib
 
+RUN rm -f /usr/bin/python && ln -s /usr/bin/python3 /usr/bin/python
+
 CMD ["bash"]

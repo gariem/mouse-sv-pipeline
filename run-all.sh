@@ -77,7 +77,7 @@ do
         --intersect_window $INTERSECT_WINDOW_VALUES \
         --filter_hets $FILTER_VALUES \
         --input_dir ./data/merged \
-        --strain "$STRAIN-mapped"
+        --strain "$STRAIN-survivor"
 
     rm -rf ./work
     echo " -> Done ($STRAIN [Survivor])\n"

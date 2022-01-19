@@ -50,7 +50,7 @@ process general_metrics {
     strain = vcf_name.tokenize("-").get(0) 
     data_file = "${vcf_name}.data"
 
-    filter_flag = (filter == '1' || vcf_name.contains("_all")) ? 0 : 1
+    filter_flag = (filter == '0' || vcf_name.contains("_all")) ? 0 : 1
     filter_name = filter == '1' ? "hom" : "all"
 
     prev_dir = file(params.previous_dir)
@@ -190,11 +190,11 @@ process intersect_files {
     data_file=key + "." + window + ".metrics"
 
     """
-    A_TOTAL="\$(cat ${file_a} | wc -l)"
-    A_NAME="\$(echo ${file_a} | cut -d '.' -f 4)"
+    awk -F'\\t' 'BEGIN {OFS = FS} {print \$1,\$2-${window},\$3+${window},\$4}' ${file_a} | awk '!x[\$0]++' > FILE_A
+    awk -F'\\t' 'BEGIN {OFS = FS} {print \$1,\$2-${window},\$3+${window},\$4}' ${file_b} | awk '!x[\$0]++' > FILE_B
 
-    awk -F'\\t' 'BEGIN {OFS = FS} {print \$1,\$2-${window},\$3+${window},\$4}' ${file_a} > FILE_A
-    awk -F'\\t' 'BEGIN {OFS = FS} {print \$1,\$2-${window},\$3+${window},\$4}' ${file_b} > FILE_B
+    A_TOTAL="\$(cat FILE_A | wc -l)"
+    A_NAME="\$(echo ${file_a} | cut -d '.' -f 4)"
 
     bedtools intersect -a FILE_A -b FILE_B -wa > intersect_wa
 
@@ -203,8 +203,8 @@ process intersect_files {
     cat ${src_data_file} > ${data_file}
 
     echo "W_AB=${window}" >> ${data_file}
-    echo "\${A_NAME}_TOT=\$A_TOTAL" >> ${data_file}
-    echo "\${A_NAME}_INT=\$A_INTERSECTED" >> ${data_file}
+    echo "T_\${A_NAME}=\$A_TOTAL" >> ${data_file}
+    echo "I_\${A_NAME}=\$A_INTERSECTED" >> ${data_file}
 
     rm -rf FILE_A FILE_B intersect_wa
     """
