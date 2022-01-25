@@ -1,7 +1,7 @@
 strains=DBA_2J,C57BL_6NJ,A_J,AKR_J,BALB_cJ,C3H_HeJ,LP_J,CBA_J
 
 survivor.max_dist=200
-survivor.min_size=15,20
+survivor.min_size=20
 survivor.min_callers=2
 
 combi.min_coverage=3
