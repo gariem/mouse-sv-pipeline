@@ -1,11 +1,11 @@
 strains=DBA_2J,C57BL_6NJ,A_J,AKR_J,BALB_cJ,C3H_HeJ,LP_J,CBA_J
 
-survivor.max_dist=50,100,150,200,250,300,500,1000
-survivor.min_size=14,29,49
-survivor.min_callers=1,2,3
+survivor.max_dist=200
+survivor.min_size=15,20
+survivor.min_callers=2
 
-combi.min_coverage=3,4,5,6,8,10,12
+combi.min_coverage=3
 
-intersect.window=10,20,30,50
+intersect.window=30
 
 filter_hets=1,0

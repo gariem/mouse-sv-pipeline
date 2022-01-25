@@ -18,17 +18,17 @@ echo "DATA_TAG=$DATA_TAG"
 echo "PROFILE=$PROFILE"
 echo "QUIET=$QUIET"
 echo ""
-echo "============================\n"
+echo "============================"
 echo ""
 
 echo "Cleaning work, merge, and reports folders"
 rm -rf ./work
 rm -rf ./data/reports
 rm -rf ./data/merged 
-echo "\tDone -> Clean\n"
+echo "  Done -> Clean"
 
 echo "Collecting metrics From source VCFs"
-nextflow $QUIET run tasks/metrics_collect.nf \
+nextflow $QUIET run tasks/metrics_collect_general.nf \
     --intersect_window $INTERSECT_WINDOW_VALUES \
     --filter_hets $FILTER_VALUES \
     --input_dir ./data/input $PROFILE
@@ -43,7 +43,7 @@ echo "Merging with CombiSV"
 echo "  Done -> Merge [CombiSV]\n"
 
 echo "Collecting metrics for CombiSV"
-    nextflow run tasks/metrics_collect.nf \
+    nextflow run tasks/metrics_collect_general.nf \
         --intersect_window $INTERSECT_WINDOW_VALUES \
         --filter_hets $FILTER_VALUES \
         --input_dir ./data/merged $PROFILE
@@ -58,7 +58,7 @@ nextflow $QUIET run tasks/merge_survivor_mapped.nf \
     --min_size $SURVIVOR_MIN_SIZE_VALUES \
     --filter_hets $FILTER_VALUES $PROFILE
 
-echo "  Done\n"
+echo "  Done"
 
 echo "Merging with survivor"
     nextflow run tasks/merge_survivor_simple.nf \
@@ -71,25 +71,25 @@ echo "  Done"
 for STRAIN in $(echo $STRAIN_VALUES | sed "s/,/ /g")
 do
     echo "Collecting metrics for merged $STRAIN [Mapped]"
-    nextflow $QUIET run tasks/metrics_collect.nf \
+    nextflow $QUIET run tasks/metrics_collect_general.nf \
         --intersect_window $INTERSECT_WINDOW_VALUES \
         --filter_hets 0 \
         --input_dir ./data/merged \
         --strain "$STRAIN-mapped" $PROFILE
 
     rm -rf ./work
-    echo "  Done ($STRAIN [Mapped])\n"
+    echo "  Done ($STRAIN [Mapped])"
     
 
     echo "Collecting metrics for merged $STRAIN [Survivor]"
-    nextflow $QUIET run tasks/metrics_collect.nf \
+    nextflow $QUIET run tasks/metrics_collect_general.nf \
         --intersect_window $INTERSECT_WINDOW_VALUES \
         --filter_hets $FILTER_VALUES \
         --input_dir ./data/merged \
         --strain "$STRAIN-survivor" $PROFILE
 
     rm -rf ./work
-    echo "  Done ($STRAIN [Survivor])\n"
+    echo "  Done ($STRAIN [Survivor])"
     
 done
 
