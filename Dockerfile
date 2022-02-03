@@ -5,8 +5,6 @@ RUN apt-get update && apt-get install -y build-essential git zlib1g-dev wget \
     libncursesw5-dev libssl-dev libxml-xpath-perl libjson-perl bedtools \
     python3 python3-pip
 
-RUN pip install pandas
-
 RUN git clone -b 1.13 https://github.com/samtools/htslib.git && \
     cd htslib && git submodule update --init --recursive && make -j `nproc` && make install && \
     cd .. && rm -rf htslib
@@ -23,6 +21,8 @@ RUN git clone https://github.com/gariem/SURVIVOR.git && cd SURVIVOR/Debug && mak
     ln /SURVIVOR/Debug/SURVIVOR /sbin/SURVIVOR
 
 ENV LD_LIBRARY_PATH=/usr/local/lib
+
+RUN pip install scipy matplotlib pandas numpy
 
 RUN rm -f /usr/bin/python && ln -s /usr/bin/python3 /usr/bin/python
 
