@@ -46,11 +46,11 @@ def figure(input_file_1, input_file_2, output_file):
     positions = [100, 1000, 10000, 100000, 1000000, 1500000]
     labels = ["100", "1K", "10K", "100K", "1M", ""]
 
-    y1 = gaussian_filter1d(deletions_new, sigma=4)
-    y2 = gaussian_filter1d(insertions_new, sigma=4)
+    y1 = gaussian_filter1d(deletions_new, sigma=3)
+    y2 = gaussian_filter1d(insertions_new, sigma=3)
 
-    y3 = gaussian_filter1d(deletions_old, sigma=4)
-    y4 = gaussian_filter1d(insertions_old, sigma=4)
+    y3 = gaussian_filter1d(deletions_old, sigma=3)
+    y4 = gaussian_filter1d(insertions_old, sigma=3)
 
     fig, (ax1, ax2) = plt.subplots(1, 2, sharey=True, figsize=(12, 6))
 
@@ -59,6 +59,7 @@ def figure(input_file_1, input_file_2, output_file):
     ax1.plot(x, y3, label="DELETIONS SR")
     ax1.set_xticks(positions)
     ax1.set_xticklabels(labels, fontsize=12)
+    ax1.margins(x=0)
     right_side = ax1.spines["right"]
     right_side.set_visible(False)
     ax1.invert_xaxis()
@@ -69,7 +70,8 @@ def figure(input_file_1, input_file_2, output_file):
     ax2.plot(x, y4, label="INSERTIONS SR")
     ax2.set_xticks(positions)
     ax2.set_xticklabels(labels, fontsize=12)
-
+    ax2.tick_params(axis='y', colors='silver')
+    ax2.margins(x=0)
     left_side = ax2.spines["left"]
     left_side.set_visible(False)
     ax2.legend()
