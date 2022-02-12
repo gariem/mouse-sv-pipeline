@@ -17,9 +17,10 @@ params.genome_sizes = "./data/input/genome_size.txt"
 params.all_sv_types='INS,DEL,INV,DUP'
 params.compare_sv_types='INS,DEL'
 
-params.igv_path='/home/egarcia/appdir/IGV_2.4.10'
-params.reference_path=''
-params.files_to_load='/home/egarcia/data/mouse/minimap2/C57BL_6NJ.sorted.bam /media/egarcia/DataBank/mouse/aligments_old/C57BL_6NJ.bam'
+params.reference_path='/home/egarcia/data/mouse/reference/Mus_musculus.GRCm39.dna.toplevel.fa'
+params.new_alignment='/home/egarcia/data/mouse/minimap2/C57BL_6NJ.sorted.bam' 
+params.old_alignment='/media/egarcia/DataBank/mouse/aligments_old/C57BL_6NJ.bam'
+
 
 params.intersect_window = '30'
 
@@ -116,11 +117,6 @@ process generate_bed_files {
 
 process intersect_out_with_validated { 
 
-    publishDir file(params.out_dir), mode: "copy",  saveAs: {
-                            filename -> filename.tokenize('.').get(0) + '/' + filename.replace(filename.tokenize('.').get(0)+ '.', "")
-                            }
-
-
     input: 
         file bed_file
         file validated_dir
@@ -149,9 +145,59 @@ process intersect_out_with_validated {
 
         awk -F'\\t' 'BEGIN {OFS = FS} {print \$1,\$2-${window},\$3+${window},\$4}' \${VALIDATED_FILE} | awk '!x[\$0]++' > FILE_A
 
-        bedtools intersect -a FILE_A -b FILE_B -v > "${file_id}.${strain}.${type}_\${VALIDATED_TYPE}_out.bed"
+        bedtools intersect -a FILE_A -b FILE_B -v > "${file_id}.${strain}.${type}_\${VALIDATED_TYPE}.out.bed"
     done < compare_to.txt
     """
+}
+
+process take_out_screenshots { 
+
+    publishDir file(params.out_dir), mode: "copy",  saveAs: {
+                            filename -> filename.tokenize('.').get(1) + '/' + filename.replace(filename.tokenize('.').get(1)+ '.', "")
+                            }
+
+    input:
+        file out_bed_file
+        file reference
+        file reference_index
+        file new_alignment
+        file new_alignment_index
+        file old_alignment
+        file new_alignment_index
+
+    output:
+        file 'snapshots/*.png'
+
+    script:
+
+    file_id = out_bed_file.name.toString().tokenize('.').get(0)
+
+    """
+    echo "new" > snapshots.txt
+    echo "genome ${reference}" >> snapshots.txt
+    echo "snapshotDirectory ./snapshots" >> snapshots.txt
+    echo "load ${new_alignment}" >> snapshots.txt
+    echo "load ${old_alignment}" >> snapshots.txt
+    echo "load ${out_bed_file}" >> snapshots.txt
+    
+    bedToIgv -path ./snapshots -slop 50 -i ${out_bed_file} >> snapshots.txt
+    bedToIgv -path ./snapshots -slop 200 -clps -i ${out_bed_file} >> snapshots.txt
+
+    echo "exit" >> snapshots.txt
+
+    sed -i -e 's/.png/.${file_id}.png/g' snapshots.txt
+
+    echo "IGV.Bounds=0,0,1440,810" > prefs.properties
+    echo "SAM.SHOW_ALL_BASES=false" >> prefs.properties
+    echo "SAM.SHOW_SOFT_CLIPPED=true" >> prefs.properties
+    echo "SAM.SHOW_JUNCTION_TRACK=false" >> prefs.properties
+    echo "SAM.SHOW_JUNCTION_FLANKINGREGIONS=false" >> prefs.properties
+    echo "DETAILS_BEHAVIOR=CLICK" >> prefs.properties
+
+    xvfb-run --auto-servernum -s "-screen 0 1440x810x24" java -Xmx4000m --module-path=/IGV_Linux_2.12.2/lib --module=org.igv/org.broad.igv.ui.Main -b snapshots.txt -o prefs.properties
+
+    """
+
 }
 
 workflow {
@@ -182,6 +228,13 @@ workflow {
                     params.compare_sv_types.split(',').contains(it.name.toString().tokenize('.').get(2)) 
                 }
     
-    intersect_out_with_validated(final_beds, file(params.validated_dir), file(params.metrics_mappings_file), params.intersect_window)
+    out_features = intersect_out_with_validated(final_beds, file(params.validated_dir), file(params.metrics_mappings_file), params.intersect_window).flatten()
+
+    take_out_screenshots(out_features, file(params.reference_path), file(params.reference_path + '.fai'),
+                        file(params.new_alignment), file(params.new_alignment + '.bai'), 
+                        file(params.old_alignment), file(params.old_alignment + '.bai')
+                    )
+
+
     
 }
