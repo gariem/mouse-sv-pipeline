@@ -106,9 +106,9 @@ process general_metrics {
         TYPE="\$(echo \$mappings_line | cut -d ':' -f 1)"
 
         if [ "${filter}" == "1" ]; then
-            QUERY="SVTYPE='\$TYPE' && GT='HOM'"
+            QUERY="SVTYPE='\$TYPE' && GT='HOM' && PROB>0.8"
         else
-            QUERY="SVTYPE='\$TYPE' "
+            QUERY="SVTYPE='\$TYPE' && PROB>0.8"
         fi
 
         bcftools query -i"\$QUERY" -f'%CHROM\\t%POS0\\t%END0\\t%SVLEN\\n' ${vcf_file} | \

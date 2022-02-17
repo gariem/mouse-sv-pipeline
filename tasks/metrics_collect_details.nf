@@ -3,8 +3,8 @@
 nextflow.enable.dsl = 2
 
 
-params.file= "C57BL_6NJ-mapped_200_2_20_hom.vcf"
-params.input_dir = "./data/merged"
+params.file= "C57BL_6NJ-dysgu.vcf"
+params.input_dir = "./data/input"
 params.input_files = "${params.input_dir}/${params.file}"
 params.out_dir = './data/reports/details'
 params.previous_dir = './data/previous'
@@ -39,7 +39,7 @@ process generate_new_data_file {
     file_id = vcf_file.name.toString().tokenize('.').get(0)
 
     """
-    bcftools query -f'%CHROM,%SVTYPE,%SVLEN\\n' ${vcf_file} | awk -F',' 'BEGIN {OFS = FS} {abs=\$3;sub("^-", "",abs); print \$1,\$2,abs}' > "${file_id}.new_data.csv"
+    bcftools query -f'%CHROM,%SVTYPE,%SVLEN\\n' ${vcf_file} | awk -F',' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{abs=\$3;sub("^-", "",abs); print \$1,\$2,abs}' > "${file_id}.new_data.csv"
     """
 }
 
@@ -111,7 +111,8 @@ process generate_bed_files {
     strain = file_id.tokenize('-').get(0)
 
     """
-    bcftools query -i"SVTYPE='${type}'" -f'%CHROM\\t%POS0\\t%END0\\t%SVLEN\\n' ${vcf_file} > "${file_id}.${strain}.${type}.bed"
+    bcftools query -i"SVTYPE='${type}'" -f'%CHROM\\t%POS0\\t%END0\\t%SVLEN\\n' ${vcf_file} | \
+            awk -F'\\t' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{print \$1,\$2,\$3,\$4}' > "${file_id}.${strain}.${type}.bed"
     """
 }
 
@@ -150,14 +151,14 @@ process intersect_out_with_validated {
     """
 }
 
-process take_out_screenshots { 
+process take_screenshots { 
 
     publishDir file(params.out_dir), mode: "copy",  saveAs: {
                             filename -> filename.tokenize('.').get(1) + '/' + filename.replace(filename.tokenize('.').get(1)+ '.', "")
                             }
 
     input:
-        file out_bed_file
+        file bed_file
         file reference
         file reference_index
         file new_alignment
@@ -170,7 +171,7 @@ process take_out_screenshots {
 
     script:
 
-    file_id = out_bed_file.name.toString().tokenize('.').get(0)
+    file_id = bed_file.name.toString().tokenize('.').get(0)
 
     """
     echo "new" > snapshots.txt
@@ -178,10 +179,10 @@ process take_out_screenshots {
     echo "snapshotDirectory ./snapshots" >> snapshots.txt
     echo "load ${new_alignment}" >> snapshots.txt
     echo "load ${old_alignment}" >> snapshots.txt
-    echo "load ${out_bed_file}" >> snapshots.txt
+    echo "load ${bed_file}" >> snapshots.txt
     
-    bedToIgv -path ./snapshots -slop 50 -i ${out_bed_file} >> snapshots.txt
-    bedToIgv -path ./snapshots -slop 200 -clps -i ${out_bed_file} >> snapshots.txt
+    bedToIgv -path ./snapshots -slop 50 -i ${bed_file} >> snapshots.txt
+    bedToIgv -path ./snapshots -slop 200 -clps -i ${bed_file} >> snapshots.txt
 
     echo "exit" >> snapshots.txt
 
@@ -230,10 +231,10 @@ workflow {
     
     out_features = intersect_out_with_validated(final_beds, file(params.validated_dir), file(params.metrics_mappings_file), params.intersect_window).flatten()
 
-    take_out_screenshots(out_features, file(params.reference_path), file(params.reference_path + '.fai'),
-                        file(params.new_alignment), file(params.new_alignment + '.bai'), 
-                        file(params.old_alignment), file(params.old_alignment + '.bai')
-                    )
+    // take_screenshots(out_features, file(params.reference_path), file(params.reference_path + '.fai'),
+    //                     file(params.new_alignment), file(params.new_alignment + '.bai'), 
+    //                     file(params.old_alignment), file(params.old_alignment + '.bai')
+    //                 )
 
 
     

@@ -7,6 +7,7 @@ process bed_from_vcf {
     input: 
         file vcf_file
         each type
+        val suffix
     
     output:
         file "*.bed"
@@ -18,7 +19,7 @@ process bed_from_vcf {
 
     """
     bcftools query -i"SVTYPE='${type}'" -f'%CHROM\\t%POS0\\t%END0\\t%SVLEN\\n' ${vcf_file} | \
-            awk -F'\\t' 'BEGIN {OFS = FS} {print \$1,\$2,\$3,\$4}' > "${file_key(vcf_file)}.${strain(vcf_file)}.${type}.bed"
+            awk -F'\\t' 'BEGIN {OFS = FS} {print \$1,\$2,\$3,\$4}' > "${simple_name}__${type}${suffix}.bed"
     """
 }
 

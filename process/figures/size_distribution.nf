@@ -42,6 +42,8 @@ process generate_len_csv_from_previous_tsv {
 
 process calculate_size_distribution {
 
+    publishDir file(params.out_dir), mode: "copy",  saveAs: {filename -> filename.tokenize('-').get(0) + '/' + filename.replace(".sizes.png","")+'/size_distribution.png' }
+    
     input:
         file pacbio_data
         file ilumina_data

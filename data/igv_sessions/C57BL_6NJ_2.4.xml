@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Session genome="/home/egarcia/data/mouse/reference/Mus_musculus.GRCm39.dna.toplevel.fa" hasGeneTrack="false" hasSequenceTrack="true" locus="19:12766015-12766112" nextAutoscaleGroup="2" path="/home/egarcia/workspace/github/mouse-sv-pipeline/data/igv_sessions/C57BL_6NJ_2.4.xml" version="8">
+    <Resources>
+        <Resource path="/home/egarcia/data/mouse/minimap2/C57BL_6NJ.sorted.bam"/>
+        <Resource path="/media/egarcia/DataBank/mouse/aligments_old/C57BL_6NJ.bam"/>
+        <Resource path="/home/egarcia/workspace/github/mouse-sv-pipeline/data/validated/C57BL_6NJ.H1.mm39.bed"/>
+        <Resource path="/home/egarcia/workspace/github/mouse-sv-pipeline/data/validated/C57BL_6NJ.H6.mm39.bed"/>
+    </Resources>
+    <Panel height="856" name="Panel1644614660261" width="2489">
+        <Track altColor="0,0,178" autoScale="true" color="175,175,175" colorScale="ContinuousColorScale;0.0;42.0;255,255,255;175,175,175" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/home/egarcia/data/mouse/minimap2/C57BL_6NJ.sorted.bam_coverage" name="C57BL_6NJ PacBio Coverage" showReference="false" snpThreshold="0.2" sortable="true" visible="true">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="42.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" height="60" id="/home/egarcia/data/mouse/minimap2/C57BL_6NJ.sorted.bam_junctions" name="C57BL_6NJ.sorted.bam Junctions" sortable="false" visible="false" windowFunction="count">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="60.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" color="0,0,178" displayMode="EXPANDED" featureVisibilityWindow="-1" fontSize="10" id="/home/egarcia/data/mouse/minimap2/C57BL_6NJ.sorted.bam" name="C57BL_6NJ PacBio" sortable="true" visible="true">
+            <RenderOptions/>
+        </Track>
+    </Panel>
+    <Panel height="1472" name="Panel1644614675706" width="2489">
+        <Track altColor="0,0,178" autoScale="true" color="175,175,175" colorScale="ContinuousColorScale;0.0;88.0;255,255,255;175,175,175" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/media/egarcia/DataBank/mouse/aligments_old/C57BL_6NJ.bam_coverage" name="C57BL_6NJ Ilumina Coverage" showReference="false" snpThreshold="0.2" sortable="true" visible="true">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="88.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" height="60" id="/media/egarcia/DataBank/mouse/aligments_old/C57BL_6NJ.bam_junctions" name="C57BL_6NJ.bam Junctions" sortable="false" visible="false" windowFunction="count">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="60.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" color="0,0,178" displayMode="EXPANDED" featureVisibilityWindow="-1" fontSize="10" id="/media/egarcia/DataBank/mouse/aligments_old/C57BL_6NJ.bam" name="C57BL_6NJ Ilumina" sortable="true" visible="true">
+            <RenderOptions/>
+        </Track>
+    </Panel>
+    <Panel height="154" name="FeaturePanel" width="2489">
+        <Track altColor="0,0,178" autoScale="false" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="Reference sequence" name="Reference sequence" sortable="false" visible="true"/>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/home/egarcia/workspace/github/mouse-sv-pipeline/data/validated/C57BL_6NJ.H1.mm39.bed" name="C57BL_6NJ.H1.mm39.bed" renderer="BASIC_FEATURE" sortable="false" visible="true" windowFunction="count"/>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/home/egarcia/workspace/github/mouse-sv-pipeline/data/validated/C57BL_6NJ.H6.mm39.bed" name="C57BL_6NJ.H6.mm39.bed" renderer="BASIC_FEATURE" sortable="false" visible="true" windowFunction="count"/>
+    </Panel>
+    <PanelLayout dividerFractions="0.048927038626609444,0.4317596566523605,0.863519313304721"/>
+    <HiddenAttributes>
+        <Attribute name="DATA FILE"/>
+        <Attribute name="DATA TYPE"/>
+        <Attribute name="NAME"/>
+    </HiddenAttributes>
+</Session>

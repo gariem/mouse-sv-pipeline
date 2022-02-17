@@ -8,7 +8,7 @@ import pandas as pd
 from scipy.ndimage.filters import gaussian_filter1d
 
 
-def figure(input_file_1, input_file_2, output_file):
+def figure(strain, input_file_1, input_file_2, output_file):
     print('Input file 1 is "', input_file_1)
     print('Input file 2 is "', input_file_2)
     print('Output file is "', output_file)
@@ -55,32 +55,32 @@ def figure(input_file_1, input_file_2, output_file):
     fig, (ax1, ax2) = plt.subplots(1, 2, sharey=True, figsize=(12, 6))
 
     ax1.set_xscale('log')
-    ax1.plot(x, y1, label="DELETIONS LR")
-    ax1.plot(x, y3, label="DELETIONS SR")
+    ax1.plot(x, y1, label="DELETIONS PacBio")
+    ax1.plot(x, y3, label="DELETIONS Ilumina")
     ax1.set_xticks(positions)
     ax1.set_xticklabels(labels, fontsize=12)
     ax1.margins(x=0)
     right_side = ax1.spines["right"]
     right_side.set_visible(False)
     ax1.invert_xaxis()
-    ax1.legend()
+    ax1.legend(loc='upper left')
 
     ax2.set_xscale('log')
-    ax2.plot(x, y2, label="INSERTIONS LR")
-    ax2.plot(x, y4, label="INSERTIONS SR")
+    ax2.plot(x, y2, label="INSERTIONS PacBio")
+    ax2.plot(x, y4, label="INSERTIONS Ilumina")
     ax2.set_xticks(positions)
     ax2.set_xticklabels(labels, fontsize=12)
     ax2.tick_params(axis='y', colors='silver')
     ax2.margins(x=0)
     left_side = ax2.spines["left"]
     left_side.set_visible(False)
-    ax2.legend()
+    ax2.legend(loc='upper right')
 
     ax1.grid()
     ax2.grid()
 
     plt.subplots_adjust(wspace=0, hspace=0)
-    fig.suptitle("Size Distribution")
+    fig.suptitle("Size Distribution \n " + strain)
     plt.show()
 
     fig.savefig(output_file)
@@ -89,10 +89,11 @@ def figure(input_file_1, input_file_2, output_file):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Generate comparative size distribution line graphs for SVs")
+    parser.add_argument('-s', '--strain', help='Strain')
     parser.add_argument('-i1', '--input1', help='Input file 1')
     parser.add_argument('-i2', '--input2', help='Input file 2')
     parser.add_argument('-o', '--output', help='Output file')
 
     args = parser.parse_args()
 
-    figure(args.input1, args.input2, args.output)
+    figure(args.strain, args.input1, args.input2, args.output)
