@@ -3,25 +3,56 @@
 nextflow.enable.dsl = 2
 
 params.previous_dir = './data/previous'
-params.input = "./data/input/calls/{DBA_2J,C57BL_6NJ}-*.vcf"
 
+params.input = "./data/input/calls/{DBA_2J,C57BL_6NJ}-*.vcf"
 params.validated_files = './data/validated/{DBA_2J,C57BL_6NJ}*.bed'
+
+// params.input = "./data/input/calls/C57BL_6NJ-*.vcf"
+// params.validated_files = './data/validated/C57BL_6NJ*.bed'
+
+params.igv_workdir = '/media/egarcia/DataBank/mouse/igv_workfiles'
 
 params.out_dir = './data/analysis/details'
 
-params.dysgu_probs='50,65,70'
+params.dysgu_probs='30,50'
 params.sv_types='INS,DEL,INV,DUP'
 
 params.filter_hets=true
-params.min_score=0.8
-params.take_screenshots=true
+params.min_score=0.65
+params.screenshots_missed=true
+params.screenshots_detected=true
+params.create_figures=true
+params.big_inversions=true
 
 
 params.size_distribution_script='./templates/size_distribution.py'
 
-include { bed_from_vcf; clean_regions; filter_prob_dysgu; clean_hets } from './bedfiles/vcf_operations'
-include { intersect_features; retrieve_validated_features; save_intersect_stats } from './bedfiles/intersect_operations'
-include { generate_len_csv_from_vcf; generate_len_csv_from_previous_tsv; calculate_size_distribution } from './figures/size_distribution'
+include { 
+    bed_from_vcf; 
+    clean_regions; 
+    filter_prob_dysgu; 
+    clean_hets;
+    big_inversions
+} from './bedfiles/vcf_operations'
+
+include { 
+    intersect_features as intersect_in; 
+    intersect_features as intersect_out; 
+    retrieve_validated_features; 
+    calc_intersect_stats;
+    save_intersect_stats
+} from './bedfiles/intersect_operations'
+
+include { 
+    size_data_from_vcf; 
+    size_data_from_previous; 
+    calculate_size_distribution 
+} from './figures/size_distribution'
+
+include {
+    take_screenshots as screenshot_missed
+    take_screenshots as screenshot_random
+} from './igv/igv_capture'
 
 
 workflow {
@@ -33,21 +64,21 @@ workflow {
         homs_in: file
     }.set{vcf_files}
 
-    files = vcf_files.all
-
     if(params.filter_hets){      
         homs_only = clean_hets(vcf_files.homs_in)
         files = vcf_files.all.concat(homs_only)
+    }else{
+        files = vcf_files.all
     }
 
-    files.multiMap{file ->
-        source: file
-        merge: file
-    }.set {prepared_files}
+    // files.multiMap{file ->
+    //     source: file
+    //     merge: file
+    // }.set {prepared_files}
 
     // use [[prepared_files.source]] to merge and later inject the results back in the pipeline for further processing
 
-    prepared_files.source.branch {
+    files.branch {
         dysgu: it.name.contains("dysgu")
         other: true
     }.set {callers}
@@ -58,10 +89,13 @@ workflow {
 
     // Join new dsygu filter vcfs with other vcfs 
     //TODO: join merged files too
-    all_vcfs=dysgu_files.concat(callers.other)
+    dysgu_files.concat(callers.other).multiMap { file ->
+        intersect: file
+        high_score: file
+    }.set { all_vcfs }
 
     sv_types = Channel.from(params.sv_types).splitCsv().flatten()
-    src_new_features = bed_from_vcf(all_vcfs, sv_types, '.B')
+    src_new_features = bed_from_vcf(all_vcfs.intersect, sv_types, '.B')
 
     Channel.fromPath(params.validated_files).set{validated}
 
@@ -92,29 +126,93 @@ workflow {
         return tuple(key, file)
     }.set{ validated_features }
 
-    intersect_results = intersect_features(new_features.combine(validated_features, by: 0), '-wa', 30)
+    new_features.combine(validated_features, by: 0).multiMap { file ->
+        intersect: file
+        outersect: file
+    }.set {new_and_validated}
 
-    intersect_results.map { file ->
+    src_intersect = intersect_in(new_and_validated.intersect, '-wa', 30)
+
+    src_intersect.map { file ->
         def simple_name = file.name.split('__')[0]
         return tuple(simple_name, file)
-    }.groupTuple()
-    .set{ grouped_intersect_result }
+    }.groupTuple(size: 2)
+    .set{ intersected }
 
-    save_intersect_stats(grouped_intersect_result, 'validated').view()
+    // calc_intersect_stats(intersected, 'validated').view() // Use this line to debug scores
 
-    // if(params.take_screenshots){
+    // filter intersect scores higher than param.min_score
+    calc_intersect_stats(intersected, 'validated').filter {
+        Float.parseFloat(it.name.split('_-_')[1].replace("validated_","").replace(".data","")) >= params.min_score
+    }.multiMap { file ->
+        outersect: file
+        save: file
+    }.set {src_high_score_files}
+    
+    // save high scores to data/analysis/strain/simple_name
+    save_intersect_stats(src_high_score_files.save)
 
-    // }
+    // map files with high scores back to feature beds 
+    // outersect is used to map with original feature beds
+    // figures is used to map with original vcf file
+    src_high_score_files.outersect.map { file ->
+        def simple_name = file.name.split('_-_')[0]
+        def strain = simple_name.tokenize('-').get(0)
+        return tuple(strain, simple_name, file)
+    }.multiMap{tuple ->
+        outersect: tuple
+        vcf_candidates: tuple
+    }.set {high_score_tuples}
 
-    // dysgu_files.multiMap{file ->
-    //     pacbio: file
-    //     ilumina: file
-    // }.set {figure_sizes}
+    high_score_tuples.outersect.combine(new_and_validated.outersect, by: 1).map { tuple_element ->
+        return tuple(tuple_element[3], tuple_element[0], tuple_element[4], tuple_element[5])
+    }.set { new_and_validated_out }
 
-    // pacbio_data = generate_len_csv_from_vcf(figure_sizes.pacbio)
-    // ilumina_data = generate_len_csv_from_previous_tsv(figure_sizes.ilumina, file(params.previous_dir))
+    // *******************************
+    // prepare high score vcfs
+    // this section is very important
+    // *******************************
+    if(params.create_figures || params.screenshots_missed || params.big_inversions) {
+        
+        all_vcfs.high_score.map{ file ->
+            def simple_name = file.name.replace(".vcf", "")
+            def strain = simple_name.tokenize('-').get(0)
+            return tuple(strain, simple_name, file)
+        }.set{ all_vcfs_candidates }
 
-    // figures  = calculate_size_distribution(pacbio_data, ilumina_data, file(params.size_distribution_script))
+        high_score_tuples.vcf_candidates.combine(all_vcfs_candidates, by:1).map {tuple_element ->
+            return tuple_element[4]
+        }.multiMap{file ->
+            fig_pacbio: file
+            fig_ilumina: file
+            big_invs: file
+        }.set {high_score_vcfs}
+    }
 
+    // Create figures from high scoring VCF files
+    if(params.create_figures) {
+
+        size_data_from_vcf(high_score_vcfs.fig_pacbio).map{file ->
+            def simple_name = file.name.replace(".pacbio.csv", "")
+            return tuple(simple_name, file)
+        }set {pacbio_data}
+
+        size_data_from_previous(high_score_vcfs.fig_ilumina, file(params.previous_dir)).map{file ->
+            def simple_name = file.name.replace(".ilumina.csv", "")
+            return tuple(simple_name, file)
+        }set {ilumina_data}
+
+        calculate_size_distribution(pacbio_data.combine(ilumina_data, by: 0), file(params.size_distribution_script))
+    }
+
+    // Take screenshots from missed validated features
+    if(params.screenshots_missed){
+        src_outersect = intersect_out(new_and_validated_out, '-v', 30)
+        screenshot_missed(src_outersect, file(params.igv_workdir))
+    }
+
+    if(params.big_inversions){
+        big_inversions(high_score_vcfs.big_invs).view()
+    }
     
 }

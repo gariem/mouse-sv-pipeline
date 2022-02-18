@@ -59,8 +59,6 @@ process clean_hets {
     """
 }
 
-
-
 process clean_regions {
 
     input: 
@@ -75,5 +73,29 @@ process clean_regions {
     """
     output=\$(bcftools view -i'CHROM="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,X"' ${vcf_file} > ${simple_name}.all.vcf || true)
     
+    """
+}
+
+process big_inversions {
+
+    publishDir file(params.out_dir), mode: "copy",  saveAs: {filename -> filename.tokenize('-').get(0) + '/' + filename.replace(".bed","")+'/big_invs.bed' }
+
+    input:
+        file vcf_file
+    
+    output:
+        file "*.bed" optional true
+
+    script:
+
+    simple_name = vcf_file.name.replace(".vcf","")
+
+    """
+    bcftools query -i"SVTYPE='INV' && SVLEN>1000000" -f'%CHROM\\t%POS0\\t%END0\\t%SVLEN\\n' ${vcf_file} | \
+            awk -F'\\t' 'BEGIN {OFS = FS} {print \$1,\$2,\$3,\$4}' > big_invs
+
+    if [ -s big_invs ]; then
+        mv big_invs ${simple_name}.bed
+    fi
     """
 }

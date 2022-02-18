@@ -12,3 +12,4 @@ work/
 *.bam
 *.bai
 data/input
+data/analysis

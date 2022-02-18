@@ -2,7 +2,7 @@
 
 nextflow.enable.dsl = 2
 
-process generate_len_csv_from_vcf {
+process size_data_from_vcf {
 
     input:
         file vcf_file
@@ -19,14 +19,14 @@ process generate_len_csv_from_vcf {
     """
 }
 
-process generate_len_csv_from_previous_tsv {
+process size_data_from_previous {
 
     input:
         file vcf_file
         file previous_dir
 
     output:
-        file "*.tsv"
+        file "*.csv"
 
     script:
     
@@ -35,18 +35,17 @@ process generate_len_csv_from_previous_tsv {
     """
     for file in ${previous_dir}/${strain}*; do
         TYPE="\$(echo \$file | cut -d '.' -f 2)"
-        cat \$file | awk -v type=\$TYPE '{print \$1","type","\$4}' >> "${simple_name}.ilumina.tsv"
+        cat \$file | awk -v type=\$TYPE '{print \$1","type","\$4}' >> "${simple_name}.ilumina.csv"
     done
     """
 }
 
 process calculate_size_distribution {
 
-    publishDir file(params.out_dir), mode: "copy",  saveAs: {filename -> filename.tokenize('-').get(0) + '/' + filename.replace(".sizes.png","")+'/size_distribution.png' }
+    publishDir file(params.out_dir), mode: "copy",  saveAs: {filename -> filename.tokenize('-').get(0) + '/' + filename.replace(".sizes.png","")+'/figure_sizes.png' }
     
     input:
-        file pacbio_data
-        file ilumina_data
+        tuple val(simple_name), file(pacbio_data), file(ilumina_data)
         file size_distribution_script
     
     output:
@@ -54,10 +53,13 @@ process calculate_size_distribution {
 
     script:
 
-    simple_name = pacbio_data.name.replace(".pacbio.csv","")
     strain = simple_name.tokenize('-').get(0)
 
     """
-    python ${size_distribution_script} -s ${strain} -i1 ${pacbio_data} -i2 ${ilumina_data} -o "${simple_name}.sizes.png"
+    grep -v BND ${pacbio_data} > pacbio.csv
+
+    python ${size_distribution_script} -s ${strain} -i1 pacbio.csv -i2 ${ilumina_data} -o "${simple_name}.sizes.png"
+
+    rm pacbio.csv
     """
 }

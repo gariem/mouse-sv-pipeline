@@ -44,9 +44,7 @@ process retrieve_validated_features {
     """    
 }
 
-process save_intersect_stats {
-
-    publishDir file(params.out_dir), mode: "copy",  saveAs: {filename -> filename.split('-')[0] + '/' + filename.split('_-_')[0] + '/' + filename.split('_-_')[1] }
+process calc_intersect_stats {
 
     input:
         tuple val(simple_name), file(bed_file)
@@ -84,4 +82,20 @@ process save_intersect_stats {
 
     mv data ${data_file}_\${SCORE}.data
     """
+}
+
+process save_intersect_stats {
+
+    publishDir file(params.out_dir), mode: "copy", overwrite: true,  saveAs: {filename -> filename.split('-')[0] + '/' + filename.split('_-_')[0] + '/' + filename.split('_-_')[1] }
+
+    input:
+        file stat_file
+    
+    output:
+        file "*"
+
+    """
+    ln -s ${stat_file} ${stat_file.name.replace(".data", "")}
+    """
+
 }
