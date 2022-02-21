@@ -23,7 +23,6 @@ process size_data_from_previous {
 
     input:
         file vcf_file
-        file previous_dir
 
     output:
         file "*.csv"
@@ -32,6 +31,8 @@ process size_data_from_previous {
     
     simple_name = vcf_file.name.replace(".vcf","")
     strain = simple_name.tokenize('-').get(0)
+
+    previous_dir = file(params.previous_dir)
     """
     for file in ${previous_dir}/${strain}*; do
         TYPE="\$(echo \$file | cut -d '.' -f 2)"

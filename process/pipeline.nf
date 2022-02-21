@@ -4,6 +4,9 @@ nextflow.enable.dsl = 2
 
 params.previous_dir = './data/previous'
 
+// params.input = "./data/input/calls/{A_J,DBA_2J,C57BL_6NJ}-*.vcf"
+// params.validated_files = './data/validated/{A_J,DBA_2J,C57BL_6NJ}*.bed'
+
 params.input = "./data/input/calls/{DBA_2J,C57BL_6NJ}-*.vcf"
 params.validated_files = './data/validated/{DBA_2J,C57BL_6NJ}*.bed'
 
@@ -14,18 +17,20 @@ params.igv_workdir = '/media/egarcia/DataBank/mouse/igv_workfiles'
 
 params.out_dir = './data/analysis/details'
 
-params.dysgu_probs='30,50'
+params.dysgu_probs='20'
 params.sv_types='INS,DEL,INV,DUP'
 
 params.filter_hets=true
-params.min_score=0.65
+params.min_score=0.85
+params.min_score_b6n=0.2
 params.screenshots_missed=true
-params.screenshots_detected=true
+params.screenshots_random=true
+params.random_sample=200
 params.create_figures=true
 params.big_inversions=true
 
-
 params.size_distribution_script='./templates/size_distribution.py'
+
 
 include { 
     bed_from_vcf; 
@@ -50,8 +55,9 @@ include {
 } from './figures/size_distribution'
 
 include {
-    take_screenshots as screenshot_missed
-    take_screenshots as screenshot_random
+    take_screenshots as screenshot_missed;
+    take_screenshots as screenshot_random;
+    radomize_bed_file
 } from './igv/igv_capture'
 
 
@@ -70,13 +76,6 @@ workflow {
     }else{
         files = vcf_files.all
     }
-
-    // files.multiMap{file ->
-    //     source: file
-    //     merge: file
-    // }.set {prepared_files}
-
-    // use [[prepared_files.source]] to merge and later inject the results back in the pipeline for further processing
 
     files.branch {
         dysgu: it.name.contains("dysgu")
@@ -143,11 +142,13 @@ workflow {
 
     // filter intersect scores higher than param.min_score
     calc_intersect_stats(intersected, 'validated').filter {
-        Float.parseFloat(it.name.split('_-_')[1].replace("validated_","").replace(".data","")) >= params.min_score
+        (it.name.split('-')[0]=="C57BL_6NJ" && Float.parseFloat(it.name.split('_-_')[1].replace("validated_","").replace(".data","")) >= params.min_score_b6n) || Float.parseFloat(it.name.split('_-_')[1].replace("validated_","").replace(".data","")) >= params.min_score
     }.multiMap { file ->
         outersect: file
         save: file
     }.set {src_high_score_files}
+
+    // src_high_score_files.save.view()
     
     // save high scores to data/analysis/strain/simple_name
     save_intersect_stats(src_high_score_files.save)
@@ -166,13 +167,19 @@ workflow {
 
     high_score_tuples.outersect.combine(new_and_validated.outersect, by: 1).map { tuple_element ->
         return tuple(tuple_element[3], tuple_element[0], tuple_element[4], tuple_element[5])
-    }.set { new_and_validated_out }
+    }.multiMap{tuple ->
+        out: tuple
+        in: tuple
+    }.set { new_and_validated_high }
+
+    // new_and_validated_out.view() =>
+    // C57BL_6NJ.DEL, C57BL_6NJ-cutesv.all, C57BL_6NJ-cutesv.all__DEL.B.bed, C57BL_6NJ.DEL.A.bed
 
     // *******************************
     // prepare high score vcfs
     // this section is very important
     // *******************************
-    if(params.create_figures || params.screenshots_missed || params.big_inversions) {
+    if(params.create_figures || params.screenshots_missed || params.screenshots_random || params.big_inversions) {
         
         all_vcfs.high_score.map{ file ->
             def simple_name = file.name.replace(".vcf", "")
@@ -197,7 +204,7 @@ workflow {
             return tuple(simple_name, file)
         }set {pacbio_data}
 
-        size_data_from_previous(high_score_vcfs.fig_ilumina, file(params.previous_dir)).map{file ->
+        size_data_from_previous(high_score_vcfs.fig_ilumina).map{file ->
             def simple_name = file.name.replace(".ilumina.csv", "")
             return tuple(simple_name, file)
         }set {ilumina_data}
@@ -207,12 +214,34 @@ workflow {
 
     // Take screenshots from missed validated features
     if(params.screenshots_missed){
-        src_outersect = intersect_out(new_and_validated_out, '-v', 30)
-        screenshot_missed(src_outersect, file(params.igv_workdir))
+
+        intersect_out(new_and_validated_high.out, '-v', 30).map{file ->
+            def simple_name = file.name.split('__')[0]
+            def strain = simple_name.tokenize('-').get(0)
+            return tuple(strain, 'captures/missed', simple_name, file)
+        }.set{out_data}
+
+        screenshot_missed(out_data, file(params.igv_workdir))
+    }
+
+    if(params.screenshots_random) {
+        radomize_bed_file(new_and_validated_high.in.map{ tuple_element ->
+            return tuple_element[2]
+        }).map{ file ->
+            def simple_name = file.name.split('__')[0]
+            def strain = simple_name.tokenize('-').get(0)
+            return tuple(strain, 'captures/random', simple_name, file)
+        }.set{random_data}
+        
+        screenshot_random(random_data, file(params.igv_workdir))
     }
 
     if(params.big_inversions){
-        big_inversions(high_score_vcfs.big_invs).view()
+        big_inversions(high_score_vcfs.big_invs).map{file ->
+            def simple_name = file.name.replace(".bed", "")
+            def strain = simple_name.tokenize('-').get(0)
+            return tuple(strain, simple_name, file)
+        }.set{src_biginvs}
     }
     
 }
