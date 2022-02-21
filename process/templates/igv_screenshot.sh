@@ -1,8 +1,8 @@
 # echo "new" > snapshots.txt
-echo "genome ${igv_workdir}/Mus_musculus.GRCm39.dna.toplevel.fa" >> snapshots.txt
+# echo "genome ${igv_workdir}/Mus_musculus.GRCm39.dna.toplevel.fa" >> snapshots.txt
 echo "snapshotDirectory ./${dir}" >> snapshots.txt
 
-echo "load ${igv_workdir}/${strain}.session.xml" >> snapshots.txt
+echo "load ${igv_workdir}/${strain}/${strain}.session.xml" >> snapshots.txt
 echo "load ${bed_file}" >> snapshots.txt
 
 bedToIgv -slop 50 -i ${bed_file} | grep -v snapshotDirectory >> snapshots.txt
