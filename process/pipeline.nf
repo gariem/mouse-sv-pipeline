@@ -15,7 +15,7 @@ params.validated_files = './data/validated/C57BL_6NJ*.bed'
 
 params.igv_workdir = '/media/egarcia/DataBank/mouse/igv_workfiles'
 
-params.out_dir = './data/analysis/details'
+params.out_dir = './data/analysis/local/details'
 
 params.dysgu_probs='20'
 params.sv_types='INS,DEL,INV,DUP'
@@ -25,7 +25,7 @@ params.min_score=0.85
 params.min_score_b6n=0.2
 params.screenshots_missed=true
 params.screenshots_random=true
-params.random_sample=10
+params.random_sample=200
 params.create_figures=true
 params.big_inversions=true
 
