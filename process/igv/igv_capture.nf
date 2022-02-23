@@ -20,8 +20,6 @@ process radomize_bed_file {
 
 process take_screenshots { 
     
-    maxForks 4
-
     //save as: {out_dir}/strain/simple_name/chr_pos_end_slopX.png
     publishDir file(params.out_dir), mode: "copy",  saveAs: {
                     filename -> filename.split('_-_')[1].tokenize('-').get(0) + '/' + filename.split('_-_')[1].replace(".png", "") + '/' + filename.replace(filename.split('_-_')[1], "").replace("_-_","") + ".png"

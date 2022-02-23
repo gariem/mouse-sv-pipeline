@@ -7,10 +7,9 @@ process bed_from_vcf {
     input: 
         file vcf_file
         each type
-        val suffix
     
     output:
-        file "*.bed"
+        tuple val(strain), val(type), val(simple_name), file('*.bed')
 
     script:
 
@@ -19,7 +18,7 @@ process bed_from_vcf {
 
     """
     bcftools query -i"SVTYPE='${type}'" -f'%CHROM\\t%POS0\\t%END0\\t%SVLEN\\n' ${vcf_file} | \
-            awk -F'\\t' 'BEGIN {OFS = FS} {print \$1,\$2,\$3,\$4}' > "${simple_name}__${type}${suffix}.bed"
+            awk -F'\\t' 'BEGIN {OFS = FS} {print \$1,\$2,\$3,\$4}' > "${simple_name}__${type}.bed"
     """
 }
 
@@ -39,6 +38,42 @@ process filter_prob_dysgu {
 
     """
     bcftools view -i'PROB>=${prob_percent}' ${vcf_file} > "${simple_name}.p${prob}.vcf"
+    """
+}
+
+process filter_read_depth {
+    input: 
+        file vcf_file
+        each read_depth
+    
+    output:
+        file '*.vcf'
+
+    script:
+
+    simple_name = vcf_file.name.replace(".vcf","")
+
+    """
+    bcftools view -i'DP>=${read_depth}' ${vcf_file} > "${simple_name}.dp${read_depth}.vcf"
+    """
+}
+
+
+process filter_diff_allele_depth {
+        
+    input: 
+        file vcf_file
+        each limits
+    
+    output:
+        file '*.vcf'
+
+    script:
+
+    simple_name = vcf_file.name.replace(".vcf","")
+
+    """
+    bcftools view -i'(AD[0:1] - AD[0:0])>=${limits[0]} && (AD[0:1] - AD[0:0])<=${limits[1]}' ${vcf_file} > "${simple_name}.addiff${limits[0]}-${limits[1]}}.vcf"
     """
 }
 
