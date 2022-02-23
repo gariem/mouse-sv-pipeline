@@ -124,16 +124,16 @@ process calc_intersect_stats {
 
 process save_intersect_stats {
 
-    publishDir file(params.out_dir), mode: "copy", overwrite: true,  saveAs: {filename -> filename.split('-')[0] + '/' + filename.split('_-_')[0] + '/' + filename.split('_-_')[1] }
+    publishDir file(params.out_dir), mode: "copy", overwrite: true,  saveAs: {filename -> filename.split('-')[1] + '/' + filename.split('-')[2] + '/' + filename.split('-')[0] + '.stats' }
 
     input:
-        file stat_file
+        tuple val(source_name), file(stat_file)
     
     output:
         file "*"
 
     """
-    ln -s ${stat_file} ${stat_file.name.replace(".data", "")}
+    ln -s ${stat_file} ${stat_file.name.split('_')[0]}-${source_name}
     """
 
 }

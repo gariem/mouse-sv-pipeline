@@ -26,7 +26,10 @@ params.sv_types='INS,DEL,INV,DUP'
 
 params.filter_hets=true
 params.min_score=0.85
+
+params.max_diff_b6n=20
 params.min_score_b6n=0.2
+
 params.screenshots_missed=false
 params.screenshots_random=false
 params.random_sample=20
@@ -152,26 +155,20 @@ workflow {
     validated_intersected = find_intersected(new_and_validated.intersect, '-wa', 30)
 
     previous_intersected.combine(validated_intersected, by: [0, 1]).set {data}
-    calculate_scores(data).view()
-
-    
-    // calc_intersect_stats(intersected, 'validated').view() // Use this line to debug scores
-
-    // calc = calc_intersect_stats(intersected, 'validated')
-    // calc.view()
+    scores = calculate_scores(data)
     
     // // filter intersect scores higher than param.min_score
-    // calc.filter {
-    //     (it[0].contains("C57BL_6NJ") && Float.parseFloat(it[1].name.replace("validated_","")) >= params.min_score_b6n) || Float.parseFloat(it[1].name.replace("validated_","")) >= params.min_score
-    // }.multiMap { file ->
-    //     outersect: file
-    //     save: file
-    // }.set {src_high_score_files}
+    scores.filter {
+        (it[0].contains("C57BL_6NJ") && Float.parseFloat(it[1].name.split('_')[1]) >= params.min_score_b6n && Float.parseFloat(it[1].name.split('_')[2]) <= params.max_diff_b6n)
+    }.multiMap { file ->
+        outersect: file
+        save: file
+    }.set {src_high_score_files}
 
     // src_high_score_files.save.view()
     
     // // save high scores to data/analysis/strain/simple_name
-    // save_intersect_stats(src_high_score_files.save)
+    save_intersect_stats(src_high_score_files.save).view()
 
     // // map files with high scores back to feature beds 
     // // outersect is used to map with original feature beds

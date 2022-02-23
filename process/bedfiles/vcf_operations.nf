@@ -71,9 +71,10 @@ process filter_diff_allele_depth {
     script:
 
     simple_name = vcf_file.name.replace(".vcf","")
+    outname = "${simple_name}.ad_${limits[0]}to${limits[1]}.vcf".replace("-","_")
 
     """
-    bcftools view -i'(AD[0:1] - AD[0:0])>=${limits[0]} && (AD[0:1] - AD[0:0])<=${limits[1]}' ${vcf_file} > "${simple_name}.addiff${limits[0]}-${limits[1]}}.vcf"
+    bcftools view -i'(AD[0:1] - AD[0:0])>=${limits[0]} && (AD[0:1] - AD[0:0])<=${limits[1]}' ${vcf_file} > "${outname}.vcf"
     """
 }
 
