@@ -4,17 +4,17 @@ nextflow.enable.dsl = 2
 
 params.previous_dir = './data/previous'
 
-// params.input = "./data/input/calls/{A_J,DBA_2J,C57BL_6NJ}-*.vcf"
-// params.validated_files = './data/validated/simple/{A_J,DBA_2J,C57BL_6NJ}*.bed'
-// params.previous_files = './data/previous/{A_J,DBA_2J,C57BL_6NJ}*.bed'
+params.input = "./data/input/calls/{A_J,DBA_2J,C57BL_6NJ,C3H_HeJ,AKR_J}-*.vcf"
+params.validated_files = './data/validated/simple/{A_J,DBA_2J,C57BL_6NJ,C3H_HeJ,AKR_J}*.bed'
+params.previous_files = './data/previous/{A_J,DBA_2J,C57BL_6NJ,C3H_HeJ,AKR_J}*.bed'
 
 // params.input = "./data/input/calls/{DBA_2J,C57BL_6NJ}-*.vcf"
 // params.validated_files = './data/validated/simple/{DBA_2J,C57BL_6NJ}*.bed'
 // params.previous_files = './data/previous/{DBA_2J,C57BL_6NJ}*.bed'
 
-params.input = "./data/input/calls/C57BL_6NJ-*.vcf"
-params.validated_files = './data/validated/simple/C57BL_6NJ*.bed'
-params.previous_files = './data/previous/C57BL_6NJ*.bed'
+// params.input = "./data/input/calls/C57BL_6NJ-*.vcf"
+// params.validated_files = './data/validated/simple/C57BL_6NJ*.bed'
+// params.previous_files = './data/previous/C57BL_6NJ*.bed'
 
 // params.input = "./data/input/calls/DBA_2J-*.vcf"
 // params.validated_files = './data/validated/simple/DBA_2J*.bed'
@@ -32,11 +32,11 @@ params.read_depth='30,40,50'
 params.sv_types='INS,DEL,INV,DUP'
 
 params.filter_hets=true
-params.min_score=0.85
+params.min_score=0.75
 params.max_diff=10
 
 params.max_diff_b6n=40
-params.min_score_b6n=0.1
+params.min_score_b6n=0.6
 
 params.screenshots_missed=true
 params.screenshots_random=true
@@ -138,31 +138,29 @@ workflow {
     pbsv_files = filtered_dp.concat(filtered_diff_ad)
 
     // Join new dsygu filter vcfs with other vcfs 
-    //TODO: join merged files too
+    // TODO: join merged files too
     dysgu_files.concat(pbsv_files).concat(callers.other).multiMap { file ->
         intersect: file
         high_score: file
         full_graph: file
     }.set { all_vcfs }
-
     
     graph_strains = all_vcfs.full_graph.map{ file ->
         def strain = file.name.tokenize('-').get(0)
         return strain
-    }.distinct()
+    }.unique()
 
     // Bed files must end with __TYPE.bed
-
     bed_from_full_graph(graph_strains, file(params.full_graph_files)).flatten().map{ file ->
         def simple_name = file.name.split('__')[0]
         def strain = simple_name.tokenize('-').get(0)
         def type = file.name.split('__')[1].replace(".bed", "")
         return tuple(strain, type, simple_name, file)
-    }.set {minigrap_beds}
+    }.set {minigraph_beds}
 
     sv_types = Channel.from(params.sv_types).splitCsv().flatten()
 
-    bed_from_vcf(all_vcfs.intersect, sv_types).concat(minigrap_beds).multiMap{ file ->
+    bed_from_vcf(all_vcfs.intersect, sv_types).concat(minigraph_beds).multiMap{ file ->
         validate: file
         previous: file
     }.set{new_features}
@@ -186,6 +184,8 @@ workflow {
 
     previous_intersected.combine(validated_intersected, by: [0, 1]).set {data}
     scores = calculate_scores(data)
+
+    scores.view()
 
     scores.filter {
         (it[0].contains("C57BL_6NJ") && Float.parseFloat(it[1].name.split('_')[1]) >= params.min_score_b6n && Float.parseFloat(it[1].name.split('_')[2]) <= params.max_diff_b6n) ||

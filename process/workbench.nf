@@ -2,7 +2,7 @@
 
 nextflow.enable.dsl = 2
 
-params.validated_src_files = './data/validated/original/{DBA_2J,C57BL_6NJ}*.bed'
+params.validated_src_files = './data/validated/original/{A_J,DBA_2J,C57BL_6NJ,C3H_HeJ,AKR_J}*.bed'
 params.validated_output = './data/validated/simple'
 
 
