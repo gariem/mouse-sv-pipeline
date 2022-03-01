@@ -16,6 +16,13 @@ params.input = "./data/input/calls/C57BL_6NJ-*.vcf"
 params.validated_files = './data/validated/simple/C57BL_6NJ*.bed'
 params.previous_files = './data/previous/C57BL_6NJ*.bed'
 
+// params.input = "./data/input/calls/DBA_2J-*.vcf"
+// params.validated_files = './data/validated/simple/DBA_2J*.bed'
+// params.previous_files = './data/previous/DBA_2J*.bed'
+
+params.full_graph_files = './data/input/minigraph/full'
+params.small_graph_files = './data/input/minigraph/small'
+
 params.igv_workdir = '/media/egarcia/DataBank/mouse/igv_workfiles'
 
 params.out_dir = './data/analysis/local/details'
@@ -28,7 +35,7 @@ params.filter_hets=true
 params.min_score=0.85
 params.max_diff=10
 
-params.max_diff_b6n=25
+params.max_diff_b6n=40
 params.min_score_b6n=0.1
 
 params.screenshots_missed=true
@@ -71,6 +78,10 @@ include {
     take_screenshots as screenshot_random;
     radomize_bed_file
 } from './igv/igv_capture'
+
+include {
+    bed_from_full_graph
+} from './graph/minigraph'
 
 
 workflow {
@@ -131,11 +142,27 @@ workflow {
     dysgu_files.concat(pbsv_files).concat(callers.other).multiMap { file ->
         intersect: file
         high_score: file
+        full_graph: file
     }.set { all_vcfs }
 
-    sv_types = Channel.from(params.sv_types).splitCsv().flatten()
     
-    bed_from_vcf(all_vcfs.intersect, sv_types).multiMap{ file ->
+    graph_strains = all_vcfs.full_graph.map{ file ->
+        def strain = file.name.tokenize('-').get(0)
+        return strain
+    }.distinct()
+
+    // Bed files must end with __TYPE.bed
+
+    bed_from_full_graph(graph_strains, file(params.full_graph_files)).flatten().map{ file ->
+        def simple_name = file.name.split('__')[0]
+        def strain = simple_name.tokenize('-').get(0)
+        def type = file.name.split('__')[1].replace(".bed", "")
+        return tuple(strain, type, simple_name, file)
+    }.set {minigrap_beds}
+
+    sv_types = Channel.from(params.sv_types).splitCsv().flatten()
+
+    bed_from_vcf(all_vcfs.intersect, sv_types).concat(minigrap_beds).multiMap{ file ->
         validate: file
         previous: file
     }.set{new_features}
@@ -226,6 +253,5 @@ workflow {
 
         calculate_size_distribution(size_data, file(params.size_distribution_script))
     }
-
     
 }
