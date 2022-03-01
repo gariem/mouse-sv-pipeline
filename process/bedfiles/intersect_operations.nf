@@ -124,7 +124,9 @@ process calc_intersect_stats {
 
 process save_intersect_stats {
 
-    publishDir file(params.out_dir), mode: "copy", overwrite: true,  saveAs: {filename -> filename.split('-')[1] + '/' + filename.split('-')[2] + '/' + filename.split('-')[0] + '.stats' }
+    publishDir file(params.out_dir), mode: "copy", overwrite: true,  saveAs: {
+                    filename -> filename.split('-')[1] + '/' + filename.split('-')[1] + '-' + filename.split('-')[2] + '/' + filename.split('-')[0]
+                    }
 
     input:
         tuple val(source_name), file(stat_file)
@@ -133,7 +135,10 @@ process save_intersect_stats {
         file "*"
 
     """
-    ln -s ${stat_file} ${stat_file.name.split('_')[0]}-${source_name}
+    INS="\$(cat ${stat_file} | grep 'INS.SCORE' | cut -d '=' -f 2)"
+    DEL="\$(cat ${stat_file} | grep 'DEL.SCORE' | cut -d '=' -f 2)"
+
+    cat ${stat_file} > scores_\${INS}_\${DEL}-${source_name}
     """
 
 }

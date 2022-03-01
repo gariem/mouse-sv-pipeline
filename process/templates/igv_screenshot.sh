@@ -11,6 +11,10 @@ echo "exit" >> snapshots.txt
 sed -i -e "s/.png/_-_${simple_name}.png/g" snapshots.txt
 sed -i -e "s/snapshot /snapshot ${type}/g" snapshots.txt
 
+echo "SKIP_VERSION=null,2.12.2" > prefs.properties
+echo "SHOW_SEQUENCE_TRANSLATION=true" > prefs.properties
+echo "IGV.Bounds=129,85,2243,1263" > prefs.properties
+echo "SAM.SHOW_SOFT_CLIPPED=true" > prefs.properties
 echo "IGV.Bounds=0,0,1920,1080" > prefs.properties
 echo "DETAILS_BEHAVIOR=CLICK" >> prefs.properties
 

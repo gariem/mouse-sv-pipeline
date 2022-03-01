@@ -26,12 +26,13 @@ params.sv_types='INS,DEL,INV,DUP'
 
 params.filter_hets=true
 params.min_score=0.85
+params.max_diff=10
 
-params.max_diff_b6n=20
-params.min_score_b6n=0.2
+params.max_diff_b6n=25
+params.min_score_b6n=0.1
 
-params.screenshots_missed=false
-params.screenshots_random=false
+params.screenshots_missed=true
+params.screenshots_random=true
 params.random_sample=20
 params.create_figures=true
 params.big_inversions=true
@@ -61,8 +62,7 @@ include {
 } from './bedfiles/intersect_operations'
 
 include { 
-    size_data_from_vcf; 
-    size_data_from_previous; 
+    size_data_from_bedfiles; 
     calculate_size_distribution 
 } from './figures/size_distribution'
 
@@ -149,116 +149,83 @@ workflow {
 
     previous_features.combine(new_features.previous, by: [0, 1]).map { tuple_element ->
         return tuple(tuple_element[3], tuple_element[1], tuple_element[2], tuple_element[4])
+    }.multiMap { file ->
+        intersect: file
+        figures: file
     }.set {new_and_previous}
 
-    previous_intersected = find_previous(new_and_previous, '-wa', 30)
+    previous_intersected = find_previous(new_and_previous.intersect, '-wa', 30)
     validated_intersected = find_intersected(new_and_validated.intersect, '-wa', 30)
 
     previous_intersected.combine(validated_intersected, by: [0, 1]).set {data}
     scores = calculate_scores(data)
-    
-    // // filter intersect scores higher than param.min_score
+
     scores.filter {
-        (it[0].contains("C57BL_6NJ") && Float.parseFloat(it[1].name.split('_')[1]) >= params.min_score_b6n && Float.parseFloat(it[1].name.split('_')[2]) <= params.max_diff_b6n)
-    }.multiMap { file ->
+        (it[0].contains("C57BL_6NJ") && Float.parseFloat(it[1].name.split('_')[1]) >= params.min_score_b6n && Float.parseFloat(it[1].name.split('_')[2]) <= params.max_diff_b6n) ||
+        (Float.parseFloat(it[1].name.split('_')[1]) >= params.min_score && Float.parseFloat(it[1].name.split('_')[2]) <= params.max_diff)
+    }.groupTuple(by: 0, size: 2).multiMap { file ->
         outersect: file
         save: file
     }.set {src_high_score_files}
 
-    // src_high_score_files.save.view()
+   
+    // save high scores to data/analysis/strain/simple_name
+    save_intersect_stats(src_high_score_files.save)
     
-    // // save high scores to data/analysis/strain/simple_name
-    save_intersect_stats(src_high_score_files.save).view()
 
-    // // map files with high scores back to feature beds 
-    // // outersect is used to map with original feature beds
-    // // figures is used to map with original vcf file
-    // src_high_score_files.outersect.map { file ->
-    //     def simple_name = file.name.split('_-_')[0]
-    //     def strain = simple_name.tokenize('-').get(0)
-    //     return tuple(strain, simple_name, file)
-    // }.multiMap{tuple ->
-    //     outersect: tuple
-    //     vcf_candidates: tuple
-    // }.set {high_score_tuples}
+    // map files with high scores back to feature beds 
+    // outersect is used to map with original feature beds
+    // figures is used to map with original vcf file
 
-    // high_score_tuples.outersect.combine(new_and_validated.outersect, by: 1).map { tuple_element ->
-    //     return tuple(tuple_element[3], tuple_element[0], tuple_element[4], tuple_element[5])
-    // }.multiMap{tuple ->
-    //     out: tuple
-    //     in: tuple
-    // }.set { new_and_validated_high }
+    src_high_score_files.outersect.combine(new_and_validated.outersect, by: 0).map { tuple_element ->
+        return tuple(tuple_element[0], tuple_element[2], tuple_element[3], tuple_element[4])
+    }.multiMap{tuple ->
+        out: tuple
+        in: tuple
+        figs: tuple
+    }.set { new_and_validated_high }
 
-    // // new_and_validated_out.view() =>
-    // // C57BL_6NJ.DEL, C57BL_6NJ-cutesv.all, C57BL_6NJ-cutesv.all__DEL.B.bed, C57BL_6NJ.DEL.A.bed
+    // Take screenshots from missed validated features
+    if(params.screenshots_missed){
 
-    // // *******************************
-    // // prepare high score vcfs
-    // // this section is very important
-    // // *******************************
-    // if(params.create_figures || params.screenshots_missed || params.screenshots_random || params.big_inversions) {
+        find_missed(new_and_validated_high.out, '-v', 30).map{tuple_element ->
+            def simple_name = tuple_element[0]
+            def strain = simple_name.tokenize('-').get(0)
+            return tuple(strain, 'captures/missed', simple_name, tuple_element[2])
+        }.set{out_data}
+
+        screenshot_missed(out_data, file(params.igv_workdir))
+    }
+
+    // Take screenshots from random predicted features
+
+    if(params.screenshots_random) {
+
+        radomize_bed_file(new_and_validated_high.in.map{ tuple_element ->
+            return tuple_element[3]
+        }).map{ file ->
+            def simple_name = file.name.split('__')[0]
+            def strain = simple_name.tokenize('-').get(0)
+            return tuple(strain, 'captures/random', simple_name, file)
+        }.set{random_data}
         
-    //     all_vcfs.high_score.map{ file ->
-    //         def simple_name = file.name.replace(".vcf", "")
-    //         def strain = simple_name.tokenize('-').get(0)
-    //         return tuple(strain, simple_name, file)
-    //     }.set{ all_vcfs_candidates }
+        screenshot_random(random_data, file(params.igv_workdir))
+    }
 
-    //     high_score_tuples.vcf_candidates.combine(all_vcfs_candidates, by:1).map {tuple_element ->
-    //         return tuple_element[4]
-    //     }.multiMap{file ->
-    //         fig_pacbio: file
-    //         fig_ilumina: file
-    //         big_invs: file
-    //     }.set {high_score_vcfs}
-    // }
 
-    // // Create figures from high scoring VCF files
-    // if(params.create_figures) {
+    // Create figures from high scoring files
+    if(params.create_figures) {
 
-    //     size_data_from_vcf(high_score_vcfs.fig_pacbio).map{file ->
-    //         def simple_name = file.name.replace(".pacbio.csv", "")
-    //         return tuple(simple_name, file)
-    //     }set {pacbio_data}
+        bed_size_data = new_and_validated_high.figs.map {tuple_element ->
+            return tuple(tuple_element[0], tuple_element[1])
+        }.combine(new_and_previous.figures, by: [0, 1])
 
-    //     size_data_from_previous(high_score_vcfs.fig_ilumina).map{file ->
-    //         def simple_name = file.name.replace(".ilumina.csv", "")
-    //         return tuple(simple_name, file)
-    //     }set {ilumina_data}
+        size_data = size_data_from_bedfiles(bed_size_data).groupTuple(by: 0).map{tuple_element ->
+            return tuple(tuple_element[0], tuple_element[2], tuple_element[3])
+        }
 
-    //     calculate_size_distribution(pacbio_data.combine(ilumina_data, by: 0), file(params.size_distribution_script))
-    // }
+        calculate_size_distribution(size_data, file(params.size_distribution_script))
+    }
 
-    // // Take screenshots from missed validated features
-    // if(params.screenshots_missed){
-
-    //     find_missed(new_and_validated_high.out, '-v', 30).map{file ->
-    //         def simple_name = file.name.split('__')[0]
-    //         def strain = simple_name.tokenize('-').get(0)
-    //         return tuple(strain, 'captures/missed', simple_name, file)
-    //     }.set{out_data}
-
-    //     screenshot_missed(out_data, file(params.igv_workdir))
-    // }
-
-    // if(params.screenshots_random) {
-    //     radomize_bed_file(new_and_validated_high.in.map{ tuple_element ->
-    //         return tuple_element[2]
-    //     }).map{ file ->
-    //         def simple_name = file.name.split('__')[0]
-    //         def strain = simple_name.tokenize('-').get(0)
-    //         return tuple(strain, 'captures/random', simple_name, file)
-    //     }.set{random_data}
-        
-    //     screenshot_random(random_data, file(params.igv_workdir))
-    // }
-
-    // if(params.big_inversions){
-    //     big_inversions(high_score_vcfs.big_invs).map{file ->
-    //         def simple_name = file.name.replace(".bed", "")
-    //         def strain = simple_name.tokenize('-').get(0)
-    //         return tuple(strain, simple_name, file)
-    //     }.set{src_biginvs}
-    // }
     
 }

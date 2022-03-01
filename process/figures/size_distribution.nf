@@ -2,42 +2,21 @@
 
 nextflow.enable.dsl = 2
 
-process size_data_from_vcf {
+
+process size_data_from_bedfiles {
 
     input:
-        file vcf_file
+        tuple val(simple_name), val(type), file(ilumina), file(pacbio)
         
     output:
-        file "*.csv"
+        tuple val(simple_name), val(type), file("*.ilumina.csv"), file("*.pacbio.csv")
 
     script:
 
-    simple_name = vcf_file.name.replace(".vcf","")
-
     """
-    bcftools query -f'%CHROM,%SVTYPE,%SVLEN\\n' ${vcf_file} | awk -F',' 'BEGIN {OFS = FS} \$1 ~/^[0-9]*\$|^X\$/{abs=\$3;sub("^-", "",abs); print \$1,\$2,abs}' > "${simple_name}.pacbio.csv"
-    """
-}
+    awk '{abs=\$4; sub("^-", "",abs); print \$1",${type},"abs}' ${ilumina} > "${simple_name}.${type}.ilumina.csv"
+    awk '{abs=\$4; sub("^-", "",abs); print \$1",${type},"abs}' ${pacbio} > "${simple_name}.${type}.pacbio.csv"
 
-process size_data_from_previous {
-
-    input:
-        file vcf_file
-
-    output:
-        file "*.csv"
-
-    script:
-    
-    simple_name = vcf_file.name.replace(".vcf","")
-    strain = simple_name.tokenize('-').get(0)
-
-    previous_dir = file(params.previous_dir)
-    """
-    for file in ${previous_dir}/${strain}*; do
-        TYPE="\$(echo \$file | cut -d '.' -f 2)"
-        cat \$file | awk -v type=\$TYPE '{print \$1","type","\$4}' >> "${simple_name}.ilumina.csv"
-    done
     """
 }
 
@@ -46,7 +25,7 @@ process calculate_size_distribution {
     publishDir file(params.out_dir), mode: "copy",  saveAs: {filename -> filename.tokenize('-').get(0) + '/' + filename.replace(".sizes.png","")+'/figure_sizes.png' }
     
     input:
-        tuple val(simple_name), file(pacbio_data), file(ilumina_data)
+        tuple val(simple_name), file(ilumina_data), file(pacbio_data)
         file size_distribution_script
     
     output:
@@ -57,10 +36,12 @@ process calculate_size_distribution {
     strain = simple_name.tokenize('-').get(0)
 
     """
-    grep -v BND ${pacbio_data} > pacbio.csv
 
-    python ${size_distribution_script} -s ${strain} -i1 pacbio.csv -i2 ${ilumina_data} -o "${simple_name}.sizes.png"
+    cat ${pacbio_data} > pacbio.csv
+    cat ${ilumina_data} > ilumina.csv
 
+    python ${size_distribution_script} -s ${strain} -i1 pacbio.csv -i2 ilumina.csv -o "${simple_name}.sizes.png"
     rm pacbio.csv
+    rm ilumina.csv
     """
 }
