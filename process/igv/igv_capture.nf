@@ -3,7 +3,6 @@
 nextflow.enable.dsl = 2
 
 process radomize_bed_file {
-    maxForks 4
 
     input:
         file bed_file

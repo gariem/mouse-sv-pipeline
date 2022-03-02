@@ -13,3 +13,4 @@ work/
 *.bai
 data/input
 data/analysis
+bench/
