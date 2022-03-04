@@ -4,7 +4,6 @@ nextflow.enable.dsl = 2
 
 
 process bed_from_full_graph {
-    cache false
 
     input: 
         val strain
@@ -25,23 +24,38 @@ process bed_from_full_graph {
 }
 
 
-process bed_from_simple_graph {
-    cache false
+process rename_tuples {
 
     input: 
-        val strain
-        file folder
+        tuple val(simple_name), val(type), file(bed_file)
     
+    output:
+        tuple val(type), file("*.bed")
+
+    script:
+    
+    """
+    cat ${bed_file} > "${simple_name}.${bed_file.name}.bed"
+    """
+}
+
+process intersect_all_minigraph {
+
+    publishDir file(params.out_dir + '/minigraph_all'), mode: "copy"
+
+    input: 
+        tuple val(type), file(bed_files)
+        val overlap_fraction
+
     output:
         file "*.bed"
 
     script:
-    
-    simple_name = strain + '-minigraph'
+    def b6nj = bed_files.findAll{ it.name.contains("C57BL_6NJ") }.join(" ")
+    def others = bed_files.findAll{ !it.name.contains("C57BL_6NJ") }.join(" ")
 
     """
-    awk -F"[\t:]" 'BEGIN {OFS = "\t"} {if(\$6!="."&&(\$3-\$2)<\$7)print \$1,\$2,\$3,\$3-\$2}' ${folder}/${strain}.bed > "${strain}-minigraph__INS.bed"
-    awk -F"[\t:]" 'BEGIN {OFS = "\t"} {if(\$6!="."&&(\$3-\$2)>\$7)print \$1,\$2,\$3,\$3-\$2}' ${folder}/${strain}.bed > "${strain}-minigraph__DEL.bed"
+    bedtools intersect -wo -filenames -f ${overlap_fraction} -a ${b6nj} -b ${others} > minigraph-${type}-all.bed
     """
 
 }

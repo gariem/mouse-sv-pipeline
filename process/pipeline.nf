@@ -8,6 +8,10 @@ params.input = "./data/input/calls/{A_J,DBA_2J,C57BL_6NJ,C3H_HeJ,AKR_J}-*.vcf"
 params.validated_files = './data/validated/simple/{A_J,DBA_2J,C57BL_6NJ,C3H_HeJ,AKR_J}*.bed'
 params.previous_files = './data/previous/{A_J,DBA_2J,C57BL_6NJ,C3H_HeJ,AKR_J}*.bed'
 
+// params.input = "./data/input/calls/{A_J,DBA_2J,C57BL_6NJ}-*.vcf"
+// params.validated_files = './data/validated/simple/{A_J,DBA_2J,C57BL_6NJ}*.bed'
+// params.previous_files = './data/previous/{A_J,DBA_2J,C57BL_6NJ}*.bed'
+
 // params.input = "./data/input/calls/{DBA_2J,C57BL_6NJ}-*.vcf"
 // params.validated_files = './data/validated/simple/{DBA_2J,C57BL_6NJ}*.bed'
 // params.previous_files = './data/previous/{DBA_2J,C57BL_6NJ}*.bed'
@@ -80,7 +84,9 @@ include {
 } from './igv/igv_capture'
 
 include {
-    bed_from_full_graph
+    bed_from_full_graph;
+    rename_tuples;
+    intersect_all_minigraph
 } from './graph/minigraph'
 
 
@@ -156,11 +162,15 @@ workflow {
         def strain = simple_name.tokenize('-').get(0)
         def type = file.name.split('__')[1].replace(".bed", "")
         return tuple(strain, type, simple_name, file)
-    }.set {minigraph_beds}
+    }.multiMap{file ->
+        concat: file
+        compare: file
+    }
+    .set {minigraph_beds}
 
     sv_types = Channel.from(params.sv_types).splitCsv().flatten()
 
-    bed_from_vcf(all_vcfs.intersect, sv_types).concat(minigraph_beds).multiMap{ file ->
+    bed_from_vcf(all_vcfs.intersect, sv_types).concat(minigraph_beds.concat).multiMap{ file ->
         validate: file
         previous: file
     }.set{new_features}
@@ -185,19 +195,40 @@ workflow {
     previous_intersected.combine(validated_intersected, by: [0, 1]).set {data}
     scores = calculate_scores(data)
 
-    scores.view()
-
     scores.filter {
         (it[0].contains("C57BL_6NJ") && Float.parseFloat(it[1].name.split('_')[1]) >= params.min_score_b6n && Float.parseFloat(it[1].name.split('_')[2]) <= params.max_diff_b6n) ||
         (Float.parseFloat(it[1].name.split('_')[1]) >= params.min_score && Float.parseFloat(it[1].name.split('_')[2]) <= params.max_diff)
     }.groupTuple(by: 0, size: 2).multiMap { file ->
         outersect: file
         save: file
+        minigraph: file
     }.set {src_high_score_files}
 
    
     // save high scores to data/analysis/strain/simple_name
     save_intersect_stats(src_high_score_files.save)
+
+
+    // Transform high score tuples 
+    src_high_score_files.minigraph.filter {
+        it[0].contains("minigraph")
+    }.flatMap{ tuple_element ->
+        def tuples = []
+        tuple_element[1].each { elem -> tuples.add(tuple(tuple_element[0], elem.name.tokenize('_').get(0), elem)) }
+        return tuples
+    }.set {src_minigrap_highscores}
+
+    // Combine high score minigraph with original bedfiles
+
+    src_minigrap_highscores.combine(
+        minigraph_beds.compare.map{ tuple_element ->
+            return tuple(tuple_element[2], tuple_element[1], tuple_element[3])
+        }, by: [0, 1]
+    ).map{tuple_element ->
+        return tuple(tuple_element[1], tuple_element[3])
+    }.groupTuple(by: 0).set {high_score_minigraph_data}
+
+    intersect_all_minigraph(high_score_minigraph_data, 0.99)
     
 
     // map files with high scores back to feature beds 
