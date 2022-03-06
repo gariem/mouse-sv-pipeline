@@ -17,8 +17,8 @@ process bed_from_full_graph {
     simple_name = strain + '-minigraph'
 
     """
-    awk -F"[\t:]" 'BEGIN {OFS = "\t"} {if(\$6!="."&&(\$3-\$2)<\$7)print \$1,\$2,\$3,\$3-\$2}' ${folder}/${strain}.bed > "${strain}-minigraph__INS.bed"
-    awk -F"[\t:]" 'BEGIN {OFS = "\t"} {if(\$6!="."&&(\$3-\$2)>\$7)print \$1,\$2,\$3,\$3-\$2}' ${folder}/${strain}.bed > "${strain}-minigraph__DEL.bed"
+    awk -F"[\t:]" 'BEGIN {OFS = "\t"} {if(\$6!="."&&(\$3-\$2)<\$7)print \$1,\$2,\$3,\$7}' ${folder}/${strain}.bed > "${strain}-minigraph__INS.bed"
+    awk -F"[\t:]" 'BEGIN {OFS = "\t"} {if(\$6!="."&&(\$3-\$2)>\$7)print \$1,\$2,\$3,\$7}' ${folder}/${strain}.bed > "${strain}-minigraph__DEL.bed"
     """
 
 }

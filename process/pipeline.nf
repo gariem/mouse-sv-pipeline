@@ -4,9 +4,9 @@ nextflow.enable.dsl = 2
 
 params.previous_dir = './data/previous'
 
-params.input = "./data/input/calls/{A_J,DBA_2J,C57BL_6NJ,C3H_HeJ,AKR_J}-*.vcf"
-params.validated_files = './data/validated/simple/{A_J,DBA_2J,C57BL_6NJ,C3H_HeJ,AKR_J}*.bed'
-params.previous_files = './data/previous/{A_J,DBA_2J,C57BL_6NJ,C3H_HeJ,AKR_J}*.bed'
+params.input = "./data/input/calls/{A_J,DBA_2J,C57BL_6NJ,C3H_HeJ,AKR_J,C57BL_6JEve}-*.vcf"
+params.validated_files = './data/validated/simple/{A_J,DBA_2J,C57BL_6NJ,C3H_HeJ,AKR_J,C57BL_6JEve}*.bed'
+params.previous_files = './data/previous/{A_J,DBA_2J,C57BL_6NJ,C3H_HeJ,AKR_J,C57BL_6JEve}*.bed'
 
 // params.input = "./data/input/calls/{A_J,DBA_2J,C57BL_6NJ}-*.vcf"
 // params.validated_files = './data/validated/simple/{A_J,DBA_2J,C57BL_6NJ}*.bed'
@@ -24,8 +24,8 @@ params.previous_files = './data/previous/{A_J,DBA_2J,C57BL_6NJ,C3H_HeJ,AKR_J}*.b
 // params.validated_files = './data/validated/simple/DBA_2J*.bed'
 // params.previous_files = './data/previous/DBA_2J*.bed'
 
-params.full_graph_files = './data/input/minigraph/full'
-params.small_graph_files = './data/input/minigraph/small'
+params.full_graph_files = './data/input/minigraph/15plusEve'
+// params.small_graph_files = './data/input/minigraph/full'
 
 params.igv_workdir = '/media/egarcia/DataBank/mouse/igv_workfiles'
 
@@ -42,8 +42,8 @@ params.max_diff=10
 params.max_diff_b6n=40
 params.min_score_b6n=0.6
 
-params.screenshots_missed=true
-params.screenshots_random=true
+params.screenshots_missed=false
+params.screenshots_random=false
 params.random_sample=20
 params.create_figures=true
 params.big_inversions=true
@@ -196,7 +196,7 @@ workflow {
     scores = calculate_scores(data)
 
     scores.filter {
-        (it[0].contains("C57BL_6NJ") && Float.parseFloat(it[1].name.split('_')[1]) >= params.min_score_b6n && Float.parseFloat(it[1].name.split('_')[2]) <= params.max_diff_b6n) ||
+        (it[0].contains("C57BL_6") && Float.parseFloat(it[1].name.split('_')[1]) >= params.min_score_b6n && Float.parseFloat(it[1].name.split('_')[2]) <= params.max_diff_b6n) ||
         (Float.parseFloat(it[1].name.split('_')[1]) >= params.min_score && Float.parseFloat(it[1].name.split('_')[2]) <= params.max_diff)
     }.groupTuple(by: 0, size: 2).multiMap { file ->
         outersect: file
@@ -204,7 +204,6 @@ workflow {
         minigraph: file
     }.set {src_high_score_files}
 
-   
     // save high scores to data/analysis/strain/simple_name
     save_intersect_stats(src_high_score_files.save)
 
@@ -216,11 +215,11 @@ workflow {
         def tuples = []
         tuple_element[1].each { elem -> tuples.add(tuple(tuple_element[0], elem.name.tokenize('_').get(0), elem)) }
         return tuples
-    }.set {src_minigrap_highscores}
+    }.set {src_minigraph_highscores}
 
     // Combine high score minigraph with original bedfiles
 
-    src_minigrap_highscores.combine(
+    src_minigraph_highscores.combine(
         minigraph_beds.compare.map{ tuple_element ->
             return tuple(tuple_element[2], tuple_element[1], tuple_element[3])
         }, by: [0, 1]
