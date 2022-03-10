@@ -74,7 +74,9 @@ include {
 
 include { 
     size_data_from_bedfiles; 
-    calculate_size_distribution 
+    filtered_size_data_from_bedfiles;
+    calculate_size_distribution;
+    calculate_size_distribution_filtered
 } from './figures/size_distribution'
 
 include {
@@ -86,7 +88,8 @@ include {
 include {
     bed_from_full_graph;
     rename_tuples;
-    intersect_all_minigraph
+    intersect_all_minigraph;
+    get_features_across_strains
 } from './graph/minigraph'
 
 
@@ -227,7 +230,7 @@ workflow {
         return tuple(tuple_element[1], tuple_element[3])
     }.groupTuple(by: 0).set {high_score_minigraph_data}
 
-    intersect_all_minigraph(high_score_minigraph_data, 0.99)
+    repeated = get_features_across_strains(intersect_all_minigraph(high_score_minigraph_data, 1.0), 4)
     
 
     // map files with high scores back to feature beds 
@@ -273,15 +276,30 @@ workflow {
     // Create figures from high scoring files
     if(params.create_figures) {
 
-        bed_size_data = new_and_validated_high.figs.map {tuple_element ->
+        new_and_validated_high.figs.map {tuple_element ->
             return tuple(tuple_element[0], tuple_element[1])
         }.combine(new_and_previous.figures, by: [0, 1])
+        .multiMap{ file -> 
+            all: file
+            filtered: file
+        }.set{bed_size_data}
 
-        size_data = size_data_from_bedfiles(bed_size_data).groupTuple(by: 0).map{tuple_element ->
+        size_data = size_data_from_bedfiles(bed_size_data.all).groupTuple(by: 0).map{tuple_element ->
             return tuple(tuple_element[0], tuple_element[2], tuple_element[3])
         }
 
         calculate_size_distribution(size_data, file(params.size_distribution_script))
+        
+        filtered_size_data = filtered_size_data_from_bedfiles( bed_size_data.filtered.combine(repeated, by: 1)).groupTuple(by: 0).map{tuple_element ->
+            return tuple(tuple_element[0], tuple_element[2], tuple_element[3])
+        }
+
+        // filtered_size_data.view()
+        // size_data.view()
+
+        calculate_size_distribution_filtered(filtered_size_data, file(params.size_distribution_script))
+
+        
     }
     
 }

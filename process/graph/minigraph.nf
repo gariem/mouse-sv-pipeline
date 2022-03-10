@@ -59,3 +59,33 @@ process intersect_all_minigraph {
     """
 
 }
+
+process get_features_across_strains {
+
+    input:
+        file bed_file
+        val strain_num
+
+    output:
+       tuple file("*.bed"), val(type)
+
+    script:
+
+    type = bed_file.name.contains("INS") ? "INS" : "DEL"
+"""
+#!python
+
+import pandas as pd
+
+cols = ['Chr1', 'Pos1', 'End1', 'Size1', 'Src', 'Chr2', 'Pos2', 'End2', 'Size2', 'Overlap']
+group_cols = ['Chr1', 'Pos1', 'End1', 'Size1', 'Chr2', 'Pos2', 'End2', 'Size2', 'Overlap']
+data = pd.read_csv('${bed_file}', sep='\t', names=cols, header=None)
+
+grouped_data = data.groupby(group_cols, as_index=False).count()
+repeated = grouped_data[grouped_data["Src"]>=${strain_num}]
+repeated = repeated.drop(['Chr2', 'Pos2', 'End2', 'Size2', 'Overlap', 'Src'], axis=1)
+
+repeated.to_csv("repeated-${type}.bed", sep="\t", header=False, index=False)
+"""
+
+}
