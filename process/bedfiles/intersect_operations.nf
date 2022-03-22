@@ -8,12 +8,13 @@ process intersect_features {
     input: 
         tuple val(source), val(type), file(a_file), file(b_file)
         val options
-        each window
 
     output:
         tuple val(source), val(type), file('*.bed')
 
     script:
+    
+    window = 30
 
     """
     awk -F'\\t' 'BEGIN {OFS = FS} {print \$1,\$2-${window},\$3+${window},\$4}' ${a_file} > FILE_A

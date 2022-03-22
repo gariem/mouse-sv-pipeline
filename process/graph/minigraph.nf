@@ -2,23 +2,21 @@
 
 nextflow.enable.dsl = 2
 
-
 process bed_from_full_graph {
 
     input: 
-        val strain
-        file folder
+        file graph_bed
     
     output:
         file "*.bed"
 
     script:
     
-    simple_name = strain + '-minigraph'
+    strain = graph_bed.name.replace(".bed", "")
 
     """
-    awk -F"[\t:]" 'BEGIN {OFS = "\t"} {if(\$6!="."&&(\$3-\$2)<\$7)print \$1,\$2,\$3,\$7}' ${folder}/${strain}.bed > "${strain}-minigraph__INS.bed"
-    awk -F"[\t:]" 'BEGIN {OFS = "\t"} {if(\$6!="."&&(\$3-\$2)>\$7)print \$1,\$2,\$3,\$7}' ${folder}/${strain}.bed > "${strain}-minigraph__DEL.bed"
+    awk -F"[\t:]" 'BEGIN {OFS = "\t"} {if(\$6!="."&&(\$3-\$2)<\$7)print \$1,\$2,\$3,\$7}' ${graph_bed} > "${strain}-minigraph__INS.bed"
+    awk -F"[\t:]" 'BEGIN {OFS = "\t"} {if(\$6!="."&&(\$3-\$2)>\$7)print \$1,\$2,\$3,\$7}' ${graph_bed} > "${strain}-minigraph__DEL.bed"
     """
 
 }
@@ -45,12 +43,14 @@ process intersect_all_minigraph {
 
     input: 
         tuple val(type), file(bed_files)
-        val overlap_fraction
 
     output:
         file "*.bed"
 
     script:
+
+    overlap_fraction = 1.0
+
     def b6nj = bed_files.findAll{ it.name.contains("C57BL_6NJ") }.join(" ")
     def others = bed_files.findAll{ !it.name.contains("C57BL_6NJ") }.join(" ")
 
@@ -64,7 +64,6 @@ process get_features_across_strains {
 
     input:
         file bed_file
-        val strain_num
 
     output:
        tuple file("*.bed"), val(type)
@@ -72,6 +71,8 @@ process get_features_across_strains {
     script:
 
     type = bed_file.name.contains("INS") ? "INS" : "DEL"
+    strains_m1 = params.pattern.count(",")
+    
 """
 #!python
 
@@ -82,7 +83,7 @@ group_cols = ['Chr1', 'Pos1', 'End1', 'Size1', 'Chr2', 'Pos2', 'End2', 'Size2', 
 data = pd.read_csv('${bed_file}', sep='\t', names=cols, header=None)
 
 grouped_data = data.groupby(group_cols, as_index=False).count()
-repeated = grouped_data[grouped_data["Src"]>=${strain_num}]
+repeated = grouped_data[grouped_data["Src"]>=${strains_m1}]
 repeated = repeated.drop(['Chr2', 'Pos2', 'End2', 'Size2', 'Overlap', 'Src'], axis=1)
 
 repeated.to_csv("repeated-${type}.bed", sep="\t", header=False, index=False)

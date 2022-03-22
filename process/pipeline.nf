@@ -4,28 +4,18 @@ nextflow.enable.dsl = 2
 
 params.previous_dir = './data/previous'
 
-params.input = "./data/input/calls/{A_J,DBA_2J,C57BL_6NJ,C3H_HeJ,AKR_J,C57BL_6JEve}-*.vcf"
-params.validated_files = './data/validated/simple/{A_J,DBA_2J,C57BL_6NJ,C3H_HeJ,AKR_J,C57BL_6JEve}*.bed'
-params.previous_files = './data/previous/{A_J,DBA_2J,C57BL_6NJ,C3H_HeJ,AKR_J,C57BL_6JEve}*.bed'
+// params.pattern = "{A_J,DBA_2J,C57BL_6NJ,C3H_HeJ,AKR_J,C57BL_6JEve}"
+// params.pattern = "{A_J,DBA_2J,C57BL_6NJ}"
+params.pattern = "{DBA_2J,C57BL_6NJ}"
+// params.pattern = "C57BL_6NJ"
+// params.pattern = "DBA_2J"
 
-// params.input = "./data/input/calls/{A_J,DBA_2J,C57BL_6NJ}-*.vcf"
-// params.validated_files = './data/validated/simple/{A_J,DBA_2J,C57BL_6NJ}*.bed'
-// params.previous_files = './data/previous/{A_J,DBA_2J,C57BL_6NJ}*.bed'
+params.input = "./data/input/calls/${params.pattern}-*.vcf"
+params.validated_files = "./data/validated/simple/${params.pattern}*.bed"
+params.previous_files = "./data/previous/${params.pattern}*.bed"
 
-// params.input = "./data/input/calls/{DBA_2J,C57BL_6NJ}-*.vcf"
-// params.validated_files = './data/validated/simple/{DBA_2J,C57BL_6NJ}*.bed'
-// params.previous_files = './data/previous/{DBA_2J,C57BL_6NJ}*.bed'
-
-// params.input = "./data/input/calls/C57BL_6NJ-*.vcf"
-// params.validated_files = './data/validated/simple/C57BL_6NJ*.bed'
-// params.previous_files = './data/previous/C57BL_6NJ*.bed'
-
-// params.input = "./data/input/calls/DBA_2J-*.vcf"
-// params.validated_files = './data/validated/simple/DBA_2J*.bed'
-// params.previous_files = './data/previous/DBA_2J*.bed'
-
-params.full_graph_files = './data/input/minigraph/15plusEve'
-// params.small_graph_files = './data/input/minigraph/full'
+params.graph_files = "./data/input/minigraph/15plusEve/${params.pattern}.bed"
+params.full_graph_files = './data/input/minigraph/full'
 
 params.igv_workdir = '/media/egarcia/DataBank/mouse/igv_workfiles'
 
@@ -42,14 +32,13 @@ params.max_diff=10
 params.max_diff_b6n=40
 params.min_score_b6n=0.6
 
-params.screenshots_missed=false
-params.screenshots_random=false
+params.screenshots_missed=true
+params.screenshots_random=true
 params.random_sample=20
 params.create_figures=true
 params.big_inversions=true
 
 params.size_distribution_script='./templates/size_distribution.py'
-
 
 include { 
     bed_from_vcf; 
@@ -96,6 +85,8 @@ include {
 workflow {
 
     Channel.fromPath(params.input).set{vcf_channel}
+
+    Channel.fromPath(params.graph_files).set{graph_channel}
 
     Channel.fromPath(params.validated_files).map{ file ->
         def strain = file.name.tokenize('.').get(0)
@@ -151,16 +142,10 @@ workflow {
     dysgu_files.concat(pbsv_files).concat(callers.other).multiMap { file ->
         intersect: file
         high_score: file
-        full_graph: file
     }.set { all_vcfs }
-    
-    graph_strains = all_vcfs.full_graph.map{ file ->
-        def strain = file.name.tokenize('-').get(0)
-        return strain
-    }.unique()
 
     // Bed files must end with __TYPE.bed
-    bed_from_full_graph(graph_strains, file(params.full_graph_files)).flatten().map{ file ->
+    bed_from_full_graph(graph_channel).flatten().map{ file ->
         def simple_name = file.name.split('__')[0]
         def strain = simple_name.tokenize('-').get(0)
         def type = file.name.split('__')[1].replace(".bed", "")
@@ -192,8 +177,8 @@ workflow {
         figures: file
     }.set {new_and_previous}
 
-    previous_intersected = find_previous(new_and_previous.intersect, '-wa', 30)
-    validated_intersected = find_intersected(new_and_validated.intersect, '-wa', 30)
+    previous_intersected = find_previous(new_and_previous.intersect, '-wa')
+    validated_intersected = find_intersected(new_and_validated.intersect, '-wa')
 
     previous_intersected.combine(validated_intersected, by: [0, 1]).set {data}
     scores = calculate_scores(data)
@@ -230,7 +215,7 @@ workflow {
         return tuple(tuple_element[1], tuple_element[3])
     }.groupTuple(by: 0).set {high_score_minigraph_data}
 
-    repeated = get_features_across_strains(intersect_all_minigraph(high_score_minigraph_data, 1.0), 4)
+    repeated = get_features_across_strains(intersect_all_minigraph(high_score_minigraph_data))
     
 
     // map files with high scores back to feature beds 
@@ -248,7 +233,7 @@ workflow {
     // Take screenshots from missed validated features
     if(params.screenshots_missed){
 
-        find_missed(new_and_validated_high.out, '-v', 30).map{tuple_element ->
+        find_missed(new_and_validated_high.out, '-v').map{tuple_element ->
             def simple_name = tuple_element[0]
             def strain = simple_name.tokenize('-').get(0)
             return tuple(strain, 'captures/missed', simple_name, tuple_element[2])
