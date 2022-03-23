@@ -53,9 +53,11 @@ process calculate_scores {
         tuple val(source), val(type), file(previous), file(validated)
 
     output:
-        tuple val(source), file('*_*_*')
+        tuple val(strain), val(source), file('*_*_*')
 
     script:
+
+    strain = source.tokenize("-").get(0)
 
     previous_numbers = previous.name.tokenize('.').get(1).split('_of_')
     previous_intersected = previous_numbers[0]

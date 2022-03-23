@@ -5,8 +5,8 @@ nextflow.enable.dsl = 2
 params.previous_dir = './data/previous'
 
 // params.pattern = "{A_J,DBA_2J,C57BL_6NJ,C3H_HeJ,AKR_J,C57BL_6JEve}"
-// params.pattern = "{A_J,DBA_2J,C57BL_6NJ}"
-params.pattern = "{DBA_2J,C57BL_6NJ}"
+params.pattern = "{A_J,DBA_2J,C57BL_6NJ,C57BL_6JEve}"
+// params.pattern = "{DBA_2J,C57BL_6NJ}"
 // params.pattern = "C57BL_6NJ"
 // params.pattern = "DBA_2J"
 
@@ -29,11 +29,11 @@ params.filter_hets=true
 params.min_score=0.75
 params.max_diff=10
 
-params.max_diff_b6n=40
-params.min_score_b6n=0.6
+params.max_diff_b6n=60
+params.min_score_b6n=0.50
 
-params.screenshots_missed=true
-params.screenshots_random=true
+params.screenshots_missed=false
+params.screenshots_random=false
 params.random_sample=20
 params.create_figures=true
 params.big_inversions=true
@@ -67,6 +67,15 @@ include {
     calculate_size_distribution;
     calculate_size_distribution_filtered
 } from './figures/size_distribution'
+
+include {
+    split_data as split_0_100;
+    split_data as split_100_1K;
+    split_data as split_1K_100K;
+    split_data as split_30_100;
+    calc_overlaps;
+    draw_overlaps;
+} from './figures/overlaps'
 
 include {
     take_screenshots as screenshot_missed;
@@ -161,6 +170,7 @@ workflow {
     bed_from_vcf(all_vcfs.intersect, sv_types).concat(minigraph_beds.concat).multiMap{ file ->
         validate: file
         previous: file
+        intercaller: file
     }.set{new_features}
 
     validated_features.combine(new_features.validate, by: [0, 1]).map { tuple_element ->
@@ -183,18 +193,68 @@ workflow {
     previous_intersected.combine(validated_intersected, by: [0, 1]).set {data}
     scores = calculate_scores(data)
 
+    // raw_scores.filter {
+    //     (it[1].contains("C57BL_6") && Float.parseFloat(it[2].name.split('_')[1]) >= params.min_score_b6n && Float.parseFloat(it[2].name.split('_')[2]) <= params.max_diff_b6n) ||
+    //     (Float.parseFloat(it[2].name.split('_')[1]) >= params.min_score && Float.parseFloat(it[2].name.split('_')[2]) <= params.max_diff)
+    // }.multiMap{file -> 
+    //     raw: file
+    //     calc: file
+    // }.set{scores}
+
+    // scores.calc.map{tuple_element ->
+    //     def name = tuple_element[2].name
+    //     def parts = name.tokenize("_")
+    //     def type = parts.get(0)
+    //     def score = parts.get(1)
+    //     def diff = parts.get(2)
+    //     return tuple(tuple_element[0], tuple_element[1], type, score, diff)
+    // }.groupTuple(by: [0, 2]).map{ items ->
+    //     def tuples = []
+    //     for(int i=0; i<items[1].size(); i++) {
+    //         tuples.add(tuple(items[1].get(i), items[3].get(i), items[4].get(i)))
+    //     }
+    //     tuples.sort { a,b -> b[1] <=> a[1] ?: a[2] <=> b[2] }
+    //     return tuple(items[0], items[2], tuples.findAll{t -> t[0].contains("pbsv.all.ad_")}) // Modify here to find other scores for pbsv or other callers
+    // }.view()
+
     scores.filter {
-        (it[0].contains("C57BL_6") && Float.parseFloat(it[1].name.split('_')[1]) >= params.min_score_b6n && Float.parseFloat(it[1].name.split('_')[2]) <= params.max_diff_b6n) ||
-        (Float.parseFloat(it[1].name.split('_')[1]) >= params.min_score && Float.parseFloat(it[1].name.split('_')[2]) <= params.max_diff)
+        (   
+            (it[1].contains("C57BL_6") && Float.parseFloat(it[2].name.split('_')[1]) >= params.min_score_b6n && Float.parseFloat(it[2].name.split('_')[2]) <= params.max_diff_b6n) 
+            || (Float.parseFloat(it[2].name.split('_')[1]) >= params.min_score && Float.parseFloat(it[2].name.split('_')[2]) <= params.max_diff)
+        )
+            && 
+        ( 
+            it[1].contains("minigraph") || it[1].contains("pbsv.all.ad_")
+        ) 
+        
+    }.map{tuple_element ->
+        return tuple(tuple_element[1], tuple_element[2])
     }.groupTuple(by: 0, size: 2).multiMap { file ->
         outersect: file
         save: file
         minigraph: file
+        intercaller: file
     }.set {src_high_score_files}
+
+    // src_high_score_files.save.view()
 
     // save high scores to data/analysis/strain/simple_name
     save_intersect_stats(src_high_score_files.save)
 
+    // Prepate tuples to compare between callers (minigraph vs pbsv)
+    src_high_score_files.intercaller.filter {
+        it[0].contains("minigraph") || it[0].contains("pbsv")
+    }.set {src_interstrain_highscores}
+
+    src_interstrain_highscores.combine(new_features.intercaller.map{ tuple_element -> 
+        return tuple(tuple_element[2],tuple_element[0], tuple_element[1], tuple_element[3])
+    }.filter{it[2] == 'INS' || it[2] == 'DEL'}, by: 0).map{tuple_element ->
+        return tuple(tuple_element[2], tuple_element[3], tuple_element[4])
+    }.groupTuple(by: [0, 1], size: 2).set {src_intercaller_data}
+
+    // src_intercaller_data.view()
+    split_data = split_0_100(src_intercaller_data, 0, 100).concat(split_100_1K(src_intercaller_data, 100, 1000)).concat(split_1K_100K(src_intercaller_data, 1000, 100000)).concat(split_30_100(src_intercaller_data, 30, 100))
+    draw_overlaps(calc_overlaps(split_data).collect()).view()
 
     // Transform high score tuples 
     src_high_score_files.minigraph.filter {
@@ -217,7 +277,6 @@ workflow {
 
     repeated = get_features_across_strains(intersect_all_minigraph(high_score_minigraph_data))
     
-
     // map files with high scores back to feature beds 
     // outersect is used to map with original feature beds
     // figures is used to map with original vcf file
