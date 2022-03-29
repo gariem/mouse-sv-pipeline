@@ -4,8 +4,8 @@ nextflow.enable.dsl = 2
 
 params.previous_dir = './data/previous'
 
-// params.pattern = "{A_J,DBA_2J,C57BL_6NJ,C3H_HeJ,AKR_J,C57BL_6JEve}"
-params.pattern = "{A_J,DBA_2J,C57BL_6NJ,C57BL_6JEve}"
+params.pattern = "{A_J,DBA_2J,C57BL_6NJ,C3H_HeJ,AKR_J,C57BL_6JEve}"
+// params.pattern = "{A_J,DBA_2J,C57BL_6NJ,C57BL_6JEve}"
 // params.pattern = "{DBA_2J,C57BL_6NJ}"
 // params.pattern = "C57BL_6NJ"
 // params.pattern = "DBA_2J"
@@ -70,10 +70,14 @@ include {
 
 include {
     split_data as split_0_100;
-    split_data as split_100_1K;
-    split_data as split_1K_100K;
+    split_data as split_20_100;
     split_data as split_30_100;
-    calc_overlaps;
+    split_data as split_100_1K;
+    split_data as split_1K_10K;
+    split_data as split_10K_100K;
+    calc_overlaps as overlaps_0;
+    calc_overlaps as overlaps_5;
+    calc_overlaps as overlaps_10;
     draw_overlaps;
 } from './figures/overlaps'
 
@@ -178,6 +182,7 @@ workflow {
     }.multiMap { file ->
         intersect: file
         outersect: file
+        intercaller: file
     }.set {new_and_validated}
 
     previous_features.combine(new_features.previous, by: [0, 1]).map { tuple_element ->
@@ -241,20 +246,29 @@ workflow {
     // save high scores to data/analysis/strain/simple_name
     save_intersect_stats(src_high_score_files.save)
 
-    // Prepate tuples to compare between callers (minigraph vs pbsv)
+    // Prepate tuples to compare between callers (minigraph vs pbsv) and validated data
     src_high_score_files.intercaller.filter {
         it[0].contains("minigraph") || it[0].contains("pbsv")
     }.set {src_interstrain_highscores}
 
-    src_interstrain_highscores.combine(new_features.intercaller.map{ tuple_element -> 
-        return tuple(tuple_element[2],tuple_element[0], tuple_element[1], tuple_element[3])
+
+    src_interstrain_highscores.combine( new_and_validated.intercaller.map{ tuple_element -> 
+        def strain = tuple_element[0].tokenize("-").get(0)
+        return tuple(tuple_element[0], strain, tuple_element[1], tuple_element[2], tuple_element[3])
     }.filter{it[2] == 'INS' || it[2] == 'DEL'}, by: 0).map{tuple_element ->
-        return tuple(tuple_element[2], tuple_element[3], tuple_element[4])
-    }.groupTuple(by: [0, 1], size: 2).set {src_intercaller_data}
+        return tuple(tuple_element[2], tuple_element[3], tuple_element[5], tuple_element[4])
+    }.groupTuple(by: [0, 1, 3], size: 2).set {src_intercaller_data}
 
     // src_intercaller_data.view()
-    split_data = split_0_100(src_intercaller_data, 0, 100).concat(split_100_1K(src_intercaller_data, 100, 1000)).concat(split_1K_100K(src_intercaller_data, 1000, 100000)).concat(split_30_100(src_intercaller_data, 30, 100))
-    draw_overlaps(calc_overlaps(split_data).collect()).view()
+    split_0_100(src_intercaller_data, 0, 100)
+        .concat(split_20_100(src_intercaller_data, 20, 100))
+        .concat(split_30_100(src_intercaller_data, 30, 100))
+        .concat(split_100_1K(src_intercaller_data, 100, 1000))
+        .concat(split_1K_10K(src_intercaller_data, 1000, 10000))
+        .concat(split_10K_100K(src_intercaller_data, 10000, 100000))
+    .set{split_data}
+    
+    draw_overlaps(overlaps_0(split_data, 0).concat(overlaps_5(split_data, 5)).concat(overlaps_10(split_data, 10)).collect()).view()
 
     // Transform high score tuples 
     src_high_score_files.minigraph.filter {
