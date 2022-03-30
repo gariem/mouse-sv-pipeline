@@ -10,7 +10,7 @@ process split_data {
         val end
 
     output:
-        tuple val(strain), val(type), val(range), file("*.minigraph.bed"), file("*.pbsv.bed"), file("*.validation.bed")
+        tuple val(strain), val(type), val(range), file("*.pbsv.bed"), file("*.minigraph.bed"), file("*.validation.bed")
     
     script:
 
@@ -26,8 +26,8 @@ process split_data {
 
 
     """
-    cat ${minigraph_file} | awk -F'\t' 'BEGIN {OFS = FS} {print \$1,\$2,\$3,\$4<0?\$4*-1:\$4}' | awk '\$4 >= ${start} && \$4 <= ${end}' > "${strain}.${type}.${range}.minigraph.bed"
     cat ${pbsv_file} | awk -F'\t' 'BEGIN {OFS = FS} {print \$1,\$2,\$3,\$4<0?\$4*-1:\$4}' | awk '\$4 >= ${start} && \$4 <= ${end}' > "${strain}.${type}.${range}.pbsv.bed"
+    cat ${minigraph_file} | awk -F'\t' 'BEGIN {OFS = FS} {print \$1,\$2,\$3,\$4<0?\$4*-1:\$4}' | awk '\$4 >= ${start} && \$4 <= ${end}' > "${strain}.${type}.${range}.minigraph.bed"
     cat ${validation_file} | awk -F'\t' 'BEGIN {OFS = FS} {print \$1,\$2,\$3,\$4<0?\$4*-1:\$4}' | awk '\$4 >= ${start} && \$4 <= ${end}' > "${strain}.${type}.${range}.validation.bed"
     """
 }
@@ -35,7 +35,7 @@ process split_data {
 process calc_overlaps {
 
     input:
-        tuple val(strain), val(type), val(range), file(minigraph_file), file(pbsv_file), file(validation_file)
+        tuple val(strain), val(type), val(range), file(pbsv_file), file(minigraph_file), file(validation_file)
         val window
 
     output:
@@ -47,20 +47,24 @@ process calc_overlaps {
     awk -F'\\t' 'BEGIN {OFS = FS} {print \$1,\$2-${window},\$3+${window},\$4}' ${pbsv_file} > FILE_A
     awk -F'\\t' 'BEGIN {OFS = FS} {print \$1,\$2-${window},\$3+${window},\$4}' ${minigraph_file} > FILE_B
 
+    awk -F'\\t' 'BEGIN {OFS = FS} {print \$1,\$2-30,\$3+30,\$4}' ${pbsv_file} > PBSV_VALIDATION
     awk -F'\\t' 'BEGIN {OFS = FS} {print \$1,\$2-30,\$3+30,\$4}' ${minigraph_file} > MG_VALIDATION
     awk -F'\\t' 'BEGIN {OFS = FS} {print \$1,\$2-30,\$3+30,\$4}' ${validation_file} > VALIDATION
-
 
     PBSV_COUNT="\$(cat FILE_A | uniq -u | wc -l)"
     MNG_COUNT="\$(cat FILE_B | uniq -u | wc -l)"
     
     VAL_COUNT="\$(cat VALIDATION | uniq -u | wc -l)"
 
-    A_IN_B="\$(bedtools intersect -a FILE_A -b FILE_B | uniq -u | wc -l )"
+    bedtools intersect -a FILE_A -b FILE_B -wa > INTER
 
-    VAL_IN_MINI="\$(bedtools intersect -a VALIDATION -b MG_VALIDATION | uniq -u | wc -l )"
+    A_IN_B="\$(cat INTER | uniq -u | wc -l )"
 
-    echo "${strain},${type},${range},${window},\$PBSV_COUNT,\$MNG_COUNT,\$A_IN_B,\$VAL_COUNT,\$VAL_IN_MINI" > "${strain}.${type}.${range}_w${window}.data.csv"
+    VAL_IN_PBSV="\$(bedtools intersect -a VALIDATION -b PBSV_VALIDATION -wa | uniq -u | wc -l )"
+    VAL_IN_MINI="\$(bedtools intersect -a VALIDATION -b MG_VALIDATION -wa | uniq -u | wc -l )"
+    VAL_IN_INTER="\$(bedtools intersect -a VALIDATION -b INTER -wa | uniq -u | wc -l )"
+
+    echo "${window},${strain},${type},${range},\$PBSV_COUNT,\$MNG_COUNT,\$A_IN_B,\$VAL_COUNT,\$VAL_IN_PBSV,\$VAL_IN_MINI,\$VAL_IN_INTER" > "${strain}.${type}.${range}_w${window}.data.csv"
 
     """
 }
@@ -71,12 +75,12 @@ process draw_overlaps {
         file csv_file
     
     output:
-        file "*.data"
+        file "*.csv"
 
     """
-    echo "strain,type,range,window,pbsv,minigraph,intersect,t_val,int_val" >> data.data
-    cat ${csv_file} >> data.data
-     ## =SWITCH(E2:E73, "0_100", 1, "20_100", 2, "30_100", 3, "100_1000", 4, "1000_10000", 5, "10000_100000", 6)
+    echo "window,strain,type,range,pbsv,minigraph,intersect,t_val,pbsv_val,mini_val,inter_val" >> pbsv_minigraph_overlap.csv
+    cat ${csv_file} >> pbsv_minigraph_overlap.csv
+     ## =SWITCH(E2:E151, "0_50", 1, "50_100", 2, "100_1000", 3, "1000_10000", 4, "10000_1000000", 5)
     """
 }
 

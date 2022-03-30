@@ -69,9 +69,8 @@ include {
 } from './figures/size_distribution'
 
 include {
-    split_data as split_0_100;
-    split_data as split_20_100;
-    split_data as split_30_100;
+    split_data as split_0_50;
+    split_data as split_50_100;
     split_data as split_100_1K;
     split_data as split_1K_10K;
     split_data as split_10K_100K;
@@ -260,12 +259,11 @@ workflow {
     }.groupTuple(by: [0, 1, 3], size: 2).set {src_intercaller_data}
 
     // src_intercaller_data.view()
-    split_0_100(src_intercaller_data, 0, 100)
-        .concat(split_20_100(src_intercaller_data, 20, 100))
-        .concat(split_30_100(src_intercaller_data, 30, 100))
+    split_0_50(src_intercaller_data, 0, 50)
+        .concat(split_50_100(src_intercaller_data, 50, 100))
         .concat(split_100_1K(src_intercaller_data, 100, 1000))
         .concat(split_1K_10K(src_intercaller_data, 1000, 10000))
-        .concat(split_10K_100K(src_intercaller_data, 10000, 100000))
+        .concat(split_10K_100K(src_intercaller_data, 10000, 1000000))
     .set{split_data}
     
     draw_overlaps(overlaps_0(split_data, 0).concat(overlaps_5(split_data, 5)).concat(overlaps_10(split_data, 10)).collect()).view()
