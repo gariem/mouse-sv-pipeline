@@ -93,6 +93,12 @@ include {
     get_features_across_strains
 } from './graph/minigraph'
 
+include {
+    survivor_vcf_from_bed;
+    join_survivor_vcfs;
+    merge_survivor_vcfs
+} from './merge/survivor'
+
 
 workflow {
 
@@ -165,8 +171,7 @@ workflow {
     }.multiMap{file ->
         concat: file
         compare: file
-    }
-    .set {minigraph_beds}
+    }.set {minigraph_beds}
 
     sv_types = Channel.from(params.sv_types).splitCsv().flatten()
 
@@ -197,30 +202,6 @@ workflow {
     previous_intersected.combine(validated_intersected, by: [0, 1]).set {data}
     scores = calculate_scores(data)
 
-    // raw_scores.filter {
-    //     (it[1].contains("C57BL_6") && Float.parseFloat(it[2].name.split('_')[1]) >= params.min_score_b6n && Float.parseFloat(it[2].name.split('_')[2]) <= params.max_diff_b6n) ||
-    //     (Float.parseFloat(it[2].name.split('_')[1]) >= params.min_score && Float.parseFloat(it[2].name.split('_')[2]) <= params.max_diff)
-    // }.multiMap{file -> 
-    //     raw: file
-    //     calc: file
-    // }.set{scores}
-
-    // scores.calc.map{tuple_element ->
-    //     def name = tuple_element[2].name
-    //     def parts = name.tokenize("_")
-    //     def type = parts.get(0)
-    //     def score = parts.get(1)
-    //     def diff = parts.get(2)
-    //     return tuple(tuple_element[0], tuple_element[1], type, score, diff)
-    // }.groupTuple(by: [0, 2]).map{ items ->
-    //     def tuples = []
-    //     for(int i=0; i<items[1].size(); i++) {
-    //         tuples.add(tuple(items[1].get(i), items[3].get(i), items[4].get(i)))
-    //     }
-    //     tuples.sort { a,b -> b[1] <=> a[1] ?: a[2] <=> b[2] }
-    //     return tuple(items[0], items[2], tuples.findAll{t -> t[0].contains("pbsv.all.ad_")}) // Modify here to find other scores for pbsv or other callers
-    // }.view()
-
     scores.filter {
         (   
             (it[1].contains("C57BL_6") && Float.parseFloat(it[2].name.split('_')[1]) >= params.min_score_b6n && Float.parseFloat(it[2].name.split('_')[2]) <= params.max_diff_b6n) 
@@ -240,8 +221,6 @@ workflow {
         intercaller: file
     }.set {src_high_score_files}
 
-    // src_high_score_files.save.view()
-
     // save high scores to data/analysis/strain/simple_name
     save_intersect_stats(src_high_score_files.save)
 
@@ -251,14 +230,24 @@ workflow {
     }.set {src_interstrain_highscores}
 
 
-    src_interstrain_highscores.combine( new_and_validated.intercaller.map{ tuple_element -> 
+    src_interstrain_highscores.combine(new_and_validated.intercaller.map{ tuple_element -> 
         def strain = tuple_element[0].tokenize("-").get(0)
         return tuple(tuple_element[0], strain, tuple_element[1], tuple_element[2], tuple_element[3])
     }.filter{it[2] == 'INS' || it[2] == 'DEL'}, by: 0).map{tuple_element ->
         return tuple(tuple_element[2], tuple_element[3], tuple_element[5], tuple_element[4])
     }.groupTuple(by: [0, 1, 3], size: 2).set {src_intercaller_data}
 
-    // src_intercaller_data.view()
+    survivor_vcf_from_bed(src_intercaller_data).flatMap { item ->
+        def tuples = []
+        for (file in item[2]){
+            def caller = file.name.tokenize('-').get(1)
+            tuples.add(tuple(item[0], caller, item[1], file))
+        }
+        return tuples
+    }.groupTuple(by: [0, 1]).set{survivor_vcfs}
+    
+    merge_survivor_vcfs(join_survivor_vcfs(survivor_vcfs).groupTuple(by: 0)).view()
+
     split_0_50(src_intercaller_data, 0, 50)
         .concat(split_50_100(src_intercaller_data, 50, 100))
         .concat(split_100_1K(src_intercaller_data, 100, 1000))
@@ -266,7 +255,7 @@ workflow {
         .concat(split_10K_100K(src_intercaller_data, 10000, 1000000))
     .set{split_data}
     
-    draw_overlaps(overlaps_0(split_data, 0).concat(overlaps_5(split_data, 5)).concat(overlaps_10(split_data, 10)).collect()).view()
+    draw_overlaps(overlaps_0(split_data, 0).concat(overlaps_5(split_data, 5)).concat(overlaps_10(split_data, 10)).collect())
 
     // Transform high score tuples 
     src_high_score_files.minigraph.filter {
@@ -355,7 +344,6 @@ workflow {
 
         calculate_size_distribution_filtered(filtered_size_data, file(params.size_distribution_script))
 
-        
     }
     
 }

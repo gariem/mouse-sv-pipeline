@@ -80,7 +80,7 @@ process draw_overlaps {
     """
     echo "window,strain,type,range,pbsv,minigraph,intersect,t_val,pbsv_val,mini_val,inter_val" >> pbsv_minigraph_overlap.csv
     cat ${csv_file} >> pbsv_minigraph_overlap.csv
-     ## =SWITCH(E2:E151, "0_50", 1, "50_100", 2, "100_1000", 3, "1000_10000", 4, "10000_1000000", 5)
+     ## 
     """
 }
 
