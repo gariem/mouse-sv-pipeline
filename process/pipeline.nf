@@ -42,6 +42,7 @@ params.size_distribution_script='./templates/size_distribution.py'
 
 include { 
     bed_from_vcf; 
+    bed_from_vcf as bed_from_survivor;
     clean_regions; 
     filter_prob_dysgu; 
     clean_hets;
@@ -69,15 +70,14 @@ include {
 } from './figures/size_distribution'
 
 include {
-    split_data as split_0_50;
-    split_data as split_50_100;
-    split_data as split_100_1K;
-    split_data as split_1K_10K;
-    split_data as split_10K_100K;
+    split_triple_data;
+    split_survivor_data;
     calc_overlaps as overlaps_0;
     calc_overlaps as overlaps_5;
     calc_overlaps as overlaps_10;
-    draw_overlaps;
+    calc_survivor_scores;
+    summarize_overlaps;
+    summarize_survivor;
 } from './figures/overlaps'
 
 include {
@@ -244,18 +244,48 @@ workflow {
             tuples.add(tuple(item[0], caller, item[1], file))
         }
         return tuples
-    }.groupTuple(by: [0, 1]).set{survivor_vcfs}
-    
-    merge_survivor_vcfs(join_survivor_vcfs(survivor_vcfs).groupTuple(by: 0)).view()
+    }.groupTuple(by: [0, 1]).set{survivor_vcfs}    
 
-    split_0_50(src_intercaller_data, 0, 50)
-        .concat(split_50_100(src_intercaller_data, 50, 100))
-        .concat(split_100_1K(src_intercaller_data, 100, 1000))
-        .concat(split_1K_10K(src_intercaller_data, 1000, 10000))
-        .concat(split_10K_100K(src_intercaller_data, 10000, 1000000))
-    .set{split_data}
-    
-    draw_overlaps(overlaps_0(split_data, 0).concat(overlaps_5(split_data, 5)).concat(overlaps_10(split_data, 10)).collect())
+    survivor_types = Channel.from('INS', 'DEL').splitCsv().flatten()
+    survivor_features = bed_from_survivor(merge_survivor_vcfs(join_survivor_vcfs(survivor_vcfs).groupTuple(by: 0)), survivor_types)
+
+    validated_features.combine(survivor_features, by: [0, 1]).map { tuple_element ->
+        return tuple(tuple_element[0], tuple_element[1], tuple_element[2], tuple_element[4])
+    }.set {survivor_and_validated}
+
+    split_survivor_data(survivor_and_validated).flatMap{tuple_element->
+        tuples = []
+        for (file in tuple_element[2]){
+            def range = file.name.tokenize('.').get(2)
+            tuples.add(tuple(tuple_element[0], tuple_element[1], range, file))
+        }
+        for (file in tuple_element[3]){
+            def range = file.name.tokenize('.').get(2)
+            tuples.add(tuple(tuple_element[0], tuple_element[1], range, file))
+        }
+        return tuples
+    }.groupTuple(by: [0, 1, 2]).set {split_survivor_data}
+
+    summarize_survivor(calc_survivor_scores(split_survivor_data, 10).collect()).view()
+
+    split_triple_data(src_intercaller_data).flatMap{tuple_element->
+        tuples = []
+        for (file in tuple_element[2]){
+            def range = file.name.tokenize('.').get(2)
+            tuples.add(tuple(tuple_element[0], tuple_element[1], range, file))
+        }
+        for (file in tuple_element[3]){
+            def range = file.name.tokenize('.').get(2)
+            tuples.add(tuple(tuple_element[0], tuple_element[1], range, file))
+        }   
+        for (file in tuple_element[4]){
+            def range = file.name.tokenize('.').get(2)
+            tuples.add(tuple(tuple_element[0], tuple_element[1], range, file))
+        }   
+        return tuples
+    }.groupTuple(by: [0, 1, 2]).set {split_data}
+
+    summarize_overlaps(overlaps_0(split_data, 0).concat(overlaps_5(split_data, 5)).concat(overlaps_10(split_data, 10)).collect())
 
     // Transform high score tuples 
     src_high_score_files.minigraph.filter {

@@ -60,7 +60,7 @@ process merge_survivor_vcfs {
         tuple val(strain), val(callers), file(vcf_files)
 
     output:
-        tuple val(strain), file("*.vcf")
+       file("*.vcf")
 
     """
     echo "${vcf_files}" | tr ' ' '\n' > '${strain}-merged-inputlist.txt'
