@@ -164,7 +164,7 @@ process calc_survivor_scores {
         val window
 
     output:
-        file("*.csv")
+        tuple file("*.csv"), file("*.bed")
 
     script: 
 
@@ -189,6 +189,8 @@ process calc_survivor_scores {
 
     VAL_IN_SUVR="\$(bedtools intersect -a VALIDATION -b SURVIIVOR -wa | uniq -u | wc -l )"
 
+    bedtools intersect -a VALIDATION -b SURVIIVOR -v > "${strain}-${range}-${type}-missed.bed"
+
     echo "${window},${strain},${type},${range},\$SURV_COUNT,\$VAL_COUNT,\$VAL_IN_SUVR" > "${strain}.${type}.${range}_w${window}.data.csv"
 
     """
@@ -201,9 +203,10 @@ process summarize_survivor {
     output:
         file "*.csv"
 
+    script:    
     """
-    echo "window,strain,type,range,survivor,validated,survivor" >> pbsv_minigraph_overlap.csv
-    cat ${csv_file} >> pbsv_minigraph_overlap.csv
+    echo "window,strain,type,range,survivor,validated,survivor" >> pbsv_minigraph_merged_score.csv
+    cat ${csv_file} >> pbsv_minigraph_merged_score.csv
      ## 
     """
 

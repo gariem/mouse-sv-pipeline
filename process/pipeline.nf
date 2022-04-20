@@ -4,9 +4,9 @@ nextflow.enable.dsl = 2
 
 params.previous_dir = './data/previous'
 
-params.pattern = "{A_J,DBA_2J,C57BL_6NJ,C3H_HeJ,AKR_J,C57BL_6JEve}"
+// params.pattern = "{A_J,DBA_2J,C57BL_6NJ,C3H_HeJ,AKR_J,C57BL_6JEve}"
 // params.pattern = "{A_J,DBA_2J,C57BL_6NJ,C57BL_6JEve}"
-// params.pattern = "{DBA_2J,C57BL_6NJ}"
+params.pattern = "{DBA_2J,C57BL_6NJ}"
 // params.pattern = "C57BL_6NJ"
 // params.pattern = "DBA_2J"
 
@@ -32,8 +32,14 @@ params.max_diff=10
 params.max_diff_b6n=60
 params.min_score_b6n=0.50
 
-params.screenshots_missed=false
+// params.screenshots_missed=false
+// params.screenshots_boxed=false
+// params.screenshots_random=false
+
+params.screenshots_missed=true
+params.screenshots_boxed=true
 params.screenshots_random=false
+
 params.random_sample=20
 params.create_figures=true
 params.big_inversions=true
@@ -83,6 +89,7 @@ include {
 include {
     take_screenshots as screenshot_missed;
     take_screenshots as screenshot_random;
+    take_screenshots2 as screenshot_merged;
     radomize_bed_file
 } from './igv/igv_capture'
 
@@ -150,7 +157,7 @@ workflow {
     read_depths = Channel.from(params.read_depth).splitCsv().flatten()
     filtered_dp = filter_read_depth(pbsv.dp_filter, read_depths)
 
-    diffs_values = Channel.from([-16,3], [0,100], [-100,0])
+    diffs_values = Channel.from([-16,3], [0,200], [-100,0])
     filtered_diff_ad = filter_diff_allele_depth(pbsv.diff_ad_filter, diffs_values)
 
     pbsv_files = filtered_dp.concat(filtered_diff_ad)
@@ -237,6 +244,8 @@ workflow {
         return tuple(tuple_element[2], tuple_element[3], tuple_element[5], tuple_element[4])
     }.groupTuple(by: [0, 1, 3], size: 2).set {src_intercaller_data}
 
+    src_intercaller_data.view()
+
     survivor_vcf_from_bed(src_intercaller_data).flatMap { item ->
         def tuples = []
         for (file in item[2]){
@@ -256,31 +265,60 @@ workflow {
     split_survivor_data(survivor_and_validated).flatMap{tuple_element->
         tuples = []
         for (file in tuple_element[2]){
-            def range = file.name.tokenize('.').get(2)
-            tuples.add(tuple(tuple_element[0], tuple_element[1], range, file))
+            tuples.add(tuple(tuple_element[0], tuple_element[1], file.name.tokenize('.').get(2), file))
         }
         for (file in tuple_element[3]){
-            def range = file.name.tokenize('.').get(2)
-            tuples.add(tuple(tuple_element[0], tuple_element[1], range, file))
+            tuples.add(tuple(tuple_element[0], tuple_element[1], file.name.tokenize('.').get(2), file))
         }
         return tuples
     }.groupTuple(by: [0, 1, 2]).set {split_survivor_data}
 
-    summarize_survivor(calc_survivor_scores(split_survivor_data, 10).collect()).view()
+    calc_survivor_scores(split_survivor_data, 10).collect().map { elems ->
+        def beds = []
+        def csvs = []
+        for (elem in elems) {
+            if (elem.name.endsWith(".bed")){
+                beds.add(elem)
+            }
+            if (elem.name.endsWith(".csv")){
+                csvs.add(elem)
+            }
+        }
+        return tuple(beds, csvs)
+    }.set {survivor_scores}
+
+    survivor_scores.map {tuple_element -> 
+        return tuple_element[0]
+    }.flatMap{elems ->
+        def tuples = []
+        for (elem in elems){
+            if(elem.toFile().length() != 0){
+                def strain = elem.name.tokenize("-").get(0)
+                def range = elem.name.tokenize("-").get(1)
+                tuples.add(tuple(strain, 'missed', strain +'-'+ range, elem))
+            }
+        }
+        return tuples
+    }.set {merged_missed}
+
+    screenshot_merged(merged_missed, file(params.igv_workdir))
+
+    survivor_scores.map {tuple_element -> 
+        return tuple_element[1]
+    }.set {merged_scores}
+
+    summarize_survivor(merged_scores)
 
     split_triple_data(src_intercaller_data).flatMap{tuple_element->
         tuples = []
         for (file in tuple_element[2]){
-            def range = file.name.tokenize('.').get(2)
-            tuples.add(tuple(tuple_element[0], tuple_element[1], range, file))
+            tuples.add(tuple(tuple_element[0], tuple_element[1], file.name.tokenize('.').get(2), file))
         }
         for (file in tuple_element[3]){
-            def range = file.name.tokenize('.').get(2)
-            tuples.add(tuple(tuple_element[0], tuple_element[1], range, file))
+            tuples.add(tuple(tuple_element[0], tuple_element[1], file.name.tokenize('.').get(2), file))
         }   
         for (file in tuple_element[4]){
-            def range = file.name.tokenize('.').get(2)
-            tuples.add(tuple(tuple_element[0], tuple_element[1], range, file))
+            tuples.add(tuple(tuple_element[0], tuple_element[1], file.name.tokenize('.').get(2), file))
         }   
         return tuples
     }.groupTuple(by: [0, 1, 2]).set {split_data}
@@ -331,6 +369,10 @@ workflow {
 
         screenshot_missed(out_data, file(params.igv_workdir))
     }
+
+    // if (screenshots_missed){
+
+    // }
 
     // Take screenshots from random predicted features
 

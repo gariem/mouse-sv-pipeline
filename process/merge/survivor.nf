@@ -65,6 +65,8 @@ process merge_survivor_vcfs {
     """
     echo "${vcf_files}" | tr ' ' '\n' > '${strain}-merged-inputlist.txt'
 
-    SURVIVOR merge '${strain}-merged-inputlist.txt' 200 1 1 1 0 20 "${strain}-survivor_200_1_20.vcf"
+    #SURVIVOR merge '${strain}-merged-inputlist.txt' 200 1 1 1 0 20 "${strain}-survivor_200_1_20.vcf"
+    #SURVIVOR merge '${strain}-merged-inputlist.txt' 100 1 1 1 0 10 "${strain}-survivor_100_1_10.vcf"
+    SURVIVOR merge '${strain}-merged-inputlist.txt' 250 1 1 1 0 10 "${strain}-survivor_250_1_10.vcf"
     """ 
 }
