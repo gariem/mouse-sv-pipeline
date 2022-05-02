@@ -22,9 +22,9 @@ process intersect_features {
 
     bedtools intersect -a FILE_A -b FILE_B ${options} > intersect_wa
 
-    INTERSECTED="\$(cat intersect_wa | uniq -u | wc -l)"
-    TOTAL_A="\$(cat FILE_A | uniq -u | wc -l)"
-    TOTAL_B="\$(cat FILE_B | uniq -u | wc -l)"
+    INTERSECTED="\$(cat intersect_wa | awk '!x[\$0]++' | wc -l)"
+    TOTAL_A="\$(cat FILE_A | awk '!x[\$0]++' | wc -l)"
+    TOTAL_B="\$(cat FILE_B | awk '!x[\$0]++' | wc -l)"
 
     mv intersect_wa "${type}.\${INTERSECTED}_of_\${TOTAL_A}_of_\${TOTAL_B}.bed"
     """

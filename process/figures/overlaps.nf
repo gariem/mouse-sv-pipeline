@@ -66,7 +66,7 @@ process split_survivor_data {
         tuple val(strain), val(type), file(validation_file), file(survivor_file)
 
     output:
-        tuple val(strain), val(type), file("*.survivor.bed"), file("*.validation.bed")
+        tuple val(strain), val(type), file("*.combined.bed"), file("*.validation.bed")
     
     script:
 
@@ -74,31 +74,31 @@ process split_survivor_data {
     start=0
     end=50
     range="\${start}_\${end}"
-    cat ${survivor_file} | awk -F'\t' 'BEGIN {OFS = FS} {print \$1,\$2,\$3,\$4<0?\$4*-1:\$4}' | awk '\$4 >= 0 && \$4 <= 50' > "${strain}.${type}.\${range}.survivor.bed"
+    cat ${survivor_file} | awk -F'\t' 'BEGIN {OFS = FS} {print \$1,\$2,\$3,\$4<0?\$4*-1:\$4}' | awk '\$4 >= 0 && \$4 <= 50' > "${strain}.${type}.\${range}.combined.bed"
     cat ${validation_file} | awk -F'\t' 'BEGIN {OFS = FS} {print \$1,\$2,\$3,\$4<0?\$4*-1:\$4}' | awk '\$4 >= 0 && \$4 <= 50' > "${strain}.${type}.\${range}.validation.bed"
 
     start=50
     end=100
     range="\${start}_\${end}"
-    cat ${survivor_file} | awk -F'\t' 'BEGIN {OFS = FS} {print \$1,\$2,\$3,\$4<0?\$4*-1:\$4}' | awk '\$4 >= 50 && \$4 <= 100' > "${strain}.${type}.\${range}.survivor.bed"
+    cat ${survivor_file} | awk -F'\t' 'BEGIN {OFS = FS} {print \$1,\$2,\$3,\$4<0?\$4*-1:\$4}' | awk '\$4 >= 50 && \$4 <= 100' > "${strain}.${type}.\${range}.combined.bed"
     cat ${validation_file} | awk -F'\t' 'BEGIN {OFS = FS} {print \$1,\$2,\$3,\$4<0?\$4*-1:\$4}' | awk '\$4 >= 50 && \$4 <= 100' > "${strain}.${type}.\${range}.validation.bed"
     
     start=100
     end=1000
     range="\${start}_\${end}"
-    cat ${survivor_file} | awk -F'\t' 'BEGIN {OFS = FS} {print \$1,\$2,\$3,\$4<0?\$4*-1:\$4}' | awk '\$4 >= 100 && \$4 <= 1000' > "${strain}.${type}.\${range}.survivor.bed"
+    cat ${survivor_file} | awk -F'\t' 'BEGIN {OFS = FS} {print \$1,\$2,\$3,\$4<0?\$4*-1:\$4}' | awk '\$4 >= 100 && \$4 <= 1000' > "${strain}.${type}.\${range}.combined.bed"
     cat ${validation_file} | awk -F'\t' 'BEGIN {OFS = FS} {print \$1,\$2,\$3,\$4<0?\$4*-1:\$4}' | awk '\$4 >= 100 && \$4 <= 1000' > "${strain}.${type}.\${range}.validation.bed"
 
     start=1000
     end=10000
     range="\${start}_\${end}"
-    cat ${survivor_file} | awk -F'\t' 'BEGIN {OFS = FS} {print \$1,\$2,\$3,\$4<0?\$4*-1:\$4}' | awk '\$4 >= 1000 && \$4 <= 10000' > "${strain}.${type}.\${range}.survivor.bed"
+    cat ${survivor_file} | awk -F'\t' 'BEGIN {OFS = FS} {print \$1,\$2,\$3,\$4<0?\$4*-1:\$4}' | awk '\$4 >= 1000 && \$4 <= 10000' > "${strain}.${type}.\${range}.combined.bed"
     cat ${validation_file} | awk -F'\t' 'BEGIN {OFS = FS} {print \$1,\$2,\$3,\$4<0?\$4*-1:\$4}' | awk '\$4 >= 1000 && \$4 <= 10000' > "${strain}.${type}.\${range}.validation.bed"
 
     start=10000
     end=10000000
     range="\${start}_\${end}"
-    cat ${survivor_file} | awk -F'\t' 'BEGIN {OFS = FS} {print \$1,\$2,\$3,\$4<0?\$4*-1:\$4}' | awk '\$4 >= 10000 && \$4 <= 1000000' > "${strain}.${type}.\${range}.survivor.bed"
+    cat ${survivor_file} | awk -F'\t' 'BEGIN {OFS = FS} {print \$1,\$2,\$3,\$4<0?\$4*-1:\$4}' | awk '\$4 >= 10000 && \$4 <= 1000000' > "${strain}.${type}.\${range}.combined.bed"
     cat ${validation_file} | awk -F'\t' 'BEGIN {OFS = FS} {print \$1,\$2,\$3,\$4<0?\$4*-1:\$4}' | awk '\$4 >= 10000 && \$4 <= 1000000' > "${strain}.${type}.\${range}.validation.bed"
     
     """
@@ -139,18 +139,18 @@ process calc_overlaps {
     awk -F'\\t' 'BEGIN {OFS = FS} {print \$1,\$2-30,\$3+30,\$4}' ${minigraph_file} > MG_VALIDATION
     awk -F'\\t' 'BEGIN {OFS = FS} {print \$1,\$2-30,\$3+30,\$4}' ${validation_file} > VALIDATION
 
-    PBSV_COUNT="\$(cat FILE_A | uniq -u | wc -l)"
-    MNG_COUNT="\$(cat FILE_B | uniq -u | wc -l)"
+    PBSV_COUNT="\$(cat FILE_A | awk '!x[\$0]++' | wc -l)"
+    MNG_COUNT="\$(cat FILE_B | awk '!x[\$0]++' | wc -l)"
     
-    VAL_COUNT="\$(cat VALIDATION | uniq -u | wc -l)"
+    VAL_COUNT="\$(cat VALIDATION | awk '!x[\$0]++' | wc -l)"
 
-    bedtools intersect -a FILE_A -b FILE_B -wa > INTER
+    bedtools intersect -a FILE_A -b FILE_B -wa -f 0.8 -r > INTER
 
-    A_IN_B="\$(cat INTER | uniq -u | wc -l )"
+    A_IN_B="\$(cat INTER | awk '!x[\$0]++' | wc -l )"
 
-    VAL_IN_PBSV="\$(bedtools intersect -a VALIDATION -b PBSV_VALIDATION -wa | uniq -u | wc -l )"
-    VAL_IN_MINI="\$(bedtools intersect -a VALIDATION -b MG_VALIDATION -wa | uniq -u | wc -l )"
-    VAL_IN_INTER="\$(bedtools intersect -a VALIDATION -b INTER -wa | uniq -u | wc -l )"
+    VAL_IN_PBSV="\$(bedtools intersect -a VALIDATION -b PBSV_VALIDATION -wa | awk '!x[\$0]++' | wc -l )"
+    VAL_IN_MINI="\$(bedtools intersect -a VALIDATION -b MG_VALIDATION -wa | awk '!x[\$0]++' | wc -l )"
+    VAL_IN_INTER="\$(bedtools intersect -a VALIDATION -b INTER -wa | awk '!x[\$0]++' | wc -l )"
 
     echo "${window},${strain},${type},${range},\$PBSV_COUNT,\$MNG_COUNT,\$A_IN_B,\$VAL_COUNT,\$VAL_IN_PBSV,\$VAL_IN_MINI,\$VAL_IN_INTER" > "${strain}.${type}.${range}_w${window}.data.csv"
 
@@ -170,7 +170,7 @@ process calc_survivor_scores {
 
     for(int i = 0;i<=1;i++) {
         name = input_files.get(i).getName()
-        if(name.contains('.survivor.')){
+        if(name.contains('.combined.')){
             survivor_file = input_files.get(i)
             continue
         }
@@ -181,15 +181,15 @@ process calc_survivor_scores {
     }
 
     """
-    awk -F'\\t' 'BEGIN {OFS = FS} {print \$1,\$2-30,\$3+30,\$4}' ${survivor_file} > SURVIIVOR
+    awk -F'\\t' 'BEGIN {OFS = FS} {print \$1,\$2-30,\$3+30,\$4}' ${survivor_file} > SURVIVOR
     awk -F'\\t' 'BEGIN {OFS = FS} {print \$1,\$2-30,\$3+30,\$4}' ${validation_file} > VALIDATION
 
-    SURV_COUNT="\$(cat SURVIIVOR | uniq -u | wc -l)"    
-    VAL_COUNT="\$(cat VALIDATION | uniq -u | wc -l)"
+    SURV_COUNT="\$(cat SURVIVOR | awk '!x[\$0]++' | wc -l)"    
+    VAL_COUNT="\$(cat VALIDATION | awk '!x[\$0]++' | wc -l)"
 
-    VAL_IN_SUVR="\$(bedtools intersect -a VALIDATION -b SURVIIVOR -wa | uniq -u | wc -l )"
+    VAL_IN_SUVR="\$(bedtools intersect -a VALIDATION -b SURVIVOR -wa |  awk '!x[\$0]++' | wc -l )"
 
-    bedtools intersect -a VALIDATION -b SURVIIVOR -v > "${strain}-${range}-${type}-missed.bed"
+    bedtools intersect -a VALIDATION -b SURVIVOR -v > "${strain}-${range}-${type}-missed.bed"
 
     echo "${window},${strain},${type},${range},\$SURV_COUNT,\$VAL_COUNT,\$VAL_IN_SUVR" > "${strain}.${type}.${range}_w${window}.data.csv"
 
@@ -197,6 +197,9 @@ process calc_survivor_scores {
 }
 
 process summarize_survivor {
+    
+    publishDir file(params.out_dir), mode: "copy",  saveAs: {filename -> 'merged_survivor_scores.csv' }
+
     input:
         file csv_file
     
@@ -213,6 +216,8 @@ process summarize_survivor {
 }
 
 process summarize_overlaps {
+
+    publishDir file(params.out_dir), mode: "copy",  saveAs: {filename -> 'minigraph_vs_pbsv.csv' }
 
     input:
         file csv_file

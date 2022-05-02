@@ -4,9 +4,9 @@ nextflow.enable.dsl = 2
 
 params.previous_dir = './data/previous'
 
-// params.pattern = "{A_J,DBA_2J,C57BL_6NJ,C3H_HeJ,AKR_J,C57BL_6JEve}"
+params.pattern = "{A_J,DBA_2J,C57BL_6NJ,C3H_HeJ,AKR_J,C57BL_6JEve}"
 // params.pattern = "{A_J,DBA_2J,C57BL_6NJ,C57BL_6JEve}"
-params.pattern = "{DBA_2J,C57BL_6NJ}"
+// params.pattern = "{C57BL_6NJ,DBA_2J}"
 // params.pattern = "C57BL_6NJ"
 // params.pattern = "DBA_2J"
 
@@ -32,13 +32,13 @@ params.max_diff=10
 params.max_diff_b6n=60
 params.min_score_b6n=0.50
 
-// params.screenshots_missed=false
-// params.screenshots_boxed=false
-// params.screenshots_random=false
-
-params.screenshots_missed=true
-params.screenshots_boxed=true
+params.screenshots_missed=false
+params.screenshots_boxed=false
 params.screenshots_random=false
+
+// params.screenshots_missed=true
+// params.screenshots_boxed=true
+// params.screenshots_random=true
 
 params.random_sample=20
 params.create_figures=true
@@ -101,11 +101,8 @@ include {
 } from './graph/minigraph'
 
 include {
-    survivor_vcf_from_bed;
-    join_survivor_vcfs;
-    merge_survivor_vcfs
-} from './merge/survivor'
-
+    combine_features
+} from './merge/combine'
 
 workflow {
 
@@ -242,27 +239,18 @@ workflow {
         return tuple(tuple_element[0], strain, tuple_element[1], tuple_element[2], tuple_element[3])
     }.filter{it[2] == 'INS' || it[2] == 'DEL'}, by: 0).map{tuple_element ->
         return tuple(tuple_element[2], tuple_element[3], tuple_element[5], tuple_element[4])
-    }.groupTuple(by: [0, 1, 3], size: 2).set {src_intercaller_data}
+    }.groupTuple(by: [0, 1, 3], size: 2).multiMap{ tuple -> 
+        combine: tuple
+        overlap: tuple
+    }.set {src_intercaller_data}
 
-    src_intercaller_data.view()
+    combined_features = combine_features(src_intercaller_data.combine)
 
-    survivor_vcf_from_bed(src_intercaller_data).flatMap { item ->
-        def tuples = []
-        for (file in item[2]){
-            def caller = file.name.tokenize('-').get(1)
-            tuples.add(tuple(item[0], caller, item[1], file))
-        }
-        return tuples
-    }.groupTuple(by: [0, 1]).set{survivor_vcfs}    
-
-    survivor_types = Channel.from('INS', 'DEL').splitCsv().flatten()
-    survivor_features = bed_from_survivor(merge_survivor_vcfs(join_survivor_vcfs(survivor_vcfs).groupTuple(by: 0)), survivor_types)
-
-    validated_features.combine(survivor_features, by: [0, 1]).map { tuple_element ->
+    validated_features.combine(combined_features, by: [0, 1]).map { tuple_element ->
         return tuple(tuple_element[0], tuple_element[1], tuple_element[2], tuple_element[4])
-    }.set {survivor_and_validated}
+    }.set {combined_and_validated}
 
-    split_survivor_data(survivor_and_validated).flatMap{tuple_element->
+    split_survivor_data(combined_and_validated).flatMap{tuple_element->
         tuples = []
         for (file in tuple_element[2]){
             tuples.add(tuple(tuple_element[0], tuple_element[1], file.name.tokenize('.').get(2), file))
@@ -271,9 +259,9 @@ workflow {
             tuples.add(tuple(tuple_element[0], tuple_element[1], file.name.tokenize('.').get(2), file))
         }
         return tuples
-    }.groupTuple(by: [0, 1, 2]).set {split_survivor_data}
+    }.groupTuple(by: [0, 1, 2]).set {split_combined_data}
 
-    calc_survivor_scores(split_survivor_data, 10).collect().map { elems ->
+    calc_survivor_scores(split_combined_data, 10).collect().map { elems ->
         def beds = []
         def csvs = []
         for (elem in elems) {
@@ -301,7 +289,7 @@ workflow {
         return tuples
     }.set {merged_missed}
 
-    screenshot_merged(merged_missed, file(params.igv_workdir))
+    // // screenshot_merged(merged_missed, file(params.igv_workdir))
 
     survivor_scores.map {tuple_element -> 
         return tuple_element[1]
@@ -309,8 +297,8 @@ workflow {
 
     summarize_survivor(merged_scores)
 
-    split_triple_data(src_intercaller_data).flatMap{tuple_element->
-        tuples = []
+    split_triple_data(src_intercaller_data.overlap).flatMap{tuple_element->
+        def tuples = []
         for (file in tuple_element[2]){
             tuples.add(tuple(tuple_element[0], tuple_element[1], file.name.tokenize('.').get(2), file))
         }
@@ -323,7 +311,7 @@ workflow {
         return tuples
     }.groupTuple(by: [0, 1, 2]).set {split_data}
 
-    summarize_overlaps(overlaps_0(split_data, 0).concat(overlaps_5(split_data, 5)).concat(overlaps_10(split_data, 10)).collect())
+    summarize_overlaps(overlaps_10(split_data, 10).collect())
 
     // Transform high score tuples 
     src_high_score_files.minigraph.filter {
@@ -415,7 +403,5 @@ workflow {
         // size_data.view()
 
         calculate_size_distribution_filtered(filtered_size_data, file(params.size_distribution_script))
-
     }
-    
 }
